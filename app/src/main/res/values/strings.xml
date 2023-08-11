@@ -8,5 +8,10 @@
     <!--Stay Menu-->
     <string name="home">Home</string>
     <string name="stay">Stay</string>
-    <string name="eat">Stay</string>
+    <string name="eat">Eat</string>
+
+    <!--Menu open and close-->
+    <string name="navigation_drawer_open">Open Navigation</string>
+    <string name="navigation_drawer_close">Close Navigation</string>
+
 </resources>

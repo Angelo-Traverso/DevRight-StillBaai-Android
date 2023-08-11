@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relDrawerLayout"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Stay">
+
+    <!--Need to alter the margin values (currently hardcoded)-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="210dp"
+        app:headerLayout="@layout/drawer_header_layout"
+        app:menu="@menu/drawer_menu" />
+
+    <RelativeLayout
+        android:id="@+id/relDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
 
         <FrameLayout
             android:id="@+id/frameParentStay"
@@ -19,7 +37,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/stay_image_background" />
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/ibBurgerMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,6 +45,18 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="placeholder"
                 android:src="@drawable/baseline_menu_24"
+                tools:ignore="TouchTargetSizeCheck" />-->
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/nav_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:background="@android:color/transparent"
+                android:contentDescription="placeholder"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:navigationIcon="@drawable/baseline_menu_24"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
@@ -63,6 +93,8 @@
             android:textColorHint="@color/searchBarHint"
             android:textStyle="italic" />
 
+
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,4 +113,4 @@
             </LinearLayout>
         </ScrollView>
 </RelativeLayout>
-
+</androidx.drawerlayout.widget.DrawerLayout>
