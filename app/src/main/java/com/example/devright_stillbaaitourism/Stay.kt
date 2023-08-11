@@ -1,14 +1,14 @@
 package com.example.devright_stillbaaitourism
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Binding
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.devright_stillbaaitourism.databinding.ActivityStayBinding
 import com.google.android.material.navigation.NavigationView
 
@@ -21,27 +21,22 @@ class Stay : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigat
         binding = ActivityStayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ///--------------------------------------------------------------------///
-        /// Navigation bar
-        setSupportActionBar(binding.navToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        var toggleOnOff = ActionBarDrawerToggle(
-            this,
-            binding.drawerLayout, binding.navToolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
+        val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
 
-        binding.drawerLayout.addDrawerListener(toggleOnOff)
-        toggleOnOff.syncState()
+        // Open drawer on menu button clicked
+        menuBtn.setOnClickListener(){
+            drawerLayout.open()
+        }
+        ///--------------------------------------------------------------------//
 
         binding.navView.bringToFront()
         binding.navView.setNavigationItemSelectedListener(this)
 
         ///--------------------------------------------------------------------///
 
+        // Temporary card display
         val linearLayout = findViewById<LinearLayout>(R.id.linearStayListings);
         linearLayout.removeAllViews()
 

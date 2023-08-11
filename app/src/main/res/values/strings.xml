@@ -9,9 +9,10 @@
     <string name="home">Home</string>
     <string name="stay">Stay</string>
     <string name="eat">Eat</string>
+    <string name="Experience">Experience</string>
 
     <!--Menu open and close-->
     <string name="navigation_drawer_open">Open Navigation</string>
-    <string name="navigation_drawer_close">Close Navigation</string>
+    <string name="navigation_drawer_close">Close Navigation</string>Experience
 
 </resources>

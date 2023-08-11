@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
@@ -9,6 +8,12 @@
     android:orientation="vertical"
     tools:context=".Stay">
 
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <!--Need to alter the margin values (currently hardcoded)-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -16,14 +21,13 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:layout_marginTop="210dp"
         app:headerLayout="@layout/drawer_header_layout"
         app:menu="@menu/drawer_menu" />
 
     <RelativeLayout
         android:id="@+id/relDrawerLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/frameParentStay"
@@ -37,27 +41,15 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/stay_image_background" />
 
-            <!--<ImageButton
-                android:id="@+id/ibBurgerMenu"
+            <ImageButton
+                android:id="@+id/btnMenu"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_gravity="center|start"
                 android:background="@android:color/transparent"
-                android:contentDescription="placeholder"
+                android:minWidth="32dp"
                 android:src="@drawable/baseline_menu_24"
-                tools:ignore="TouchTargetSizeCheck" />-->
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/nav_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:background="@android:color/transparent"
-                android:contentDescription="placeholder"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:navigationIcon="@drawable/baseline_menu_24"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/tvStayHeading"
@@ -76,41 +68,47 @@
 
         </FrameLayout>
 
-        <EditText
-            android:id="@+id/etSearch"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/frameParentStay"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="16dp"
-            android:alpha="0.6"
-            android:gravity="center"
-            android:hint="@string/searchBar"
-            android:inputType="text"
-            android:textColor="@color/black"
-            android:textColorHint="@color/searchBarHint"
-            android:textStyle="italic" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/frameParentStay">
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="16dp"
+                android:alpha="0.6"
+                android:gravity="center"
+                android:hint="@string/searchBar"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textColorHint="@color/searchBarHint"
+                android:textStyle="italic"
+                android:autofillHints="" />
 
 
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etSearch"
-            tools:ignore="SpeakableTextPresentCheck">
-
-            <LinearLayout
-                android:id="@+id/linearStayListings"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_corner_radius_stay"
-                android:orientation="vertical">
+                android:layout_below="@+id/etSearch"
+                tools:ignore="SpeakableTextPresentCheck">
 
-                <!-- ... Rest of your views ... -->
+                <LinearLayout
+                    android:id="@+id/linearStayListings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_corner_radius_stay"
+                    android:orientation="vertical">
 
-            </LinearLayout>
-        </ScrollView>
+                    <!-- ... Rest of your views ... -->
+
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
