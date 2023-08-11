@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DevRight-StillbaaiTourism</string>
+
+
+    <!--Stay-->
+    <string name="StayHeading">Stay</string>
+    <string name="searchBar">Start Searching...</string>
 </resources>
