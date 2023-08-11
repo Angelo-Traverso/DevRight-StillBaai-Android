@@ -4,5 +4,9 @@
 
     <!--Stay-->
     <string name="StayHeading">Stay</string>
-    <string name="searchBar">Start Searching...</string>
+    <string name="searchBar">Start Searching…</string>
+    <!--Stay Menu-->
+    <string name="home">Home</string>
+    <string name="stay">Stay</string>
+    <string name="eat">Stay</string>
 </resources>
