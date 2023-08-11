@@ -4,14 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
 
-class MainActivity : AppCompatActivity() {
+class Stay : AppCompatActivity() {
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_stay)
 
-        // ------------------- Remove when implementing custom card ------------------- //
-        // ------------------- This is used to test the display of the card layout ------------------- //
-        val linearLayout = findViewById<LinearLayout>(R.id.linView);
+
+        val linearLayout = findViewById<LinearLayout>(R.id.linearStayListings);
         linearLayout.removeAllViews()
 
         for (i in 1..5)
@@ -22,8 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        // ------------------- End Test ------------------- //
-
-
     }
+
+
 }
