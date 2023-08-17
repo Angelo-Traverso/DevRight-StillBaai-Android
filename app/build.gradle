@@ -6,6 +6,7 @@ plugins {
 android {
     namespace 'com.example.devright_stillbaaitourism'
     compileSdk 33
+    viewBinding.enable = true
 
     defaultConfig {
         applicationId "com.example.devright_stillbaaitourism"

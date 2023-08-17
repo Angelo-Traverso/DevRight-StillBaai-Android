@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/home"
+            android:icon="@drawable/baseline_home_24"/>
+        <item
+            android:id="@+id/nav_stay"
+            android:title="@string/stay"
+            android:icon="@drawable/baseline_bed_24"/>
+        <item
+            android:id="@+id/nav_eat"
+            android:title="@string/eat"
+            android:icon="@drawable/baseline_fastfood_24"/>
+
+        <item
+            android:id="@+id/nav_experience"
+            android:title="@string/Experience"
+            android:icon="@drawable/baseline_fastfood_24"
+            app:actionLayout="@layout/spinner"/>
+            <!--<menu>
+                <item
+                    android:id="@+id/nav_dayTrip"
+                    android:title="Day Trip"
+                    />
+            </menu>
+
+        </item>-->
+
+
+    </group>
+
+
+</menu>
