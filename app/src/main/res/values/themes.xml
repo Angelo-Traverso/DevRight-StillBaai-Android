@@ -13,8 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="button_grey">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/gray_600</item>
+    <style name="Button.Grey" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/gray_600</item>
     </style>
 </resources>
