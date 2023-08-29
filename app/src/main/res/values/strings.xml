@@ -10,7 +10,14 @@
     <string name="stay">Stay</string>
     <string name="eat">Eat</string>
     <string name="Experience">Experience</string>
-
+    <!--Eat-->
+    <string name="eatHeading">Eat</string>
+    <!--Activities-->
+    <string name="activitiesHeading">Activities</string>
+    <!--Events-->
+    <string name="eventsHeading">Events</string>
+    <!--Businesses-->
+    <string name="BusinessesHeading">Businesses</string>
     <!--Menu open and close-->
     <string name="navigation_drawer_open">Open Navigation</string>
     <string name="navigation_drawer_close">Close Navigation</string>Experience
