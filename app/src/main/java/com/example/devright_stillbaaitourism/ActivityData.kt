@@ -1,4 +1,4 @@
-package Classes
+package com.example.devright_stillbaaitourism
 
 class ActivityData
 {

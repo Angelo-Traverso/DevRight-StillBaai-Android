@@ -1,6 +1,0 @@
-package Classes
-
-class GlobalClass
-{
-
-}
