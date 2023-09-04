@@ -2,11 +2,33 @@
     <string name="app_name">DevRight-StillbaaiTourism</string>
 
 
+    <!--Home-->
+    <string name="HomeHeading">Home</string>
+    <string name="About">About</string>
+    <string name="Stilbaai">Stilbaai</string>
+    <string name="Jongensfontein">Jongensfontein</string>
+    <string name="Melkhoutfontein">Melkhoutfontein</string>
+    <string name="TodayEvents">Today\'s Events</string>
+    <string name="EelAdvert">Come see the Eels!</string>
+    <string name="StoreAdvert">Visit our Local Store!</string>
     <!--Stay-->
     <string name="StayHeading">Stay</string>
     <string name="searchBar">Start Searching…</string>
     <!--Stay Menu-->
     <string name="home">Home</string>
     <string name="stay">Stay</string>
-    <string name="eat">Stay</string>
+    <string name="eat">Eat</string>
+    <string name="Experience">Experience</string>
+    <!--Eat-->
+    <string name="eatHeading">Eat</string>
+    <!--Activities-->
+    <string name="activitiesHeading">Activities</string>
+    <!--Events-->
+    <string name="eventsHeading">Events</string>
+    <!--Businesses-->
+    <string name="BusinessesHeading">Businesses</string>
+    <!--Menu open and close-->
+    <string name="navigation_drawer_open">Open Navigation</string>
+    <string name="navigation_drawer_close">Close Navigation</string>Experience
+
 </resources>

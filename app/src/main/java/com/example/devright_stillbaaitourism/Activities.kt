@@ -9,16 +9,17 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.devright_stillbaaitourism.databinding.ActivityStayBinding
+import com.example.devright_stillbaaitourism.databinding.ActivityActivitiesBinding
+
 import com.google.android.material.navigation.NavigationView
 
-class Stay : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+class Activities : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var binding: ActivityStayBinding
+    private lateinit var binding: ActivityActivitiesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStayBinding.inflate(layoutInflater)
+        binding = ActivityActivitiesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
@@ -37,7 +38,7 @@ class Stay : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigat
         ///--------------------------------------------------------------------///
 
         // Temporary card display
-        val linearLayout = findViewById<LinearLayout>(R.id.linearStayListings);
+        val linearLayout = findViewById<LinearLayout>(R.id.linearActivitiesListings);
         linearLayout.removeAllViews()
 
         for (i in 1..5)
