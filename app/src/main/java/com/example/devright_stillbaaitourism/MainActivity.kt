@@ -9,6 +9,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var dbHandler = DBHandler();
+
         // ------------------- Remove when implementing custom card ------------------- //
         // ------------------- This is used to test the display of the card layout ------------------- //
         val linearLayout = findViewById<LinearLayout>(R.id.linView);
@@ -21,6 +23,8 @@ class MainActivity : AppCompatActivity() {
             linearLayout.addView(customCard)
 
         }
+
+        dbHandler.getConnection();
 
         // ------------------- End Test ------------------- //
 
