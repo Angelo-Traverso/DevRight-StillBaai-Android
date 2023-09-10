@@ -66,7 +66,7 @@ class DBHandler {
             conn = DriverManager.getConnection(
                 "jdbc:" + "mysql" + "://" +
                         "dedi1778.jnb1.host-h.net" +
-                        ":" + "3306" + "/" +
+                        ":" + "3306" + "/stil_app_db" +
                         "",
                 connectionProps)
         } catch (ex: SQLException) {
