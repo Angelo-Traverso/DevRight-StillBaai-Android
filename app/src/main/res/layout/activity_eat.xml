@@ -87,7 +87,17 @@
                     android:textColorHint="@color/searchBarHint"
                     android:textStyle="italic"
                     android:autofillHints="" />
-                <ScrollView
+                <ListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/etSearch"
+                    android:divider="@android:color/darker_gray"
+                    android:dividerHeight="1dp"
+                    android:layout_centerInParent="true" />
+
+
+               <!-- <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/etSearch"
@@ -99,7 +109,7 @@
                         android:background="@drawable/custom_corner_radius_stay"
                         android:orientation="vertical">
                     </LinearLayout>
-                </ScrollView>
+                </ScrollView>-->
             </RelativeLayout>
         </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
