@@ -1,12 +1,13 @@
 package com.example.devright_stillbaaitourism
 
+import CustomAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
-import android.widget.LinearLayout
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.widget.ListView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.devright_stillbaaitourism.databinding.ActivityEatBinding
@@ -21,6 +22,38 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         binding = ActivityEatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // ----------------------- List View ----------------------- //
+        val listView = findViewById<ListView>(R.id.listView)
+
+        // List items
+        val items = listOf(
+            ListItem(R.drawable.thumbail, "Pizza World", "Fun in the sun with Pizza"),
+            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
+            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
+            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
+            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
+            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
+            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
+        )
+
+        val adapter = CustomAdapter(this, items)
+        listView.adapter = adapter
+
+        // Set item click listener for the ListView
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedItem = items[position]
+
+            // Create an Intent to open the DetailActivity
+            val intent = Intent(this@Eat, DetailActivity::class.java)
+
+            // Pass data to the DetailActivity using Intent extras
+            intent.putExtra("title", selectedItem.title)
+            intent.putExtra("description", selectedItem.description)
+            intent.putExtra("thumbnailResId", selectedItem.thumbnailResId)
+
+            startActivity(intent)
+        }
+        // ----------------------- END List View ----------------------- //
 
         val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
@@ -29,84 +62,30 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         menuBtn.setOnClickListener(){
             drawerLayout.open()
         }
-        ///--------------------------------------------------------------------//
 
         binding.navView.bringToFront()
         binding.navView.setNavigationItemSelectedListener(this)
-
-        ///--------------------------------------------------------------------///
-
-        // Temporary card display
-        val linearLayout = findViewById<LinearLayout>(R.id.linearEatListings);
-        linearLayout.removeAllViews()
-
-        for (i in 1..5)
-        {
-            val customCard = custom_card(this)
-
-            linearLayout.addView(customCard)
-
-        }
-
     }
 
-    //............................................................................................//
-
-    /// It will allow the user to navigate through pages.
-    override fun onNavigationItemSelected(item: MenuItem): Boolean
-    {
-        // When the activity pages are ready, uncomment the below code
-        when(item.itemId)
-        {
-            /*R.id.nav_home -> {
-                val intent = Intent(applicationContext, Home::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }
-
-            R.id.nav_stay -> {
-                val intent = Intent(applicationContext, Stay::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }
-
-            R.id.nav_eat -> {
-                val intent = Intent(applicationContext, Eat::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }*/
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation item clicks here
+        when(item.itemId) {
+            // Handle menu item clicks here
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
-        // return true marks the item as selected
         return true
     }
 
-    //............................................................................................//
-
-    /// Opens/closses the navigation drawer.
-    override fun onBackPressed()
-    {
-        //if the drawer is open, close it
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
+    override fun onBackPressed() {
+        // Handle back button press when the drawer is open
+        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
-        }
-        else
-        {
-            //otherwise, let the super class handle it
+        } else {
             super.onBackPressed()
         }
     }
 
-    //............................................................................................//
-
     override fun onClick(v: View?) {
-        /*TODO("Not yet implemented")*/
+        /*TODO: Handle other clicks if needed*/
     }
-
-    //............................................................................................//
-
 }
