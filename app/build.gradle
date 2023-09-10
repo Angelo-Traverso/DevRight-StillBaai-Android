@@ -37,11 +37,28 @@ android {
 }
 
 dependencies {
+    //java
+    implementation fileTree(dir: 'libs',includes: ['*.jar'] )
+    implementation "org.jetbrains.kotlin:kotlin-stblib-jdk7:1.8.0"
+    //HTTP3
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    //Android Core implementations
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //material
+    implementation 'com.google.android.material:material:1.9.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+    //lifecycle
+    implementation 'androix.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha03'
+    //JDBC
+    implementation files('libs\\mysql-connector-j-8.0.33.jar')
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
