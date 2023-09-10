@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.devright_stillbaaitourism">
 
     <application
         android:name=".GlobalClass"
@@ -26,7 +27,14 @@
             android:name=".MainActivity"
             android:exported="false">
 
+
         </activity>
+        <activity
+            android:name="com.example.devright_stillbaaitourism.DetailActivity"
+            android:exported="false">
+        </activity>
+
+
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 
