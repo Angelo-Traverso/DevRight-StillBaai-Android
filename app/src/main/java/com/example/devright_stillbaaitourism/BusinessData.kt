@@ -13,3 +13,4 @@ class BusinessData
     var BUSINESS_DESCRIPTION: String? = null
     var BUSINESS_CATEGORY_ID: Int = 0
 }
+
