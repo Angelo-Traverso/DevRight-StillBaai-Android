@@ -97,16 +97,24 @@
                 android:layout_below="@+id/etSearch"
                 tools:ignore="SpeakableTextPresentCheck">
 
-                <LinearLayout
+                <ListView
+                    android:id="@+id/listStayDisplay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    
+
+                </ListView>
+
+              <!--  <LinearLayout
                     android:id="@+id/linearStayListings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_corner_radius_stay"
                     android:orientation="vertical">
 
-                    <!-- ... Rest of your views ... -->
+                    &lt;!&ndash; ... Rest of your views ... &ndash;&gt;
 
-                </LinearLayout>
+                </LinearLayout>-->
             </ScrollView>
         </RelativeLayout>
     </RelativeLayout>

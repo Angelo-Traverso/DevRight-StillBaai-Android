@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        dbHandler.getConnection();
+        //dbHandler.getConnection();
 
         // ------------------- End Test ------------------- //
 

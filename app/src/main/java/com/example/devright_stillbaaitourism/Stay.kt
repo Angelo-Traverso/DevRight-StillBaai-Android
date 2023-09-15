@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ListView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -37,14 +38,17 @@ class Stay : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigat
         ///--------------------------------------------------------------------///
 
         // Temporary card display
-        val linearLayout = findViewById<LinearLayout>(R.id.linearStayListings);
-        linearLayout.removeAllViews()
+       // val linearLayout = findViewById<LinearLayout>(R.id.linearStayListings);
+        val listView = findViewById<ListView>(R.id.listStayDisplay);
+
+        //linearLayout.removeAllViews()
+       // listView.removeAllViews()
 
         for (i in 1..5)
         {
             val customCard = custom_card(this)
 
-            linearLayout.addView(customCard)
+            listView.addView(customCard)
 
         }
 
