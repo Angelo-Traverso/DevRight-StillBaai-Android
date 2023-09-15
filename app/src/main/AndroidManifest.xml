@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.devright_stillbaaitourism">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".GlobalClass"
         android:allowBackup="true"
@@ -14,6 +16,12 @@
         android:theme="@style/Theme.DevRightStillbaaiTourism"
         tools:targetApi="31">
         <activity
+            android:name=".Eels"
+            android:exported="false" />
+        <activity
+            android:name=".ContactUs"
+            android:exported="false" />
+        <activity
             android:name=".Eat"
             android:exported="true">
             <intent-filter>
@@ -21,21 +29,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-
-        </activity>
+            android:exported="false" />
         <activity
-            android:name="com.example.devright_stillbaaitourism.DetailActivity"
-            android:exported="false">
-        </activity>
-
-
+            android:name=".DetailActivity"
+            android:exported="false" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
