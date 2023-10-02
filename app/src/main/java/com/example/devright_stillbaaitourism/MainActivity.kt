@@ -1,8 +1,8 @@
 package com.example.devright_stillbaaitourism
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        //dbHandler.getConnection();
+        dbHandler.getConnection();
+        val eatDataList = dbHandler.fetchEatData()
+
 
         // ------------------- End Test ------------------- //
 
