@@ -12,6 +12,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.devright_stillbaaitourism.databinding.ActivityEatBinding
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,7 +32,12 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         binding = ActivityEatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        CoroutineScope(Dispatchers.IO).launch {
+            val dbHandler = DBHandler()
+            val conn = dbHandler.getConnection()
+            val temp = conn?.let { dbHandler.fetchEatData(it) }
+            // Do something with 'temp'
+        }
         // Initialize Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("https://stilbaaitourism.co.za/")

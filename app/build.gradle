@@ -47,9 +47,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
+    //SQLDroid for JDBC
+    implementation 'org.sqldroid:sqldroid:1.0.3'
+    implementation 'mysql:mysql-connector-java:5.1.49'
 
-    //java
-    implementation fileTree(dir: 'libs',includes: ['*.jar'] )
     //HTTP3
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     //Android Core implementations
@@ -66,9 +67,6 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:1.1.1"
     //recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha03'
-    //JDBC
-    implementation files('libs\\mysql-connector-j-8.0.33.jar')
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
