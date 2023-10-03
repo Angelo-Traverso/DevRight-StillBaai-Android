@@ -13,36 +13,35 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.devright_stillbaaitourism.databinding.ActivityStayBinding
 import com.google.android.material.navigation.NavigationView
 
-class Stay : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+class Stay : AppCompatActivity() {
 
     private lateinit var binding: ActivityStayBinding
 
+    private lateinit var burgerMenu: BurgerMenu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStayBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_stay)
+        burgerMenu = BurgerMenu(this, R.layout.activity_stay)
+        burgerMenu.setupDrawer()
 
 
-        val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
+        /*val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
 
         // Open drawer on menu button clicked
         menuBtn.setOnClickListener(){
             drawerLayout.open()
-        }
-        ///--------------------------------------------------------------------//
-
-        binding.navView.bringToFront()
-        binding.navView.setNavigationItemSelectedListener(this)
+        }*/
 
         ///--------------------------------------------------------------------///
 
         // Temporary card display
        // val linearLayout = findViewById<LinearLayout>(R.id.linearStayListings);
-        val listView = findViewById<ListView>(R.id.listStayDisplay);
+        /*val listView = findViewById<ListView>(R.id.listStayDisplay);
 
         //linearLayout.removeAllViews()
-       // listView.removeAllViews()
+      // listView.removeAllViews()
 
         for (i in 1..5)
         {
@@ -50,65 +49,11 @@ class Stay : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigat
 
             listView.addView(customCard)
 
-        }
+        }*/
 
-    }
 
-    //............................................................................................//
 
-    /// It will allow the user to navigate through pages.
-    override fun onNavigationItemSelected(item: MenuItem): Boolean
-    {
-        // When the activity pages are ready, uncomment the below code
-        when(item.itemId)
-        {
-            /*R.id.nav_home -> {
-                val intent = Intent(applicationContext, Home::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
 
-            }
-
-            R.id.nav_stay -> {
-                val intent = Intent(applicationContext, Stay::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }
-
-            R.id.nav_eat -> {
-                val intent = Intent(applicationContext, Eat::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }*/
-        }
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
-        // return true marks the item as selected
-        return true
-    }
-
-    //............................................................................................//
-
-    /// Opens/closses the navigation drawer.
-    override fun onBackPressed()
-    {
-        //if the drawer is open, close it
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        }
-        else
-        {
-            //otherwise, let the super class handle it
-            super.onBackPressed()
-        }
-    }
-
-    //............................................................................................//
-
-    override fun onClick(v: View?) {
-        /*TODO("Not yet implemented")*/
     }
 
     //............................................................................................//

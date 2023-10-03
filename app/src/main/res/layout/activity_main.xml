@@ -7,135 +7,180 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        app:srcCompat="@drawable/homepic" />
-
-    <TextView
-        android:id="@+id/tvHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:shadowColor="#222222"
-        android:shadowDx="1"
-        android:shadowDy="10"
-        android:shadowRadius="10"
-        android:text="@string/HomeHeading"
-        android:textColor="#FFFFFF"
-        android:textSize="34sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:id="@+id/linView"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/imageView5"
-        android:orientation="vertical">
+        tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/tvAbout"
+        <!--Need to alter the margin values (currently hardcoded)-->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/About"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/drawer_header_layout"
+            app:menu="@menu/drawer_menu" />
 
-        <LinearLayout
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/relDrawerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btnStil"
+            <FrameLayout
+                android:id="@+id/frameParentHome"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:drawableStart="@android:drawable/ic_dialog_info"
-                android:gravity="center_horizontal"
-                android:text="@string/Stilbaai"
-                android:textSize="12sp"/>
+                android:layout_height="125dp">
 
-            <Button
-                android:id="@+id/btnJong"
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    app:srcCompat="@drawable/homepic" />
+
+                <ImageButton
+                    android:id="@+id/btnMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center|start"
+                    android:background="@android:color/transparent"
+                    android:minWidth="32dp"
+                    android:src="@drawable/baseline_menu_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/tvHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:shadowColor="#222222"
+                    android:shadowDx="1"
+                    android:shadowDy="10"
+                    android:shadowRadius="10"
+                    android:text="@string/HomeHeading"
+                    android:textColor="#FFFFFF"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/relBody"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:drawableStart="@android:drawable/ic_dialog_info"
-                android:gravity="center_horizontal"
-                android:text="@string/Jongensfontein"
-                android:textSize="12sp" />
+                android:layout_height="match_parent"
+                android:layout_below="@+id/frameParentHome">
 
-            <Button
-                android:id="@+id/btnMelk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:drawableStart="@android:drawable/ic_dialog_info"
-                android:gravity="center_horizontal"
-                android:text="@string/Melkhoutfontein"
-                android:textSize="12sp" />
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-        <TextView
-            android:id="@+id/tvToday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/TodayEvents"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvAbout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="@string/About"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_launcher_background" />
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvEelAdvert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/EelAdvert"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+                        <Button
+                            android:id="@+id/btnStil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:drawableStart="@android:drawable/ic_dialog_info"
+                            android:gravity="center_horizontal"
+                            android:text="@string/Stilbaai"
+                            android:textSize="12sp"/>
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="wrap_content"
-            android:layout_height="92dp"
-            app:srcCompat="@drawable/home_eel" />
+                        <Button
+                            android:id="@+id/btnJong"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:drawableStart="@android:drawable/ic_dialog_info"
+                            android:gravity="center_horizontal"
+                            android:text="@string/Jongensfontein"
+                            android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/tvLocalStore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/StoreAdvert"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+                        <Button
+                            android:id="@+id/btnMelk"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:drawableStart="@android:drawable/ic_dialog_info"
+                            android:gravity="center_horizontal"
+                            android:text="@string/Melkhoutfontein"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/home_store" />
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvToday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/TodayEvents"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/ic_launcher_background" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvEelAdvert"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/EelAdvert"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="92dp"
+                        app:srcCompat="@drawable/home_eel" />
+
+                    <TextView
+                        android:id="@+id/tvLocalStore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/StoreAdvert"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/home_store" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>

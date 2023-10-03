@@ -5,9 +5,13 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var burgerMenu: BurgerMenu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        burgerMenu = BurgerMenu(this, R.layout.activity_main)
+        burgerMenu.setupDrawer()
 
         var dbHandler = DBHandler();
 
