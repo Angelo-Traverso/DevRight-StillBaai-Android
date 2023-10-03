@@ -4,6 +4,7 @@ import CustomAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
@@ -28,7 +29,6 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         super.onCreate(savedInstanceState)
         binding = ActivityEatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         // Initialize Retrofit
         val retrofit = Retrofit.Builder()
@@ -90,7 +90,6 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         binding.navView.bringToFront()
         binding.navView.setNavigationItemSelectedListener(this)
     }
-
     private fun fetchMediaItems() {
         // Make the API request to fetch media items
         val call = apiService.getMediaItems()

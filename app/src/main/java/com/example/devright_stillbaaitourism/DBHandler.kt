@@ -1,9 +1,11 @@
 package com.example.devright_stillbaaitourism
 
+import android.util.Log
 import java.sql.*
 import java.util.*
 
 const val BASEURL = ""
+
 class DBHandler {
     internal var conn: Connection? = null
     internal var username = "k5g2h_zsu89" // provide the username
@@ -18,7 +20,7 @@ class DBHandler {
             Class.forName("com.mysql.jdbc.Driver").newInstance()
             //connection string for the DB
             conn = DriverManager.getConnection(
-                "jdbc:mysql://dedi1778.jnb1.host-h.net:306/stil_app_db",
+                "jdbc:mysql://dedi1778.jnb1.host-h.net:3306/stil_app_db",
                 connectionProps)
         } catch (ex: SQLException) {
             // handle any errors
@@ -28,12 +30,12 @@ class DBHandler {
             ex.printStackTrace()
         }
     }
-    //Queries the eats table and puts the data in a list, Suspen is for Asynch
+    //Queries the eats table and puts the data in a list, Suspen is for Async
      fun fetchEatData(): List<EatData> {
         //Holds the data from the eats table.
         val eatDataList = mutableListOf<EatData>()
         try {
-            //closes connection automatically
+            // Closes connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM eat")
                 //goes until no more records are found
@@ -50,6 +52,7 @@ class DBHandler {
                         eatData.EAT_CONTACT_PERSON = resultSet.getString("")
                         eatData.EAT_DESCRIPTION = resultSet.getString("")
                         eatData.EAT_CATEGORY_ID = resultSet.getInt("")
+                        Log.d("DB STUFF", eatData.EAT_NAME)
                         eatDataList.add(eatData)
                     }
                 }
