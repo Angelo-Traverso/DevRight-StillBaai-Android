@@ -1,9 +1,5 @@
 package com.example.devright_stillbaaitourism
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.sql.*
 import java.util.*
 
@@ -14,34 +10,34 @@ class DBHandler {
     internal var password = "G857456FD325g6p" // provide the corresponding password
 
     //Creates the SQL connection, Suspen is for Asynch
-    suspend fun getConnection(): Connection? {
+    fun getConnection() {
         val connectionProps = Properties()
-        connectionProps["user"] = username
-        connectionProps["password"] = password
+        connectionProps.put("user", username) //Username for the DB
+        connectionProps.put("password", password) //Password for the DB
         try {
-            val driverInstance = Class.forName("com.mysql.jdbc.Driver").newInstance()
-            println(driverInstance)
+            Class.forName("com.mysql.jdbc.Driver").newInstance()
+            //connection string for the DB
             conn = DriverManager.getConnection(
                 "jdbc:mysql://dedi1778.jnb1.host-h.net:3306/stil_app_db",
-                connectionProps
-            )
+                connectionProps)
         } catch (ex: SQLException) {
+            // handle any errors
             ex.printStackTrace()
         } catch (ex: Exception) {
+            // handle any errors
             ex.printStackTrace()
         }
-        return conn
     }
-
-        //Queries the eats table and puts the data in a list, Suspen is for Asynch
-        suspend fun fetchEatData(conn: Connection): List<EatData> {
-            //Holds the data from the eats table.
-            val eatDataList = mutableListOf<EatData>()
-            try {
-                //closes connection automatically
-                conn.createStatement().use { stmt ->
-                    val resultSet = stmt.executeQuery("SELECT * FROM Eat_Table")
-                    //goes until no more records are found
+    //Queries the eats table and puts the data in a list, Suspen is for Asynch
+     fun fetchEatData(): List<EatData> {
+        //Holds the data from the eats table.
+        val eatDataList = mutableListOf<EatData>()
+        try {
+            //closes connection automatically
+            conn?.createStatement().use { stmt ->
+                val resultSet = stmt?.executeQuery("SELECT * FROM Eat_Table")
+                //goes until no more records are found
+                if (resultSet != null) {
                     while (resultSet.next()) {
                         val eatData = EatData()
                         eatData.EAT_ID = resultSet.getInt("EAT_ID")
@@ -57,9 +53,10 @@ class DBHandler {
                         eatDataList.add(eatData)
                     }
                 }
-            } catch (ex: SQLException) {
-                ex.printStackTrace()
             }
-            return eatDataList
+        } catch (ex: SQLException) {
+            ex.printStackTrace()
         }
+        return eatDataList
     }
+}

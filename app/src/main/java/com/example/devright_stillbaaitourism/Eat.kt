@@ -35,7 +35,7 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         CoroutineScope(Dispatchers.IO).launch {
             val dbHandler = DBHandler()
             val conn = dbHandler.getConnection()
-            val temp = conn?.let { dbHandler.fetchEatData(it) }
+            val temp = conn?.let { dbHandler.fetchEatData() }
             // Do something with 'temp'
         }
         // Initialize Retrofit
