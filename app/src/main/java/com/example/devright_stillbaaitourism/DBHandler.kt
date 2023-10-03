@@ -1,11 +1,9 @@
 package com.example.devright_stillbaaitourism
 
-import android.util.Log
 import java.sql.*
 import java.util.*
 
 const val BASEURL = ""
-
 class DBHandler {
     internal var conn: Connection? = null
     internal var username = "k5g2h_zsu89" // provide the username
@@ -30,29 +28,28 @@ class DBHandler {
             ex.printStackTrace()
         }
     }
-    //Queries the eats table and puts the data in a list, Suspen is for Async
-     fun fetchEatData(): List<EatData> {
+    //Queries the eats table and puts the data in a list, Suspen is for Asynch
+    fun fetchEatData(): List<EatData> {
         //Holds the data from the eats table.
         val eatDataList = mutableListOf<EatData>()
         try {
-            // Closes connection automatically
+            //closes connection automatically
             conn?.createStatement().use { stmt ->
-                val resultSet = stmt?.executeQuery("SELECT * FROM eat")
+                val resultSet = stmt?.executeQuery("SELECT * FROM Eat_Table")
                 //goes until no more records are found
                 if (resultSet != null) {
                     while (resultSet.next()) {
                         val eatData = EatData()
-                        eatData.EAT_ID = resultSet.getInt("")
-                        eatData.EAT_NAME = resultSet.getString("")
-                        eatData.EAT_TEL_NUM = resultSet.getString("")
-                        eatData.EAT_MOBILE_NUM = resultSet.getString("")
-                        eatData.EAT_EMAIL = resultSet.getString("")
-                        eatData.EAT_WEBSITE = resultSet.getString("")
-                        eatData.EAT_ADDRESS = resultSet.getString("")
-                        eatData.EAT_CONTACT_PERSON = resultSet.getString("")
-                        eatData.EAT_DESCRIPTION = resultSet.getString("")
-                        eatData.EAT_CATEGORY_ID = resultSet.getInt("")
-                        Log.d("DB STUFF", eatData.EAT_NAME)
+                        eatData.EAT_ID = resultSet.getInt("EAT_ID")
+                        eatData.EAT_NAME = resultSet.getString("EAT_NAME")
+                        eatData.EAT_TEL_NUM = resultSet.getString("EAT_TEL_NUM")
+                        eatData.EAT_MOBILE_NUM = resultSet.getString("EAT_MOBILE_NUM")
+                        eatData.EAT_EMAIL = resultSet.getString("EAT_EMAIL")
+                        eatData.EAT_WEBSITE = resultSet.getString("EAT_WEBSITE")
+                        eatData.EAT_ADDRESS = resultSet.getString("EAT_ADDRESS")
+                        eatData.EAT_CONTACT_PERSON = resultSet.getString("EAT_CONTACT_PERSON")
+                        eatData.EAT_DESCRIPTION = resultSet.getString("EAT_DESCRIPTION")
+                        eatData.EAT_CATEGORY_ID = resultSet.getInt("EAT_CATEGORY_ID")
                         eatDataList.add(eatData)
                     }
                 }

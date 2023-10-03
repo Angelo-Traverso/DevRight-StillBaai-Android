@@ -4,7 +4,6 @@ import CustomAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
@@ -13,6 +12,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.devright_stillbaaitourism.databinding.ActivityEatBinding
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +32,12 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         binding = ActivityEatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        CoroutineScope(Dispatchers.IO).launch {
+            val dbHandler = DBHandler()
+            val conn = dbHandler.getConnection()
+            val temp = conn?.let { dbHandler.fetchEatData() }
+            // Do something with 'temp'
+        }
         // Initialize Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("https://stilbaaitourism.co.za/")
@@ -57,8 +65,8 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         )
 
 
-       /* val adapter = CustomAdapter(this, items)
-        listView.adapter = adapter*/
+        /* val adapter = CustomAdapter(this, items)
+         listView.adapter = adapter*/
 
         // Set item click listener for the ListView
         // Set item click listener for the ListView
@@ -90,6 +98,7 @@ class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigati
         binding.navView.bringToFront()
         binding.navView.setNavigationItemSelectedListener(this)
     }
+
     private fun fetchMediaItems() {
         // Make the API request to fetch media items
         val call = apiService.getMediaItems()
