@@ -29,7 +29,7 @@ class DBHandler {
         }
     }
     //Queries the eats table and puts the data in a list, Suspen is for Asynch
-     fun fetchEatData(): List<EatData> {
+    fun fetchEatData(): List<EatData> {
         //Holds the data from the eats table.
         val eatDataList = mutableListOf<EatData>()
         try {

@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.devright_stillbaaitourism">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".GlobalClass"
@@ -32,7 +31,10 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
+        <activity
+            android:name=".Stay"
+            android:exported="true" />
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
