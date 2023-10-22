@@ -4,6 +4,8 @@ import CustomAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings.Global
+import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ListView
@@ -28,13 +30,20 @@ class Eat : AppCompatActivity(){
 
     private lateinit var burgerMenu: BurgerMenu
 
+    private lateinit var listview: ListView
+
+    private lateinit var customAdapter: CustomAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         burgerMenu = BurgerMenu(this, R.layout.activity_eat)
         burgerMenu.setupDrawer()
 
+        listview = findViewById(R.id.listView)
 
-        var dbHandler = DBHandler();
+        //showListItems()
+
+        var dbHandler = DBHandler()
         thread { dbHandler.getConnection()
             dbHandler.fetchEatData()}
         // Initialize Retrofit
@@ -46,11 +55,20 @@ class Eat : AppCompatActivity(){
         // Create an instance of ApiService
         apiService = retrofit.create(ApiService::class.java)
 
+        val eatDataList = GlobalClass.EatDataList
+
+
+        // Create a custom adapter with the EatData list
+        customAdapter = CustomAdapter(this, eatDataList)
+
+
+        // Set the adapter for the ListView
+        listview.adapter = customAdapter
         // Make the API request to fetch media items
-        fetchMediaItems()
+     //   fetchMediaItems()
 
         // ----------------------- List View ----------------------- //
-        val listView = findViewById<ListView>(R.id.listView)
+        //val listView = findViewById<ListView>(R.id.listView)
 
         // List items
         val items = listOf(
@@ -64,32 +82,33 @@ class Eat : AppCompatActivity(){
         )
 
 
-        /* val adapter = CustomAdapter(this, items)
-         listView.adapter = adapter*/
-
         // Set item click listener for the ListView
         // Set item click listener for the ListView
-        listView.setOnItemClickListener { _, _, position, _ ->
-            if (position >= 0 && position < items.size) {
-                val selectedItem = items[position]
+        listview.setOnItemClickListener { _, _, position, _ ->
+            if (position >= 0 && position < eatDataList.size) {
+                val selectedItem = eatDataList[position]
 
                 // Create an Intent to open the DetailActivity
                 val intent = Intent(this@Eat, DetailActivity::class.java)
 
                 // Pass data to the DetailActivity using Intent extras
-                intent.putExtra("title", selectedItem.title)
-                intent.putExtra("description", selectedItem.description)
-                intent.putExtra("thumbnailResId", selectedItem.thumbnailResId)
+                intent.putExtra("title", selectedItem.EAT_NAME)
+                intent.putExtra("description", selectedItem.EAT_DESCRIPTION)
+                //intent.putExtra("thumbnailResId", selectedItem.)
 
                 startActivity(intent)
             }
         }
         // ----------------------- END List View ----------------------- //
+    }
 
+    // Displays eat items in the listview
+    private fun showListItems()
+    {
 
     }
 
-    private fun fetchMediaItems() {
+    /*private fun fetchMediaItems() {
         // Make the API request to fetch media items
         val call = apiService.getMediaItems()
         // enqueue() is used to asynchronously make the API request and handle responses
@@ -129,5 +148,5 @@ class Eat : AppCompatActivity(){
                 // Can add network error handling here, such as displaying a network error message
             }
         })
-    }
+    }*/
 }
