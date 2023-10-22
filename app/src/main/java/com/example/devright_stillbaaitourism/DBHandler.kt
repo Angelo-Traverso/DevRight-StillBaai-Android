@@ -29,12 +29,12 @@ class DBHandler {
         }
     }
     //Queries the eats table and puts the data in a list, Suspen is for Asynch
-    fun fetchEatData(){
+    fun fetchEatData() {
         try {
-            //closes connection automatically
+            // Close connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Eat_Table")
-                //goes until no more records are found
+
                 if (resultSet != null) {
                     while (resultSet.next()) {
                         val eatData = EatData()
@@ -47,7 +47,27 @@ class DBHandler {
                         eatData.EAT_ADDRESS = resultSet.getString("EAT_ADDRESS")
                         eatData.EAT_CONTACT_PERSON = resultSet.getString("EAT_CONTACT_PERSON")
                         eatData.EAT_DESCRIPTION = resultSet.getString("EAT_DESCRIPTION")
+
+                        // Add EatData object to the list
                         GlobalClass.EatDataList.add(eatData)
+                    }
+                }
+            }
+
+            // Now, fetch image URLs and associate them with the EatData objects
+            conn?.createStatement().use { stmt ->
+                val imageResultSet = stmt?.executeQuery("SELECT * FROM Eat_Image_Table")
+
+                if (imageResultSet != null) {
+                    while (imageResultSet.next()) {
+                        val eatId = imageResultSet.getInt("EAT_ID")
+                        val imageUrl = imageResultSet.getString("EAT_IMAGE_URL")
+
+                        // Find the corresponding EatData object by EAT_ID
+                        val eatData = GlobalClass.EatDataList.find { it.EAT_ID == eatId }
+
+                        // If an EatData object is found, add the image URL to its list
+                        eatData?.EAT_IMAGE_URLS?.add(imageUrl)
                     }
                 }
             }

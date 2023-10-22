@@ -36,7 +36,6 @@ class Eat : AppCompatActivity(){
 
         var dbHandler = DBHandler();
         thread { dbHandler.getConnection()
-            dbHandler.fetchActivityData()
             dbHandler.fetchEatData()}
         // Initialize Retrofit
         val retrofit = Retrofit.Builder()
