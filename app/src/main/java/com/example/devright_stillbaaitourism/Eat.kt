@@ -18,6 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.concurrent.thread
 
 class Eat : AppCompatActivity(){
 
@@ -33,12 +34,10 @@ class Eat : AppCompatActivity(){
         burgerMenu.setupDrawer()
 
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val dbHandler = DBHandler()
-            val conn = dbHandler.getConnection()
-            val temp = conn?.let { dbHandler.fetchEatData() }
-            // Do something with 'temp'
-        }
+        var dbHandler = DBHandler();
+        thread { dbHandler.getConnection()
+            dbHandler.fetchActivityData()
+            dbHandler.fetchEatData()}
         // Initialize Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("https://stilbaaitourism.co.za/")
