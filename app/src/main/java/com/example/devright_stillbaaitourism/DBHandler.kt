@@ -47,7 +47,6 @@ class DBHandler {
                         eatData.EAT_ADDRESS = resultSet.getString("EAT_ADDRESS")
                         eatData.EAT_CONTACT_PERSON = resultSet.getString("EAT_CONTACT_PERSON")
                         eatData.EAT_DESCRIPTION = resultSet.getString("EAT_DESCRIPTION")
-                        eatData.EAT_CATEGORY_ID = resultSet.getInt("EAT_CATEGORY_ID")
                         GlobalClass.EatDataList.add(eatData)
                     }
                 }
@@ -215,4 +214,6 @@ class DBHandler {
             ex.printStackTrace()
         }
     }
+
+
 }
