@@ -42,26 +42,26 @@
                 <ImageButton
                     android:id="@+id/btnMenu"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center|start"
                     android:background="@android:color/transparent"
-                    android:minWidth="32dp"
+                    android:minWidth="40dp"
                     android:src="@drawable/baseline_menu_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
-                    android:id="@+id/tvHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="30dp"
-                    android:shadowColor="#222222"
+                    android:id="@+id/tvHomeHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="48dp"
+                    android:gravity="center|start"
+                    android:shadowColor="@color/black"
                     android:shadowDx="1"
                     android:shadowDy="10"
                     android:shadowRadius="10"
                     android:text="@string/HomeHeading"
-                    android:textColor="#FFFFFF"
-                    android:textSize="34sp"
+                    android:textColor="@color/white"
+                    android:textSize="45sp"
                     android:textStyle="bold" />
 
             </FrameLayout>
