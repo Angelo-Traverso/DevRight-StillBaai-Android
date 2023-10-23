@@ -3,6 +3,7 @@ package com.example.devright_stillbaaitourism
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +15,9 @@ class MainActivity : AppCompatActivity() {
         burgerMenu.setupDrawer()
 
         var dbHandler = DBHandler();
-
+        thread { dbHandler.getConnection()
+        dbHandler.fetchActivityData()
+        dbHandler.fetchEatData()}
         // ------------------- Remove when implementing custom card ------------------- //
         // ------------------- This is used to test the display of the card layout ------------------- //
         val linearLayout = findViewById<LinearLayout>(R.id.linView);

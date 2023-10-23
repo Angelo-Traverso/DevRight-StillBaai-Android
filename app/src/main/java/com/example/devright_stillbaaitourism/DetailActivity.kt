@@ -1,6 +1,7 @@
 package com.example.devright_stillbaaitourism;
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.devright_stillbaaitourism.R // Replace with the correct import for your resources
@@ -21,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
         val descriptionTextView = findViewById<TextView>(R.id.descriptionTextView)
         val imageView = findViewById<ImageView>(R.id.imageView)
 
-        titleTextView.text = title
+        titleTextView.text = Html.fromHtml("<b>$title</b>")
         descriptionTextView.text = description
         imageView.setImageResource(thumbnailResId)
     }

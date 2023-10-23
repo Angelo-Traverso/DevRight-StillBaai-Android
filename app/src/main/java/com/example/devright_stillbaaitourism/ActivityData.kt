@@ -12,4 +12,7 @@ class ActivityData
     var ACTIVITY_CONTACT_PERSON: String? = null
     var ACTIVITY_DESCRIPTION: String? = null
     var ACTIVITY_CATEGORY_ID: Int = 0
+    var ACTIVITY_IMAGE_URLS: MutableList<String> = mutableListOf()
+    var ACTIVITY_CATEGORY_TYPE: String?=null
+
 }
