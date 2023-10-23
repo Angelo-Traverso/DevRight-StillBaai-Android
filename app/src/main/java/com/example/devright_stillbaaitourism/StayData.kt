@@ -12,4 +12,5 @@ class StayData
     var STAY_CONTACT_PERSON: String? = null
     var STAY_DESCRIPTION: String? = null
     var STAY_CATEGORY_ID: Int = 0
+    var STAY_CATEGORY_TYPE: String? = null
 }

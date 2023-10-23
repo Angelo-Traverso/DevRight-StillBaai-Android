@@ -11,4 +11,5 @@ class EatData {
     var EAT_CONTACT_PERSON: String = ""
     var EAT_DESCRIPTION: String? = null
     var EAT_IMAGE_URLS: MutableList<String> = mutableListOf()
+
 }
