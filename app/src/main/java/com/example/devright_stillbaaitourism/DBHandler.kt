@@ -246,7 +246,7 @@ class DBHandler {
         try {
             //closes connection automatically
             conn?.createStatement().use { stmt ->
-                val resultSet = stmt?.executeQuery("SELECT * FROM Activity_Table")
+                val resultSet = stmt?.executeQuery("SELECT * FROM Eel_Table")
                 //goes until no more records are found
                 if (resultSet != null) {
                     while (resultSet.next()) {
@@ -257,6 +257,23 @@ class DBHandler {
                         EelData.EEL_DESCRIPTION = resultSet.getString("EEL_DESCRIPTION")
                         EelData.EEL_CONTACT_NUM = resultSet.getNString("EEL_CONTACT_NUM")
                         GlobalClass.EelDataList.add(EelData)
+                    }
+                }
+            }
+            // fetch Activity Category Types and associate them with ActivityData objects
+            conn?.createStatement().use { stmt ->
+                val categoryResultSet = stmt?.executeQuery("SELECT * FROM Eel_Category_Table")
+
+                if (categoryResultSet != null) {
+                    while (categoryResultSet.next()) {
+                        val categoryId = categoryResultSet.getInt("EEL_CATEGORY_ID")
+                        val categoryType = categoryResultSet.getString("EEL_CATEGORY_TYPE")
+
+                        // Find the corresponding ActivityData object by ACTIVITY_CATEGORY_ID
+                        val stayData = GlobalClass.StayDataList.find { it.STAY_CATEGORY_ID == categoryId }
+
+                        // If an ActivityData object is found, set the ACTIVITY_CATEGORY_TYPE
+                        stayData?.STAY_CATEGORY_TYPE = categoryType
                     }
                 }
             }
