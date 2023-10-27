@@ -7,45 +7,40 @@
         <item
             android:id="@+id/nav_home"
             android:title="@string/home"
-            android:icon="@drawable/baseline_home_24"/>
+            android:icon="@drawable/home"/>
         <item
             android:id="@+id/nav_stay"
             android:title="@string/stay"
-            android:icon="@drawable/baseline_bed_24"/>
+            android:icon="@drawable/hotel"/>
         <item
             android:id="@+id/nav_eat"
             android:title="@string/eat"
-            android:icon="@drawable/baseline_fastfood_24"/>
+            android:icon="@drawable/restaurant"/>
 
         <item
             android:id="@+id/nav_business"
             android:title="@string/BusinessesHeading"
-            android:icon="@drawable/baseline_fastfood_24"
-            app:actionLayout="@layout/spinner"/>
+            android:icon="@drawable/work" />
 
         <item
             android:id="@+id/nav_Activities"
             android:title="@string/activitiesHeading"
-            android:icon="@drawable/baseline_fastfood_24"
-            app:actionLayout="@layout/spinner"/>
+            android:icon="@drawable/hiking" />
 
         <item
             android:id="@+id/nav_Events"
             android:title="@string/eventsHeading"
-            android:icon="@drawable/baseline_fastfood_24"
-            app:actionLayout="@layout/spinner"/>
+            android:icon="@drawable/events" />
 
         <item
             android:id="@+id/nav_Contacts"
             android:title="@string/contactUsHeading"
-            android:icon="@drawable/baseline_fastfood_24"
-            app:actionLayout="@layout/spinner"/>
+            android:icon="@drawable/call" />
 
         <item
             android:id="@+id/nav_Settings"
             android:title="@string/Experience"
-            android:icon="@drawable/baseline_fastfood_24"
-            app:actionLayout="@layout/spinner"/>
+            android:icon="@drawable/baseline_fastfood_24" />
             <!--<menu>
                 <item
                     android:id="@+id/nav_dayTrip"

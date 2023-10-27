@@ -12,9 +12,6 @@ class ContactUs : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
         burgerMenu = BurgerMenu(this, R.layout.activity_contact_us)
         burgerMenu.setupDrawer()
 
