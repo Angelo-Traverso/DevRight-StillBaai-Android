@@ -94,7 +94,7 @@ class Eat : AppCompatActivity(){
                 // Pass data to the DetailActivity using Intent extras
                 intent.putExtra("title", selectedItem.EAT_NAME)
                 intent.putExtra("description", selectedItem.EAT_DESCRIPTION)
-                //intent.putExtra("thumbnailResId", selectedItem.)
+                intent.putExtra("imageUrl", selectedItem.EAT_IMAGE_URLS[0])
 
                 startActivity(intent)
             }
