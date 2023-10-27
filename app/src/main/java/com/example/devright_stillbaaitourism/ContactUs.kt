@@ -6,16 +6,20 @@ import android.widget.ImageButton
 import androidx.drawerlayout.widget.DrawerLayout
 
 class ContactUs : AppCompatActivity() {
+
+    private lateinit var burgerMenu: BurgerMenu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_us)
+        burgerMenu = BurgerMenu(this, R.layout.activity_contact_us)
+        burgerMenu.setupDrawer()
 
-        val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
+        /*val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
 
         // Open drawer on menu button clicked
         menuBtn.setOnClickListener(){
             drawerLayout.open()
-        }
+        }*/
     }
 }

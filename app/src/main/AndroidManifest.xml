@@ -17,30 +17,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DevRightStillbaaiTourism"
         tools:targetApi="31">
+
         <activity
-            android:name=".Eels"
-            android:exported="false" />
-        <activity
-            android:name=".ContactUs"
-            android:exported="false" />
-        <activity
-            android:name=".Eat"
-            android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+
         <activity
             android:name=".Stay"
-            android:exported="true" />
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".Eat"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Businesses"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Activities"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Events"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ContactUs"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".Eels"
+            android:exported="true" >
+        </activity>
         <activity
             android:name=".DetailActivity"
-            android:exported="false" />
+            android:exported="true" >
+
+        </activity>
     </application>
 
 </manifest>

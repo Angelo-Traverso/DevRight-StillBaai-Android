@@ -122,7 +122,7 @@ class DBHandler {
                         EventData.EVENT_DURATION = resultSet.getDouble("EVENT_DURATION")
                         EventData.EVENT_PERSON = resultSet.getString("EVENT_PERSON")
                         EventData.EVENT_WEBSITE = resultSet.getString("EVENT_WEBSITE")
-                        EventData.EVENT_EMAIL = resultSet.getNString("EVENT_EMAIL")
+                        EventData.EVENT_EMAIL = resultSet.getString("EVENT_EMAIL")
                         GlobalClass.EventDataList.add(EventData)
                     }
                 }
@@ -145,13 +145,49 @@ class DBHandler {
                         ActivityData.ACTIVITY_NAME = resultSet.getString("ACTIVITY_NAME")
                         ActivityData.ACTIVITY_MOBILE_NUM = resultSet.getString("ACTIVITY_MOBILE_NUM")
                         ActivityData.ACTIVITY_TEL_NUM = resultSet.getString("ACTIVITY_TEL_NUM")
-                        ActivityData.ACTIVITY_ADDRESS = resultSet.getNString("ACTIVITY_ADDRESS")
+                        ActivityData.ACTIVITY_ADDRESS = resultSet.getString("ACTIVITY_ADDRESS")
                         ActivityData.ACTIVITY_DESCRIPTION = resultSet.getString("ACTIVITY_DESCRIPTION")
                         ActivityData.ACTIVITY_CONTACT_PERSON = resultSet.getString("ACTIVITY_CONTACT_PERSON")
                         ActivityData.ACTIVITY_EMAIL = resultSet.getString("ACTIVITY_EMAIL")
                         ActivityData.ACTIVITY_WEBSITE = resultSet.getString("ACTIVITY_WEBSITE")
                         ActivityData.ACTIVITY_CATEGORY_ID = resultSet.getInt("ACTIVITY_CATEGORY_ID")
                         GlobalClass.ActivityDataList.add(ActivityData)
+                    }
+                }
+            }
+
+            // Now, fetch image URLs and associate them with the ActivityData objects
+            conn?.createStatement().use { stmt ->
+                val imageResultSet = stmt?.executeQuery("SELECT * FROM Activity_Image_Table")
+
+                if (imageResultSet != null) {
+                    while (imageResultSet.next()) {
+                        val activityId = imageResultSet.getInt("ACTIVITY_ID")
+                        val imageUrl = imageResultSet.getString("ACTIVITY_IMAGE_URL")
+
+                        // Find the corresponding EatData object by EAT_ID
+                        val activityData = GlobalClass.ActivityDataList.find { it.ACTIVITY_ID == activityId }
+
+                        // If an ActivityData object is found, add the image URL to its list
+                        activityData?.ACTIVITY_IMAGE_URLS?.add(imageUrl)
+                    }
+                }
+            }
+
+            // fetch Activity Category Types and associate them with ActivityData objects
+            conn?.createStatement().use { stmt ->
+                val categoryResultSet = stmt?.executeQuery("SELECT * FROM Activity_Category_Table")
+
+                if (categoryResultSet != null) {
+                    while (categoryResultSet.next()) {
+                        val categoryId = categoryResultSet.getInt("ACTIVITY_CATEGORY_ID")
+                        val categoryType = categoryResultSet.getString("ACTIVITY_CATEGORY_TYPE")
+
+                        // Find the corresponding ActivityData object by ACTIVITY_CATEGORY_ID
+                        val activityData = GlobalClass.ActivityDataList.find { it.ACTIVITY_CATEGORY_ID == categoryId }
+
+                        // If an ActivityData object is found, set the ACTIVITY_CATEGORY_TYPE
+                        activityData?.ACTIVITY_CATEGORY_TYPE = categoryType
                     }
                 }
             }
@@ -173,13 +209,31 @@ class DBHandler {
                         StayData.STAY_NAME = resultSet.getString("STAY_NAME")
                         StayData.STAY_TEL_NUM = resultSet.getString("STAY_TEL_NUM")
                         StayData.STAY_MOBILE_NUM = resultSet.getString("STAY_MOBILE_NUM")
-                        StayData.STAY_EMAIL = resultSet.getNString("STAY_EMAIL")
+                        StayData.STAY_EMAIL = resultSet.getString("STAY_EMAIL")
                         StayData.STAY_WEBSITE = resultSet.getString("STAY_WEBSITE")
                         StayData.STAY_ADDRESS = resultSet.getString("STAY_ADDRESS")
                         StayData.STAY_CONTACT_PERSON = resultSet.getString("STAY_CONTACT_PERSON")
                         StayData.STAY_DESCRIPTION = resultSet.getString("STAY_DESCRIPTION")
                         StayData.STAY_CATEGORY_ID = resultSet.getInt("STAY_CATEGORY_ID")
                         GlobalClass.StayDataList.add(StayData)
+                    }
+                }
+            }
+
+            // fetch Activity Category Types and associate them with ActivityData objects
+            conn?.createStatement().use { stmt ->
+                val categoryResultSet = stmt?.executeQuery("SELECT * FROM Stay_Category_Table")
+
+                if (categoryResultSet != null) {
+                    while (categoryResultSet.next()) {
+                        val categoryId = categoryResultSet.getInt("STAY_CATEGORY_ID")
+                        val categoryType = categoryResultSet.getString("STAY_CATEGORY_TYPE")
+
+                        // Find the corresponding ActivityData object by ACTIVITY_CATEGORY_ID
+                        val stayData = GlobalClass.StayDataList.find { it.STAY_CATEGORY_ID == categoryId }
+
+                        // If an ActivityData object is found, set the ACTIVITY_CATEGORY_TYPE
+                        stayData?.STAY_CATEGORY_TYPE = categoryType
                     }
                 }
             }
@@ -192,7 +246,7 @@ class DBHandler {
         try {
             //closes connection automatically
             conn?.createStatement().use { stmt ->
-                val resultSet = stmt?.executeQuery("SELECT * FROM Activity_Table")
+                val resultSet = stmt?.executeQuery("SELECT * FROM Eel_Table")
                 //goes until no more records are found
                 if (resultSet != null) {
                     while (resultSet.next()) {
@@ -203,6 +257,23 @@ class DBHandler {
                         EelData.EEL_DESCRIPTION = resultSet.getString("EEL_DESCRIPTION")
                         EelData.EEL_CONTACT_NUM = resultSet.getNString("EEL_CONTACT_NUM")
                         GlobalClass.EelDataList.add(EelData)
+                    }
+                }
+            }
+            // fetch Activity Category Types and associate them with ActivityData objects
+            conn?.createStatement().use { stmt ->
+                val categoryResultSet = stmt?.executeQuery("SELECT * FROM Eel_Category_Table")
+
+                if (categoryResultSet != null) {
+                    while (categoryResultSet.next()) {
+                        val categoryId = categoryResultSet.getInt("EEL_CATEGORY_ID")
+                        val categoryType = categoryResultSet.getString("EEL_CATEGORY_TYPE")
+
+                        // Find the corresponding ActivityData object by ACTIVITY_CATEGORY_ID
+                        val stayData = GlobalClass.StayDataList.find { it.STAY_CATEGORY_ID == categoryId }
+
+                        // If an ActivityData object is found, set the ACTIVITY_CATEGORY_TYPE
+                        stayData?.STAY_CATEGORY_TYPE = categoryType
                     }
                 }
             }
@@ -221,11 +292,11 @@ class DBHandler {
                     while (resultSet.next()) {
                         val ContactData = ContactData()
                         ContactData.CONTACT_ID = resultSet.getInt("CONTACT_ID")
-                        ContactData.CONTACT_NUM = resultSet.getNString("CONTACT_NUM")
+                        ContactData.CONTACT_NUM = resultSet.getString("CONTACT_NUM")
                         ContactData.CONTACT_NAME = resultSet.getString("CONTACT_NAME")
                         ContactData.CONTACT_ADDRESS = resultSet.getString("CONTACT_ADDRESS")
                         ContactData.CONTACT_EMAIL = resultSet.getString("CONTACT_EMAIL")
-                        ContactData.CONTACT_PERSON = resultSet.getNString("CONTACT_PERSON")
+                        ContactData.CONTACT_PERSON = resultSet.getString("CONTACT_PERSON")
                         GlobalClass.ContactDataList.add(ContactData)
                     }
                 }
