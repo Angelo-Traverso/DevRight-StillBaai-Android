@@ -37,7 +37,7 @@
                 <ImageView
                     android:id="@+id/imgEat"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="125dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/eat_image_background" />
 

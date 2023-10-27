@@ -18,14 +18,22 @@ class DetailActivity : AppCompatActivity() {
         val imageUrl = intent.getStringExtra("imageUrl")
         val title = intent.getStringExtra("title")
         val description = intent.getStringExtra("description")
+        val websiteURL = intent.getStringExtra("WebsiteURL")
+        val contactNumber = intent.getStringExtra("ContactNumber")
 
 
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
         val descriptionTextView = findViewById<TextView>(R.id.descriptionTextView)
         val imageView = findViewById<ImageView>(R.id.imageView)
+        val websiteURLDisplay = findViewById<TextView>(R.id.tvWebsiteURL)
+        val contactNumberDisplay = findViewById<TextView>(R.id.tvContactNumber)
+
 
         titleTextView.text = Html.fromHtml("<b>$title</b>")
         descriptionTextView.text = description
+
+        websiteURLDisplay.text = websiteURL
+        contactNumberDisplay.text = contactNumber
 
         // Load the image using Picasso
         Picasso.get().load(imageUrl).into(imageView)

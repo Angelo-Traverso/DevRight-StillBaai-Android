@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings.Global
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ListView
@@ -41,12 +42,6 @@ class Eat : AppCompatActivity(){
 
         listview = findViewById(R.id.listView)
 
-        //showListItems()
-
-        var dbHandler = DBHandler()
-        thread { dbHandler.getConnection()
-            dbHandler.fetchEatData()}
-        // Initialize Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("https://stilbaaitourism.co.za/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -55,6 +50,8 @@ class Eat : AppCompatActivity(){
         // Create an instance of ApiService
         apiService = retrofit.create(ApiService::class.java)
 
+
+        // Instance of EatDataList
         val eatDataList = GlobalClass.EatDataList
 
 
@@ -64,89 +61,34 @@ class Eat : AppCompatActivity(){
 
         // Set the adapter for the ListView
         listview.adapter = customAdapter
-        // Make the API request to fetch media items
-     //   fetchMediaItems()
 
-        // ----------------------- List View ----------------------- //
-        //val listView = findViewById<ListView>(R.id.listView)
-
-        // List items
-        val items = listOf(
-            ListItem(R.drawable.thumbail, "Pizza World", "Fun in the sun with Pizza"),
-            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
-            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
-            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
-            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
-            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
-            ListItem(R.drawable.thumbail, "Item 2", "Description for Item 2"),
-        )
-
-
-        // Set item click listener for the ListView
-        // Set item click listener for the ListView
+        // Item click listener for the ListView
         listview.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < eatDataList.size) {
                 val selectedItem = eatDataList[position]
 
-                // Create an Intent to open the DetailActivity
+                // Creating an Intent to open the DetailActivity
                 val intent = Intent(this@Eat, DetailActivity::class.java)
 
-                // Pass data to the DetailActivity using Intent extras
+                // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("title", selectedItem.EAT_NAME)
                 intent.putExtra("description", selectedItem.EAT_DESCRIPTION)
                 intent.putExtra("imageUrl", selectedItem.EAT_IMAGE_URLS[0])
+                intent.putExtra("WebsiteURL", selectedItem.EAT_WEBSITE)
+
+                // Use either mobile number or tell number, whichever is available
+                val contactNumber: String = if (!selectedItem.EAT_MOBILE_NUM.isNullOrBlank()){
+
+                    selectedItem.EAT_MOBILE_NUM?:""
+                }else
+                {
+                    selectedItem.EAT_TEL_NUM?:""
+                }
+
+                intent.putExtra("ContactNumber", contactNumber)
 
                 startActivity(intent)
             }
         }
-        // ----------------------- END List View ----------------------- //
     }
-
-    // Displays eat items in the listview
-    private fun showListItems()
-    {
-
-    }
-
-    /*private fun fetchMediaItems() {
-        // Make the API request to fetch media items
-        val call = apiService.getMediaItems()
-        // enqueue() is used to asynchronously make the API request and handle responses
-        call.enqueue(object : Callback<List<MediaItem>> {
-            override fun onResponse(
-                call: Call<List<MediaItem>>,
-                response: Response<List<MediaItem>>
-            ) {
-                if (response.isSuccessful) {
-                    // If the API request is successful (HTTP status code 200)
-                    val mediaItems = response.body()
-                    if (mediaItems != null) {
-                        // Extract "thumbnail" URLs from mediaItems
-                        val thumbnailUrls =
-                            mediaItems.mapNotNull { it.media_details.sizes["thumbnail"]?.source_url }
-
-                        // Initialize the adapter with the current context and "thumbnail" URLs
-                        val adapter = CustomAdapter(this@Eat, thumbnailUrls)
-
-                        // Find the ListView by its ID
-                        val listView = findViewById<ListView>(R.id.listView)
-
-                        // Set the adapter for the ListView
-                        listView.adapter = adapter
-
-                        // Notify the adapter that the data has changed
-                        adapter.notifyDataSetChanged()
-                    }
-                } else {
-                    // Handle API error
-                }
-            }
-
-            override fun onFailure(call: Call<List<MediaItem>>, t: Throwable) {
-                // If there is a network or other failure in making the API request
-                // Handle network error
-                // Can add network error handling here, such as displaying a network error message
-            }
-        })
-    }*/
 }

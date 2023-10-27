@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
@@ -10,6 +11,7 @@
         android:layout_height="92dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:background="@drawable/round_image"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_foreground"/>
@@ -25,13 +27,25 @@
         android:text="Pizza World" />
 
     <TextView
-        android:id="@+id/descriptionTextView"
+        android:id="@+id/tvWebsite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@id/imageView"
         android:layout_below="@id/titleTextView"
-        android:text="Fun in the sun with pizza" />
+        android:drawableStart="@drawable/website"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tvContactNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvWebsite"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/imageView"
+        android:drawableStart="@drawable/call"
+        android:text="000 000 0000"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 </RelativeLayout>

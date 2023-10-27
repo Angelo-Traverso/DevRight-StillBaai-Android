@@ -17,7 +17,9 @@ class MainActivity : AppCompatActivity() {
         var dbHandler = DBHandler();
         thread { dbHandler.getConnection()
         dbHandler.fetchActivityData()
+        dbHandler.fetchContactData()
         dbHandler.fetchEatData()}
+
         // ------------------- Remove when implementing custom card ------------------- //
         // ------------------- This is used to test the display of the card layout ------------------- //
         val linearLayout = findViewById<LinearLayout>(R.id.linView);
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         dbHandler.getConnection();
-        val eatDataList = dbHandler.fetchEatData()
+        //val eatDataList = dbHandler.fetchEatData()
 
 
         // ------------------- End Test ------------------- //
