@@ -37,6 +37,9 @@ android {
 }
 
 dependencies {
+
+    // Carousal
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
     // Transition
     implementation 'androidx.transition:transition:1.4.1'
     // Image retrieval

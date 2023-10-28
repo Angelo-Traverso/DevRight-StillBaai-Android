@@ -10,6 +10,9 @@ import android.widget.ListView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.devright_stillbaaitourism.databinding.ActivityStayBinding
 import com.google.android.material.navigation.NavigationView
 
@@ -24,6 +27,16 @@ class Stay : AppCompatActivity() {
         setContentView(R.layout.activity_stay)
         burgerMenu = BurgerMenu(this, R.layout.activity_stay)
         burgerMenu.setupDrawer()
+
+        val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
+
+        val slideModels = ArrayList<SlideModel>()
+
+        slideModels.add(SlideModel(R.drawable.img1, ScaleTypes.FIT))
+        slideModels.add(SlideModel(R.drawable.img2, ScaleTypes.FIT))
+        slideModels.add(SlideModel(R.drawable.img3, ScaleTypes.FIT))
+
+        imageSlider.setImageList(slideModels, ScaleTypes.FIT)
 
 
         /*val menuBtn = findViewById<ImageButton>(R.id.btnMenu)

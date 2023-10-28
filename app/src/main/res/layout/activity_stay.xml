@@ -15,109 +15,133 @@
         tools:context=".Stay">
 
 
-    <!--Need to alter the margin values (currently hardcoded)-->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/drawer_header_layout"
-        app:menu="@menu/drawer_menu" />
-
-    <RelativeLayout
-        android:id="@+id/relDrawerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <FrameLayout
-            android:id="@+id/frameParentStay"
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
-
-            <ImageView
-                android:id="@+id/imgStay"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/stay_image_background" />
-
-            <ImageButton
-                android:id="@+id/btnMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_gravity="center|start"
-                android:background="@android:color/transparent"
-                android:minWidth="32dp"
-                android:src="@drawable/baseline_menu_24"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <TextView
-                android:id="@+id/tvStayHeading"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="48dp"
-                android:gravity="center|start"
-                android:shadowColor="@color/black"
-                android:shadowDx="1"
-                android:shadowDy="10"
-                android:shadowRadius="10"
-                android:text="@string/stay"
-                android:textColor="@color/white"
-                android:textSize="45sp"
-                android:textStyle="bold" />
-
-        </FrameLayout>
-
-        <RelativeLayout
+        <!--Need to alter the margin values (currently hardcoded)-->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/frameParentStay">
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/drawer_header_layout"
+            app:menu="@menu/drawer_menu" />
 
-            <EditText
-                android:id="@+id/etSearch"
+        <RelativeLayout
+            android:id="@+id/relDrawerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/frameParentStay"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="16dp"
-                android:alpha="0.6"
-                android:gravity="center"
-                android:hint="@string/searchBar"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:textColorHint="@color/searchBarHint"
-                android:textStyle="italic"
-                android:autofillHints="" />
+                android:layout_height="150dp">
 
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etSearch"
-                tools:ignore="SpeakableTextPresentCheck">
-
-                <ListView
-                    android:id="@+id/listStayDisplay"
+                <ImageView
+                    android:id="@+id/imgStay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/stay_image_background" />
+
+                <ImageButton
+                    android:id="@+id/btnMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center|start"
+                    android:background="@android:color/transparent"
+                    android:minWidth="32dp"
+                    android:src="@drawable/baseline_menu_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/tvStayHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="48dp"
+                    android:gravity="center|start"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="10"
+                    android:shadowRadius="10"
+                    android:text="@string/stay"
+                    android:textColor="@color/white"
+                    android:textSize="45sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/frameParentStay">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardBackgroundColor="@color/purple_200"
+                    app:cardElevation="20dp"
+                    app:cardCornerRadius="20dp">
 
 
-                </ListView>
 
-              <!--  <LinearLayout
-                    android:id="@+id/linearStayListings"
+               <com.denzcoskun.imageslider.ImageSlider
+                   android:id="@+id/imageSlider"
+                   android:layout_width="match_parent"
+                   android:layout_height="200dp"
+                   app:iss_period="1000"
+                   app:iss_auto_cycle="false"
+                   app:iss_delay="1000"
+                   app:iss_corner_radius="20"
+                   />
+
+                </androidx.cardview.widget.CardView>
+
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="16dp"
+                    android:alpha="0.6"
+                    android:autofillHints=""
+                    android:gravity="center"
+                    android:hint="@string/searchBar"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:layout_below="@+id/cardView"
+                    android:textColorHint="@color/searchBarHint"
+                    android:textStyle="italic" />
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/custom_corner_radius_stay"
-                    android:orientation="vertical">
+                    android:layout_below="@+id/etSearch"
+                    tools:ignore="SpeakableTextPresentCheck">
 
-                    &lt;!&ndash; ... Rest of your views ... &ndash;&gt;
+                    <ListView
+                        android:id="@+id/listStayDisplay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                </LinearLayout>-->
-            </ScrollView>
+
+                    </ListView>
+
+                    <!--  <LinearLayout
+                          android:id="@+id/linearStayListings"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@drawable/custom_corner_radius_stay"
+                          android:orientation="vertical">
+
+                          &lt;!&ndash; ... Rest of your views ... &ndash;&gt;
+
+                      </LinearLayout>-->
+                </ScrollView>
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>
