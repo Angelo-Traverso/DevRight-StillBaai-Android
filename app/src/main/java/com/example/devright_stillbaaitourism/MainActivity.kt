@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         // ------------------- Remove when implementing custom card ------------------- //
         // ------------------- This is used to test the display of the card layout ------------------- //
-        val linearLayout = findViewById<LinearLayout>(R.id.linView);
+        /*val linearLayout = findViewById<LinearLayout>(R.id.linView);
         linearLayout.removeAllViews()
 
         for (i in 1..5)
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
             linearLayout.addView(customCard)
 
-        }
+        }*/
 
         dbHandler.getConnection();
         //val eatDataList = dbHandler.fetchEatData()
