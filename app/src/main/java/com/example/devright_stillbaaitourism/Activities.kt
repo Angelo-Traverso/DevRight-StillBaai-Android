@@ -1,6 +1,7 @@
 package com.example.devright_stillbaaitourism
 
 import CustomAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -38,6 +39,34 @@ class Activities : AppCompatActivity() {
         activitiesAdapter = ActivityAdapter(this, activityDataList)
 
         listView.adapter = activitiesAdapter
+
+        // Item click listener for the ListView
+        listView.setOnItemClickListener { _, _, position, _ ->
+            if (position >= 0 && position < activityDataList.size) {
+                val selectedItem = activityDataList[position]
+
+                // Creating an Intent to open the DetailActivity
+                val intent = Intent(this@Activities, DetailActivity::class.java)
+                val imageUrls = ArrayList(selectedItem.ACTIVITY_IMAGE_URLS)
+                // Passing data to the DetailActivity using Intent extras
+                intent.putExtra("ActivityName", selectedItem.ACTIVITY_NAME)
+                intent.putExtra("Address", selectedItem.ACTIVITY_ADDRESS)
+                intent.putStringArrayListExtra("ActivityName", imageUrls)
+
+                // Use either mobile number or tell number, whichever is available
+               /* val contactNumber: String = if (!selectedItem.EAT_MOBILE_NUM.isNullOrBlank()){
+
+                    selectedItem.EAT_MOBILE_NUM?:""
+                }else
+                {
+                    selectedItem.EAT_TEL_NUM?:""
+                }*/
+
+              //  intent.putExtra("ContactNumber", contactNumber)
+
+                startActivity(intent)
+            }
+        }
         /*val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
 

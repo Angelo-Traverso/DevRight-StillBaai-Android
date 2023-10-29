@@ -23,10 +23,14 @@ class CustomAdapter(private val context: Context, private val eatDataList: List<
         val websiteUrlTextView = itemView?.findViewById<TextView>(R.id.tvWebsite)
         val contactTextView = itemView?.findViewById<TextView>(R.id.tvContactNum)
 
+        val defaultImageResource = R.drawable.ic_launcher_foreground
 
         // Loading images into imageView
-        eatData?.EAT_IMAGE_URLS?.get(0)?.let { imageUrl ->
+        if (eatData?.EAT_IMAGE_URLS?.isNotEmpty() == true) {
+            val imageUrl = eatData.EAT_IMAGE_URLS[0]
             Picasso.get().load(imageUrl).into(imageView)
+        } else {
+            imageView?.setImageResource(defaultImageResource)
         }
 
         // Settings title text
