@@ -102,6 +102,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="1"
                             android:drawableTop="@drawable/info"
+                            android:backgroundTint="@color/gray_400"
                             android:gravity="center_horizontal"
                             android:text="@string/Stilbaai"
                             android:textSize="10sp"/>
@@ -114,6 +115,7 @@
                             android:layout_weight="1"
                             android:drawableTop="@drawable/info"
                             android:gravity="center_horizontal"
+                            android:backgroundTint="@color/gray_400"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:scrollHorizontally="true"
@@ -128,6 +130,7 @@
                             android:layout_weight="1"
                             android:drawableTop="@drawable/info"
                             android:gravity="center_horizontal"
+                            android:backgroundTint="@color/gray_400"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:scrollHorizontally="true"

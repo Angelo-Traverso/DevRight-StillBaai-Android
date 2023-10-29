@@ -11,6 +11,7 @@
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <!--Need to alter the margin values (currently hardcoded)-->
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
@@ -20,6 +21,7 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/drawer_header_layout"
             app:menu="@menu/drawer_menu" />
+
         <RelativeLayout
             android:id="@+id/relDrawerLayout"
             android:layout_width="match_parent"
@@ -58,6 +60,7 @@
                     android:textSize="45sp"
                     android:textStyle="bold" />
             </FrameLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -78,19 +81,14 @@
                     android:textColorHint="@color/searchBarHint"
                     android:textStyle="italic"
                     android:autofillHints="" />
-                <ScrollView
+                <ListView
+                    android:id="@+id/activityListView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/etSearch"
-                    tools:ignore="SpeakableTextPresentCheck">
-                    <LinearLayout
-                        android:id="@+id/linearActivitiesListings"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/custom_corner_radius_stay"
-                        android:orientation="vertical">
-                    </LinearLayout>
-                </ScrollView>
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/etSearch"
+                    android:layout_centerInParent="true"
+                    android:divider="@android:color/darker_gray"
+                    android:dividerHeight="1dp" />
             </RelativeLayout>
         </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>

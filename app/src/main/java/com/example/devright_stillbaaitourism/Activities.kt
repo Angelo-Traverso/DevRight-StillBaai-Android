@@ -1,11 +1,13 @@
 package com.example.devright_stillbaaitourism
 
+import CustomAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ListView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -17,6 +19,10 @@ class Activities : AppCompatActivity() {
 
     private lateinit var binding: ActivityActivitiesBinding
 
+    private lateinit var activitiesAdapter: ActivityAdapter
+
+    private lateinit var listView: ListView
+
     private lateinit var burgerMenu: BurgerMenu
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +30,14 @@ class Activities : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_activities)
         burgerMenu.setupDrawer()
 
+         listView = findViewById(R.id.activityListView)
 
+        // Instance of EatDataList
+        val activityDataList = GlobalClass.ActivityDataList
+
+        activitiesAdapter = ActivityAdapter(this, activityDataList)
+
+        listView.adapter = activitiesAdapter
         /*val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
 
