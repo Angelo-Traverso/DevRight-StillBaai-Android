@@ -18,7 +18,10 @@ class MainActivity : AppCompatActivity() {
         thread { dbHandler.getConnection()
         dbHandler.fetchActivityData()
         dbHandler.fetchContactData()
-        dbHandler.fetchEatData()}
+        dbHandler.fetchEatData()
+            dbHandler.fetchStayData()
+            dbHandler.fetchListingData()}
+
 
         // ------------------- Remove when implementing custom card ------------------- //
         // ------------------- This is used to test the display of the card layout ------------------- //

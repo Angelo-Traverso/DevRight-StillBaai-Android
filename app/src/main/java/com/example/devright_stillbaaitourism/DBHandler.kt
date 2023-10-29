@@ -9,7 +9,6 @@ class DBHandler {
     private var conn: Connection? = null
     private val username = BuildConfig.STIL_USERNAME   // provide the username
     private val password = BuildConfig.STIL_PASSWORD   // provide the corresponding password
-
     //Creates the SQL connection , Suspen is for Asynch
     fun getConnection() {
         val connectionProps = Properties()
@@ -242,6 +241,47 @@ class DBHandler {
             ex.printStackTrace()
         }
     }
+    //fetching listing data from the listing table
+    fun fetchListingData(){
+        try {
+            //closes connection automatically
+            conn?.createStatement().use { stmt ->
+                val resultSet = stmt?.executeQuery("SELECT * FROM Listing")
+                //goes until no more records are found
+                if (resultSet != null) {
+                    while (resultSet.next()) {
+                        val ListingImagesData = ListingImagesData()
+                        ListingImagesData.ID = resultSet.getInt("ID")
+                        ListingImagesData.LISTING_ID = resultSet.getInt("Listing_ID")
+                        ListingImagesData.link = resultSet.getString("link")
+                        ListingImagesData.title = resultSet.getString("title")
+                        ListingImagesData.content = resultSet.getString("content")
+                        GlobalClass.ListingDataList.add(ListingImagesData)
+                    }
+                }
+            }
+
+            // fetch eel image URLs and associate them with EEL objects
+            conn?.createStatement().use { stmt ->
+                val imageResultSet = stmt?.executeQuery("SELECT * FROM Images")
+
+                if (imageResultSet != null) {
+                    while (imageResultSet.next()) {
+                        val imageId = imageResultSet.getInt("Image_ID")
+                        val imageUrl = imageResultSet.getString("sourceURL")
+
+                        // Find the corresponding EatData object by EAT_ID
+                        val listingImagesData = GlobalClass.ListingDataList.find { it.LISTING_ID == imageId }
+
+                        // If an Images object is found, add the image URL to its list
+                        listingImagesData?.imageUrlList?.add(imageUrl)
+                    }
+                }
+            }
+        } catch (ex: SQLException) {
+            ex.printStackTrace()
+        }
+    }
     //fetches all the eel data from the eel table
     fun fetchEelData(){
         try {
@@ -261,20 +301,20 @@ class DBHandler {
                     }
                 }
             }
-            // fetch Activity Category Types and associate them with ActivityData objects
+            // fetch eel image URLs and associate them with EEL objects
             conn?.createStatement().use { stmt ->
-                val categoryResultSet = stmt?.executeQuery("SELECT * FROM Eel_Category_Table")
+                val imageResultSet = stmt?.executeQuery("SELECT * FROM Eel_Image_Table")
 
-                if (categoryResultSet != null) {
-                    while (categoryResultSet.next()) {
-                        val categoryId = categoryResultSet.getInt("EEL_CATEGORY_ID")
-                        val categoryType = categoryResultSet.getString("EEL_CATEGORY_TYPE")
+                if (imageResultSet != null) {
+                    while (imageResultSet.next()) {
+                        val eelId = imageResultSet.getInt("EEL_ID")
+                        val imageUrl = imageResultSet.getString("EEL_IMAGE_URL")
 
-                        // Find the corresponding ActivityData object by ACTIVITY_CATEGORY_ID
-                        val stayData = GlobalClass.StayDataList.find { it.STAY_CATEGORY_ID == categoryId }
+                        // Find the corresponding EatData object by EAT_ID
+                        val eelData = GlobalClass.EelDataList.find { it.EEL_ID == eelId }
 
-                        // If an ActivityData object is found, set the ACTIVITY_CATEGORY_TYPE
-                        stayData?.STAY_CATEGORY_TYPE = categoryType
+                        // If an ActivityData object is found, add the image URL to its list
+                        eelData?.EEL_IMAGE_URLS?.add(imageUrl)
                     }
                 }
             }

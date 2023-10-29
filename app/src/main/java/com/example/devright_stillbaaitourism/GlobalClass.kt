@@ -13,5 +13,6 @@ class GlobalClass: Application()
         var EelDataList = arrayListOf<EelData>()
         var EventDataList = arrayListOf<EventData>()
         var StayDataList = arrayListOf<StayData>()
+        var ListingDataList = arrayListOf<ListingImagesData>()
     }
 }
