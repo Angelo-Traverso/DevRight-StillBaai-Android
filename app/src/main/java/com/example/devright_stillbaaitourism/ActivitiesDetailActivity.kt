@@ -14,12 +14,14 @@ class ActivitiesDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_activities)
 
+        // Retrieving data from Activities.kt
         val activityName = intent.getStringExtra("ActivityName")
         val description = intent.getStringExtra("Description")
         val imageUrls = intent.getStringArrayListExtra("imageUrls")
         val contactNumber = intent.getStringExtra("ContactNumber")
         val websiteLink = intent.getStringExtra("WebsiteLink")
 
+        // Binding views
         val tvActName = findViewById<TextView>(R.id.tvActivityName)
         val tvDescription = findViewById<TextView>(R.id.descriptionTextView)
         val imagesDisplay = findViewById<ImageSlider>(R.id.imageSlider)
