@@ -7,12 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ActivitiesDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_activities)
+
+        // Binding back button
+        val btnBack = findViewById<FloatingActionButton>(R.id.btnBack)
+
+        // On Click for back button click
+        btnBack.setOnClickListener{
+            onBackPressed()
+        }
 
         // Retrieving data from Activities.kt
         val activityName = intent.getStringExtra("ActivityName")

@@ -45,9 +45,6 @@ class Activities : AppCompatActivity() {
 
         listView.adapter = activitiesAdapter
 
-
-
-
         // Item click listener for the ListView
         listView.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < activityDataList.size) {

@@ -1,8 +1,10 @@
 package com.example.devright_stillbaaitourism
 
 import android.content.Context
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
@@ -36,6 +38,10 @@ class ActivityAdapter(private val context: Context, private val activityData: Li
         val tvCatName = view.findViewById<TextView>(R.id.tvCategoryName)
 
         val data = getItem(position)
+
+        if (data.ACTIVITY_WEBSITE.isNullOrBlank()) {
+                tvWebsite.visibility = GONE
+        }
 
         // Set data to the views
         tvActivityName.text = data.ACTIVITY_NAME
