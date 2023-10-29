@@ -174,7 +174,9 @@ class DBHandler {
                 }
             }
 
-            // fetch Activity Category Types and associate them with ActivityData objects
+            // Create a map to store category types by category ID
+            val categoryTypeMap = mutableMapOf<Int, String>()
+            // Fetch Activity Category Types and store them in the map
             conn?.createStatement().use { stmt ->
                 val categoryResultSet = stmt?.executeQuery("SELECT * FROM Activity_Category_Table")
 
@@ -183,14 +185,17 @@ class DBHandler {
                         val categoryId = categoryResultSet.getInt("ACTIVITY_CATEGORY_ID")
                         val categoryType = categoryResultSet.getString("ACTIVITY_CATEGORY_TYPE")
 
-                        // Find the corresponding ActivityData object by ACTIVITY_CATEGORY_ID
-                        val activityData = GlobalClass.ActivityDataList.find { it.ACTIVITY_CATEGORY_ID == categoryId }
-
-                        // If an ActivityData object is found, set the ACTIVITY_CATEGORY_TYPE
-                        activityData?.ACTIVITY_CATEGORY_TYPE = categoryType
+                        // Store category types in the map
+                        categoryTypeMap[categoryId] = categoryType
                     }
                 }
             }
+            // Associate category types with ActivityData objects
+            for (activityData in GlobalClass.ActivityDataList) {
+                val categoryId = activityData.ACTIVITY_CATEGORY_ID
+                activityData.ACTIVITY_CATEGORY_TYPE = categoryTypeMap[categoryId]
+            }
+
         } catch (ex: SQLException) {
             ex.printStackTrace()
         }
