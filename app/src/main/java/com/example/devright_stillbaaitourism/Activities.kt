@@ -12,6 +12,9 @@ import android.widget.ListView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.devright_stillbaaitourism.databinding.ActivityActivitiesBinding
 
 import com.google.android.material.navigation.NavigationView
@@ -31,6 +34,8 @@ class Activities : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_activities)
         burgerMenu.setupDrawer()
 
+
+
          listView = findViewById(R.id.activityListView)
 
         // Instance of EatDataList
@@ -40,29 +45,36 @@ class Activities : AppCompatActivity() {
 
         listView.adapter = activitiesAdapter
 
+
+
+
         // Item click listener for the ListView
         listView.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < activityDataList.size) {
                 val selectedItem = activityDataList[position]
 
                 // Creating an Intent to open the DetailActivity
-                val intent = Intent(this@Activities, DetailActivity::class.java)
+                val intent = Intent(this@Activities, ActivitiesDetailActivity::class.java)
                 val imageUrls = ArrayList(selectedItem.ACTIVITY_IMAGE_URLS)
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("ActivityName", selectedItem.ACTIVITY_NAME)
-                intent.putExtra("Address", selectedItem.ACTIVITY_ADDRESS)
-                intent.putStringArrayListExtra("ActivityName", imageUrls)
+                intent.putExtra("Description", selectedItem.ACTIVITY_DESCRIPTION)
+
+                intent.putExtra("WebsiteLink", selectedItem.ACTIVITY_WEBSITE ?: "")
+
+                //intent.putExtra("Address", selectedItem.ACTIVITY_ADDRESS)
+                intent.putStringArrayListExtra("imageUrls", imageUrls)
 
                 // Use either mobile number or tell number, whichever is available
-               /* val contactNumber: String = if (!selectedItem.EAT_MOBILE_NUM.isNullOrBlank()){
+               val contactNumber: String = if (!selectedItem.ACTIVITY_MOBILE_NUM.isNullOrBlank()){
 
-                    selectedItem.EAT_MOBILE_NUM?:""
+                    selectedItem.ACTIVITY_MOBILE_NUM?:""
                 }else
                 {
-                    selectedItem.EAT_TEL_NUM?:""
-                }*/
+                    selectedItem.ACTIVITY_TEL_NUM?:""
+                }
 
-              //  intent.putExtra("ContactNumber", contactNumber)
+                intent.putExtra("ContactNumber", contactNumber)
 
                 startActivity(intent)
             }
