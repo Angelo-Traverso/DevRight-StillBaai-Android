@@ -5,11 +5,12 @@ import java.util.*
 
 const val BASEURL = ""
 class DBHandler {
-    internal var conn: Connection? = null
-    internal var username = "k5g2h_zsu89" // provide the username
-    internal var password = "G857456FD325g6p" // provide the corresponding password
 
-    //Creates the SQL connection, Suspen is for Asynch
+    private var conn: Connection? = null
+    private val username = BuildConfig.STIL_USERNAME   // provide the username
+    private val password = BuildConfig.STIL_PASSWORD   // provide the corresponding password
+
+    //Creates the SQL connection , Suspen is for Asynch
     fun getConnection() {
         val connectionProps = Properties()
         connectionProps.put("user", username) //Username for the DB
