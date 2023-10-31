@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val eventFragments = listOf(
             EventFragment.newInstance("Eel Feeding", "18:00", "Backyard, 2440"),
             EventFragment.newInstance("Dua Lipa", "19:00", "Open Field, 2440"),
+            EventFragment.newInstance("Mamma Mia", "15:00", "Open Field, 2440"),
         )
 
         // Create the FragmentPagerAdapter and set it to the ViewPager

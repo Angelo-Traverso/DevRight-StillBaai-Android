@@ -78,9 +78,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:layout_below="@+id/viewSeparator"
                         android:text="@string/About"
                         android:textSize="24sp"
+                        android:layout_marginTop="16dp"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -88,67 +88,58 @@
                         android:id="@+id/linButtons"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal"
-                        android:layout_below="@id/tvAbout"
-                        android:weightSum="3">
+                        android:layout_gravity="start"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_below="@id/tvAbout">
 
-                        <Button
+                        <TextView
                             android:id="@+id/btnStil"
-                            android:layout_width="0dp"
-                            android:layout_height="70dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginBottom="8dp"
                             android:backgroundTint="@color/gray_400"
-                            android:drawableTop="@drawable/info"
-                            android:gravity="center_horizontal"
+                            android:gravity="start"
+                            android:drawablePadding="8dp"
                             android:text="@string/Stilbaai"
                             android:textColor="@color/black"
-                            android:textSize="10sp" />
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/info" />
 
-                        <Button
+                        <TextView
                             android:id="@+id/btnJong"
-                            android:layout_width="0dp"
-                            android:layout_height="70dp"
-                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_gravity="start"
                             android:layout_weight="1"
+                            android:layout_marginBottom="8dp"
                             android:backgroundTint="@color/gray_400"
-                            android:drawableTop="@drawable/info"
-                            android:ellipsize="end"
                             android:textColor="@color/black"
+                            android:drawablePadding="8dp"
                             android:gravity="center_horizontal"
                             android:maxLines="1"
                             android:scrollHorizontally="true"
                             android:text="@string/Jongensfontein"
-                            android:textSize="10sp" />
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/info"/>
 
-                        <Button
+                        <TextView
                             android:id="@+id/btnMelk"
-                            android:layout_width="0dp"
-                            android:layout_height="70dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginBottom="16dp"
                             android:backgroundTint="@color/gray_400"
-                            android:drawableTop="@drawable/info"
-                            android:ellipsize="end"
                             android:gravity="center_horizontal"
+                            android:drawablePadding="8dp"
                             android:textColor="@color/black"
                             android:maxLines="1"
                             android:scrollHorizontally="true"
                             android:text="@string/Melkhoutfontein"
-                            android:textSize="10sp" />
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/info"/>
                     </LinearLayout>
-
-                <View
-                    android:id="@+id/viewSeparator"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@color/black"
-                    android:alpha="0.3"/>
 
                     <TextView
                         android:id="@+id/tvToday"
@@ -161,36 +152,39 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:id="@+id/linScrollEvents"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_below="@+id/tvToday"
-                        android:orientation="horizontal">
+
 
                         <!-- Add a ViewPager to display events -->
                         <androidx.viewpager.widget.ViewPager
                             android:id="@+id/viewPager"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_below="@+id/tvToday"
                             android:contentDescription="@string/About" />
 
                         <!-- Add a TabLayout for navigation between events -->
-                        <com.google.android.material.tabs.TabLayout
-                            android:id="@+id/tabLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/viewPager"
-                            android:background="?attr/colorPrimary" />
-                    </LinearLayout>
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/viewPager"
+                    android:layout_gravity="bottom"
+                    android:contentDescription="@string/About"
+                    app:tabBackground="@drawable/event_dots"
+                    app:tabGravity="center"
+                    app:tabIndicatorGravity="center"
+                    app:tabIndicator="@null"
+                    app:tabMaxWidth="12dp"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="scrollable" />
 
                 <RelativeLayout
                     android:id="@+id/relAdverts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/linScrollEvents"
+                    android:layout_below="@+id/tabLayout"
                     android:layout_alignParentBottom="true"
-                    android:gravity="center"
+                    android:gravity="top"
                     android:layout_marginBottom="16dp"
                     >
 
@@ -199,7 +193,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="32dp"
                         android:textColor="@color/black"
                         android:text="@string/EelAdvert"
                         android:textSize="20sp"
@@ -208,8 +201,9 @@
                     <ImageView
                         android:id="@+id/imgEelAdvert"
                         android:layout_width="wrap_content"
-                        android:layout_height="150dp"
+                        android:layout_height="130dp"
                         android:scaleType="fitXY"
+                        android:layout_marginBottom="8dp"
                         android:layout_below="@+id/tvEelAdvert"
                         app:srcCompat="@drawable/home_eel" />
 
@@ -227,9 +221,8 @@
                     <ImageView
                         android:id="@+id/imgStoreAdvert"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="130dp"
                         android:scaleType="fitXY"
-                        android:layout_gravity="bottom"
                         android:layout_below="@+id/tvLocalStore"
                         app:srcCompat="@drawable/home_store" />
 
