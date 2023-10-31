@@ -72,28 +72,26 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/frameParentHome">
 
-                <LinearLayout
-                    android:id="@+id/linView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvAbout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
+                        android:layout_below="@+id/viewSeparator"
                         android:text="@string/About"
                         android:textSize="24sp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:id="@+id/linButtons"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="3"
                         android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_below="@id/tvAbout"
+                        android:weightSum="3">
 
                         <Button
                             android:id="@+id/btnStil"
@@ -101,11 +99,12 @@
                             android:layout_height="70dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="1"
-                            android:drawableTop="@drawable/info"
                             android:backgroundTint="@color/gray_400"
+                            android:drawableTop="@drawable/info"
                             android:gravity="center_horizontal"
                             android:text="@string/Stilbaai"
-                            android:textSize="10sp"/>
+                            android:textColor="@color/black"
+                            android:textSize="10sp" />
 
                         <Button
                             android:id="@+id/btnJong"
@@ -113,10 +112,11 @@
                             android:layout_height="70dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="1"
-                            android:drawableTop="@drawable/info"
-                            android:gravity="center_horizontal"
                             android:backgroundTint="@color/gray_400"
+                            android:drawableTop="@drawable/info"
                             android:ellipsize="end"
+                            android:textColor="@color/black"
+                            android:gravity="center_horizontal"
                             android:maxLines="1"
                             android:scrollHorizontally="true"
                             android:text="@string/Jongensfontein"
@@ -128,15 +128,27 @@
                             android:layout_height="70dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="1"
-                            android:drawableTop="@drawable/info"
-                            android:gravity="center_horizontal"
                             android:backgroundTint="@color/gray_400"
+                            android:drawableTop="@drawable/info"
                             android:ellipsize="end"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/black"
                             android:maxLines="1"
                             android:scrollHorizontally="true"
                             android:text="@string/Melkhoutfontein"
                             android:textSize="10sp" />
                     </LinearLayout>
+
+                <View
+                    android:id="@+id/viewSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/black"
+                    android:alpha="0.3"/>
 
                     <TextView
                         android:id="@+id/tvToday"
@@ -144,21 +156,43 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:text="@string/TodayEvents"
+                        android:layout_below="@id/linButtons"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:id="@+id/linScrollEvents"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_below="@+id/tvToday"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView6"
-                            android:layout_width="0dp"
+                        <!-- Add a ViewPager to display events -->
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/viewPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/About" />
+
+                        <!-- Add a TabLayout for navigation between events -->
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabLayout"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/ic_launcher_background" />
+                            android:layout_below="@+id/viewPager"
+                            android:background="?attr/colorPrimary" />
                     </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relAdverts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linScrollEvents"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"
+                    >
 
                     <TextView
                         android:id="@+id/tvEelAdvert"
@@ -166,14 +200,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="32dp"
+                        android:textColor="@color/black"
                         android:text="@string/EelAdvert"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/imageView9"
+                        android:id="@+id/imgEelAdvert"
                         android:layout_width="wrap_content"
-                        android:layout_height="100dp"
+                        android:layout_height="150dp"
+                        android:scaleType="fitXY"
+                        android:layout_below="@+id/tvEelAdvert"
                         app:srcCompat="@drawable/home_eel" />
 
                     <TextView
@@ -181,17 +218,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:layout_below="@+id/imgEelAdvert"
                         android:text="@string/StoreAdvert"
-                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/imageView8"
+                        android:id="@+id/imgStoreAdvert"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="150dp"
+                        android:scaleType="fitXY"
                         android:layout_gravity="bottom"
+                        android:layout_below="@+id/tvLocalStore"
                         app:srcCompat="@drawable/home_store" />
-                </LinearLayout>
+
+            </RelativeLayout>
             </RelativeLayout>
         </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>

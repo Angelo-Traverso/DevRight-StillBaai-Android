@@ -3,6 +3,8 @@ package com.example.devright_stillbaaitourism
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
@@ -14,30 +16,33 @@ class MainActivity : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_main)
         burgerMenu.setupDrawer()
 
-        var dbHandler = DBHandler();
-        thread { dbHandler.getConnection()
-        dbHandler.fetchActivityData()
-        dbHandler.fetchContactData()
-        dbHandler.fetchEatData()
+        val viewPager = findViewById<ViewPager>(R.id.viewPager)
+        val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+
+        // Create event fragments for each event
+        val eventFragments = listOf(
+            EventFragment.newInstance("Eel Feeding", "18:00", "Backyard, 2440"),
+            EventFragment.newInstance("Dua Lipa", "19:00", "Open Field, 2440"),
+        )
+
+        // Create the FragmentPagerAdapter and set it to the ViewPager
+        val adapter = EventPagerAdapter(supportFragmentManager, eventFragments)
+        viewPager.adapter = adapter
+
+        // Connect the TabLayout with the ViewPager for navigation
+        tabLayout.setupWithViewPager(viewPager)
+
+        val dbHandler = DBHandler();
+        thread {
+            dbHandler.getConnection()
+            dbHandler.fetchActivityData()
+            dbHandler.fetchContactData()
+            dbHandler.fetchEatData()
             dbHandler.fetchStayData()
-            dbHandler.fetchListingData()}
-
-
-        // ------------------- Remove when implementing custom card ------------------- //
-        // ------------------- This is used to test the display of the card layout ------------------- //
-        /*val linearLayout = findViewById<LinearLayout>(R.id.linView);
-        linearLayout.removeAllViews()
-
-        for (i in 1..5)
-        {
-            val customCard = custom_card(this)
-
-            linearLayout.addView(customCard)
-
-        }*/
+            dbHandler.fetchListingData()
+        }
 
         dbHandler.getConnection();
-        //val eatDataList = dbHandler.fetchEatData()
 
 
         // ------------------- End Test ------------------- //

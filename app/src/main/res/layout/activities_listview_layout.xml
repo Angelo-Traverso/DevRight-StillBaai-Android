@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:padding="8dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_foreground"/>
 
