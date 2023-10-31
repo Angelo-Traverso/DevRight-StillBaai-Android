@@ -66,6 +66,8 @@
         android:text="something@example.co.za"
         android:drawableStart="@drawable/website"/>
 
+
+
     <TextView
         android:id="@+id/tvContactNumber"
         android:layout_width="match_parent"
@@ -78,11 +80,22 @@
         android:textSize="16sp"
         tools:ignore="TouchTargetSizeCheck" />
 
+    <TextView
+        android:id="@+id/tvLocationToEats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvContactNumber"
+        android:layout_marginTop="8dp"
+        android:autoLink="map"
+        android:drawableStart="@drawable/location"
+        android:text="Yessssir"
+        android:textSize="16sp"
+        tools:ignore="TouchTargetSizeCheck" />
     <View
         android:id="@+id/lineAboveDescription"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/tvContactNumber"
+        android:layout_below="@+id/tvLocationToEats"
         android:alpha="0.2"
         android:layout_marginTop="8dp"
         android:background="@color/black"

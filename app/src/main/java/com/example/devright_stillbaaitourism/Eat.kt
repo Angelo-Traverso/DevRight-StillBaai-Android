@@ -71,6 +71,7 @@ class Eat : AppCompatActivity(){
                 intent.putExtra("description", selectedItem.EAT_DESCRIPTION)
                 intent.putExtra("imageUrl", selectedItem.EAT_IMAGE_URLS[0])
                 intent.putExtra("WebsiteURL", selectedItem.EAT_WEBSITE)
+                intent.putExtra("address", selectedItem.EAT_ADDRESS)
 
                 // Use either mobile number or tell number, whichever is available
                 val contactNumber: String = if (!selectedItem.EAT_MOBILE_NUM.isNullOrBlank()){

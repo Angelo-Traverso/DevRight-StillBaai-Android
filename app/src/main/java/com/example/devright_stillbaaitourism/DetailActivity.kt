@@ -33,6 +33,7 @@ class DetailActivity : AppCompatActivity() {
         val description = intent.getStringExtra("description")
         val websiteURL = intent.getStringExtra("WebsiteURL")
         val contactNumber = intent.getStringExtra("ContactNumber")
+        val address = intent.getStringExtra("address")
 
         // Binding views
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
@@ -40,11 +41,14 @@ class DetailActivity : AppCompatActivity() {
         val imagesDisplay = findViewById<ImageSlider>(R.id.imageSlider)
         val websiteURLDisplay = findViewById<TextView>(R.id.tvWebsiteURL)
         val contactNumberDisplay = findViewById<TextView>(R.id.tvContactNumber)
+        val addressLocation = findViewById<TextView>(R.id.tvLocationToEats)
 
 
         // Setting view values
         titleTextView.text = Html.fromHtml("<b>$title</b>")
         descriptionTextView.text = description
+
+        addressLocation.text = address
 
         websiteURLDisplay.text = websiteURL
         contactNumberDisplay.text = contactNumber

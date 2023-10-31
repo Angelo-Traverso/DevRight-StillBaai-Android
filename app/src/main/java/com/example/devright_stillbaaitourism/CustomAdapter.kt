@@ -22,6 +22,7 @@ class CustomAdapter(private val context: Context, private val eatDataList: List<
         val titleTextView = itemView?.findViewById<TextView>(R.id.titleTextView)
         val websiteUrlTextView = itemView?.findViewById<TextView>(R.id.tvWebsite)
         val contactTextView = itemView?.findViewById<TextView>(R.id.tvContactNum)
+        val locationToEats = itemView?.findViewById<TextView>(R.id.tvLocationToEats)
 
         val defaultImageResource = R.drawable.ic_launcher_foreground
 
@@ -35,6 +36,9 @@ class CustomAdapter(private val context: Context, private val eatDataList: List<
 
         // Settings title text
         titleTextView?.text = eatData?.EAT_NAME ?: ""
+
+        // Setting location
+        locationToEats?.text = eatData?.EAT_ADDRESS ?: ""
 
         // Setting website visibility dependant on if one exists or not
         if(!eatData?.EAT_WEBSITE.isNullOrBlank()){
