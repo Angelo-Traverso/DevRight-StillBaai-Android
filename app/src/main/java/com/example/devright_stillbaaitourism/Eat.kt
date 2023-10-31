@@ -25,10 +25,6 @@ import kotlin.concurrent.thread
 
 class Eat : AppCompatActivity(){
 
-    private lateinit var apiService: ApiService
-
-    private lateinit var binding: ActivityEatBinding
-
     private lateinit var burgerMenu: BurgerMenu
 
     private lateinit var listview: ListView
@@ -42,13 +38,13 @@ class Eat : AppCompatActivity(){
 
         listview = findViewById(R.id.listView)
 
-        val retrofit = Retrofit.Builder()
+    /*    val retrofit = Retrofit.Builder()
             .baseUrl("https://stilbaaitourism.co.za/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         // Create an instance of ApiService
-        apiService = retrofit.create(ApiService::class.java)
+        apiService = retrofit.create(ApiService::class.java)*/
 
 
         // Instance of EatDataList

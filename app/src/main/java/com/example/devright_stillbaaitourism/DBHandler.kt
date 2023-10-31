@@ -31,6 +31,8 @@ class DBHandler {
     //Queries the eats table and puts the data in a list, Suspen is for Asynch
     fun fetchEatData() {
         try {
+
+            GlobalClass.EatDataList.clear()
             // Close connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Eat_Table")
@@ -78,6 +80,8 @@ class DBHandler {
     //pulling Bussinesses data from the db and putting it in a list
     fun fetchBusinessData(){
         try {
+
+            GlobalClass.BusinessDataList.clear()
             //closes connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Business_Table")
@@ -106,6 +110,8 @@ class DBHandler {
     //getting events data from the events table
     fun fetchEventsData(){
         try {
+
+            GlobalClass.EventDataList.clear()
             //closes connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Event_Table")
@@ -134,6 +140,8 @@ class DBHandler {
     //fecth activity data from the activity table
     fun fetchActivityData(){
         try {
+
+            GlobalClass.ActivityDataList.clear()
             //closes connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Activity_Table")
@@ -203,6 +211,8 @@ class DBHandler {
     //fetching stay data from the stay table
     fun fetchStayData(){
         try {
+
+            GlobalClass.StayDataList.clear()
             //closes connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Stay_Table")
@@ -249,6 +259,9 @@ class DBHandler {
     //fetching listing data from the listing table
     fun fetchListingData(){
         try {
+
+
+            GlobalClass.ListingDataList.clear()
             //closes connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Listing")
@@ -290,6 +303,8 @@ class DBHandler {
     //fetches all the eel data from the eel table
     fun fetchEelData(){
         try {
+
+            GlobalClass.EelDataList.clear()
             //closes connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Eel_Table")
@@ -330,6 +345,8 @@ class DBHandler {
     //fetches contact information from the contact table
     fun fetchContactData(){
         try {
+
+            GlobalClass.ContactDataList.clear()
             //closes connection automatically
             conn?.createStatement().use { stmt ->
                 val resultSet = stmt?.executeQuery("SELECT * FROM Contact_Table")
