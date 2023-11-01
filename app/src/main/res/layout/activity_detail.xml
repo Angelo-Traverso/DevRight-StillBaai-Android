@@ -86,7 +86,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvContactNumber"
         android:layout_marginTop="8dp"
-        android:autoLink="map"
         android:drawableStart="@drawable/location"
         android:text="Yessssir"
         android:textSize="16sp"

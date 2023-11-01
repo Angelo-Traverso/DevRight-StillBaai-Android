@@ -1,17 +1,16 @@
 package com.example.devright_stillbaaitourism;
+
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings.Global
 import android.text.Html
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import android.widget.Toast
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.example.devright_stillbaaitourism.R // Replace with the correct import for your resources
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.squareup.picasso.Picasso
 
 class DetailActivity : AppCompatActivity() {
 
@@ -23,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
         val btnBack = findViewById<FloatingActionButton>(R.id.btnBack)
 
         // On Click listener for back button
-        btnBack.setOnClickListener{
+        btnBack.setOnClickListener {
             onBackPressed()
         }
 
@@ -43,6 +42,28 @@ class DetailActivity : AppCompatActivity() {
         val contactNumberDisplay = findViewById<TextView>(R.id.tvContactNumber)
         val addressLocation = findViewById<TextView>(R.id.tvLocationToEats)
 
+        addressLocation.setOnClickListener {
+
+            // Create a Uri for the location (use the "q" parameter)
+            val uri = Uri.parse("geo:0,0?q=$address")
+
+// Create an Intent to view the location on Google Maps
+            val mapIntent = Intent(Intent.ACTION_VIEW, uri)
+
+// Set the package to specify that you want to use Google Maps
+            mapIntent.setPackage("com.google.android.apps.maps")
+
+// Check if there's an app available to handle the intent
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                // Start the intent to open Google Maps
+                startActivity(mapIntent)
+            } else {
+                // Handle the case where Google Maps is not installed
+                // You can display a message to the user or use an alternative map application
+                Toast.makeText(this, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         // Setting view values
         titleTextView.text = Html.fromHtml("<b>$title</b>")
@@ -61,7 +82,6 @@ class DetailActivity : AppCompatActivity() {
 
         // Bind the list to the Image Slider
         imagesDisplay.setImageList(slideModels, ScaleTypes.FIT)
-
 
 
     }
