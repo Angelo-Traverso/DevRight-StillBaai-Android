@@ -16,4 +16,10 @@
     <style name="Button.Grey" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">@color/gray_600</item>
     </style>
+
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--<item name="colorControlNormal">@color/editTextBlue</item>-->
+        <item name="colorControlActivated">#007bff</item>
+      <!--  <item name="colorControlHighlight">@color/primary</item>-->
+    </style>
 </resources>

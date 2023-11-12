@@ -12,6 +12,8 @@
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
 
+<!--EDIT TEXTS-->
+<color name="editTextBlue">#007bff</color>
 
     <!--custom_card-->
     <color name="placeName">#404040</color>
