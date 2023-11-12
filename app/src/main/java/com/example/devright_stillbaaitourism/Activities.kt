@@ -1,23 +1,13 @@
 package com.example.devright_stillbaaitourism
 
-import CustomAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.ListView
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.denzcoskun.imageslider.ImageSlider
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.models.SlideModel
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.*
 import com.example.devright_stillbaaitourism.databinding.ActivityActivitiesBinding
-
-import com.google.android.material.navigation.NavigationView
+import kotlin.collections.ArrayList
 
 class Activities : AppCompatActivity() {
 
@@ -34,12 +24,14 @@ class Activities : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_activities)
         burgerMenu.setupDrawer()
 
+        val etSearch = findViewById<EditText>(R.id.etSearch)
+        val activityDataList = GlobalClass.ActivityDataList
 
 
          listView = findViewById(R.id.activityListView)
 
         // Instance of EatDataList
-        val activityDataList = GlobalClass.ActivityDataList
+
 
         activitiesAdapter = ActivityAdapter(this, activityDataList)
 
@@ -76,32 +68,27 @@ class Activities : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        /*val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
 
-        // Open drawer on menu button clicked
-        menuBtn.setOnClickListener(){
-            drawerLayout.open()
-        }*/
-        ///--------------------------------------------------------------------//
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed for this implementation
+            }
 
-        /*binding.navView.bringToFront()
-        binding.navView.setNavigationItemSelectedListener(this)*/
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed for this implementation
+            }
 
-        ///--------------------------------------------------------------------///
+            override fun afterTextChanged(s: Editable?) {
+                // Filter activityDataList based on the search query
+                val searchText = s.toString().toLowerCase()
+                val filteredList = activityDataList.filter {
+                    it.ACTIVITY_NAME.toLowerCase().contains(searchText)
+                }
 
-        // Temporary card display
-        /*val linearLayout = findViewById<LinearLayout>(R.id.linearActivitiesListings);
-        linearLayout.removeAllViews()
-
-        for (i in 1..5)
-        {
-            val customCard = custom_card(this)
-
-            linearLayout.addView(customCard)
-
-        }*/
-
+                // Update the adapter with the filtered list
+                activitiesAdapter.updateData(filteredList)
+            }
+        })
     }
 
     //............................................................................................//

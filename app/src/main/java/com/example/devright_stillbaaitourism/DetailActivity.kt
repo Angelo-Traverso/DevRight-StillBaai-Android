@@ -48,13 +48,13 @@ class DetailActivity : AppCompatActivity() {
             // Create a Uri for the location (use the "q" parameter)
             val uri = Uri.parse("geo:0,0?q=$address")
 
-// Create an Intent to view the location on Google Maps
+            // Create an Intent to view the location on Google Maps
             val mapIntent = Intent(Intent.ACTION_VIEW, uri)
 
-// Set the package to specify that you want to use Google Maps
+            // Set the package to specify that you want to use Google Maps
             mapIntent.setPackage("com.google.android.apps.maps")
 
-// Check if there's an app available to handle the intent
+            // Check if there's an app available to handle the intent
             if (mapIntent.resolveActivity(packageManager) != null) {
                 // Start the intent to open Google Maps
                 startActivity(mapIntent)
@@ -75,6 +75,7 @@ class DetailActivity : AppCompatActivity() {
         websiteURLDisplay.text = websiteURL
         contactNumberDisplay.text = contactNumber
 
+        // Dynamically adding images to carousel
         val slideModels = ArrayList<SlideModel>()
         if (imageUrls != null) {
             for (imageUrl in imageUrls) {

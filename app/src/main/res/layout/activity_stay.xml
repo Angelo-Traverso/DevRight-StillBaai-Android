@@ -67,79 +67,35 @@
 
             </FrameLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/frameParentStay">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    app:cardBackgroundColor="@color/purple_200"
-                    app:cardElevation="20dp"
-                    app:cardCornerRadius="20dp">
-
-
-
-               <com.denzcoskun.imageslider.ImageSlider
-                   android:id="@+id/imageSlider"
-                   android:layout_width="match_parent"
-                   android:layout_height="200dp"
-                   app:iss_period="1000"
-                   app:iss_auto_cycle="false"
-                   app:iss_delay="1000"
-                   app:iss_corner_radius="20"
-                   />
-
-                </androidx.cardview.widget.CardView>
-
-                <EditText
-                    android:id="@+id/etSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="16dp"
-                    android:alpha="0.6"
-                    android:autofillHints=""
-                    android:gravity="center"
-                    android:hint="@string/searchBar"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:layout_below="@+id/cardView"
-                    android:textColorHint="@color/searchBarHint"
-                    android:textStyle="italic" />
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/etSearch"
-                    tools:ignore="SpeakableTextPresentCheck">
-
-                    <ListView
-                        android:id="@+id/listStayDisplay"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/frameParentStay">
+                    <EditText
+                        android:id="@+id/etSearch"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                    </ListView>
-
-                    <!--  <LinearLayout
-                          android:id="@+id/linearStayListings"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:background="@drawable/custom_corner_radius_stay"
-                          android:orientation="vertical">
-
-                          &lt;!&ndash; ... Rest of your views ... &ndash;&gt;
-
-                      </LinearLayout>-->
-                </ScrollView>
+                        android:layout_height="48dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="16dp"
+                        android:alpha="0.6"
+                        android:gravity="center"
+                        android:hint="@string/searchBar"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/searchBarHint"
+                        android:textStyle="italic"
+                        android:autofillHints="" />
+                    <ListView
+                        android:id="@+id/stayListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/etSearch"
+                        android:layout_centerInParent="true"
+                        android:divider="@android:color/darker_gray"
+                        android:dividerHeight="1dp" />
+                </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>
