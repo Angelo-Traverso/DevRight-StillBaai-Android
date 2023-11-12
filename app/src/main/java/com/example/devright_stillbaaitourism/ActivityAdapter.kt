@@ -49,7 +49,7 @@ class ActivityAdapter(private val context: Context, private val activityData: Li
         tvContactNum.text = data.ACTIVITY_TEL_NUM
         tvCatName.text = data.ACTIVITY_CATEGORY_TYPE
 
-// Load the first image from ACTIVITY_IMAGE_URLS (assuming the list is not empty)
+        // Load the first image from ACTIVITY_IMAGE_URLS (assuming the list is not empty)
         if (data.ACTIVITY_IMAGE_URLS.isNotEmpty()) {
             val firstImageUrl = data.ACTIVITY_IMAGE_URLS[0]
             Picasso.get().load(firstImageUrl).into(imageView)

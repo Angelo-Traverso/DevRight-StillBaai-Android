@@ -33,6 +33,7 @@ class DetailActivity : AppCompatActivity() {
         val websiteURL = intent.getStringExtra("WebsiteURL")
         val contactNumber = intent.getStringExtra("ContactNumber")
         val address = intent.getStringExtra("address")
+        val imageUrls = intent.getStringArrayListExtra("imageUrls")
 
         // Binding views
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
@@ -74,11 +75,12 @@ class DetailActivity : AppCompatActivity() {
         websiteURLDisplay.text = websiteURL
         contactNumberDisplay.text = contactNumber
 
-        // SlideModel
         val slideModels = ArrayList<SlideModel>()
-
-        // Adds the image to the slide model
-        slideModels.add(SlideModel(imageUrl, ScaleTypes.FIT))
+        if (imageUrls != null) {
+            for (imageUrl in imageUrls) {
+                slideModels.add(SlideModel(imageUrl))
+            }
+        }
 
         // Bind the list to the Image Slider
         imagesDisplay.setImageList(slideModels, ScaleTypes.FIT)

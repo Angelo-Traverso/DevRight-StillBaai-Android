@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -37,7 +36,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
-                    app:srcCompat="@drawable/homepic" />
+                    app:srcCompat="@drawable/home_image" />
 
                 <ImageButton
                     android:id="@+id/btnMenu"
@@ -46,52 +45,68 @@
                     android:layout_gravity="center|start"
                     android:background="@android:color/transparent"
                     android:minWidth="40dp"
+                    android:layout_marginBottom="12dp"
                     android:src="@drawable/baseline_menu_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:id="@+id/tvHomeHeading"
-                    android:layout_width="match_parent"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:gravity="center|start"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/HomeHeading"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSubHeading"
+                    android:layout_width="280dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="60dp"
                     android:gravity="center|start"
-                    android:shadowColor="@color/black"
-                    android:shadowDx="1"
-                    android:shadowDy="10"
-                    android:shadowRadius="10"
-                    android:text="@string/HomeHeading"
+                    android:text="@string/HomeHeadingSubHeading"
                     android:textColor="@color/white"
-                    android:textSize="45sp"
-                    android:textStyle="bold" />
-
+                    android:textSize="14sp" />
             </FrameLayout>
 
-            <RelativeLayout
-                android:id="@+id/relBody"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewRelBody"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/frameParentHome">
+                android:layout_below="@+id/frameParentHome"
+                android:layout_marginTop="-20dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
+
+                <RelativeLayout
+                    android:id="@+id/relBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/frameParentHome">
 
 
                     <TextView
                         android:id="@+id/tvAbout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:gravity="center_horizontal"
                         android:text="@string/About"
-                        android:textSize="24sp"
-                        android:layout_marginTop="16dp"
                         android:textColor="@color/black"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
                         android:id="@+id/linButtons"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/tvAbout"
                         android:layout_gravity="start"
-                        android:orientation="vertical"
                         android:layout_marginStart="8dp"
-                        android:layout_below="@id/tvAbout">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/btnStil"
@@ -100,8 +115,8 @@
                             android:layout_gravity="start"
                             android:layout_marginBottom="8dp"
                             android:backgroundTint="@color/gray_400"
-                            android:gravity="start"
                             android:drawablePadding="8dp"
+                            android:gravity="start"
                             android:text="@string/Stilbaai"
                             android:textColor="@color/black"
                             android:textSize="16sp"
@@ -112,17 +127,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_gravity="start"
-                            android:layout_weight="1"
                             android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
                             android:backgroundTint="@color/gray_400"
-                            android:textColor="@color/black"
                             android:drawablePadding="8dp"
                             android:gravity="center_horizontal"
                             android:maxLines="1"
                             android:scrollHorizontally="true"
                             android:text="@string/Jongensfontein"
+                            android:textColor="@color/black"
                             android:textSize="16sp"
-                            app:drawableStartCompat="@drawable/info"/>
+                            app:drawableStartCompat="@drawable/info" />
 
                         <TextView
                             android:id="@+id/btnMelk"
@@ -131,103 +146,92 @@
                             android:layout_gravity="start"
                             android:layout_marginBottom="16dp"
                             android:backgroundTint="@color/gray_400"
-                            android:gravity="center_horizontal"
                             android:drawablePadding="8dp"
-                            android:textColor="@color/black"
+                            android:gravity="center_horizontal"
                             android:maxLines="1"
                             android:scrollHorizontally="true"
                             android:text="@string/Melkhoutfontein"
+                            android:textColor="@color/black"
                             android:textSize="16sp"
-                            app:drawableStartCompat="@drawable/info"/>
+                            app:drawableStartCompat="@drawable/info" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvToday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/TodayEvents"
                         android:layout_below="@id/linButtons"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/TodayEvents"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
 
+                    <ScrollView
+                        android:id="@+id/scrollEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:contentDescription="ScrollEvents"
+                        android:layout_below="@+id/tvToday">
 
-                        <!-- Add a ViewPager to display events -->
-                        <androidx.viewpager.widget.ViewPager
-                            android:id="@+id/viewPager"
+                        <LinearLayout
+                            android:id="@+id/linearEventsDisplay"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_below="@+id/tvToday"
-                            android:contentDescription="@string/About" />
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" />
 
-                        <!-- Add a TabLayout for navigation between events -->
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/viewPager"
-                    android:layout_gravity="bottom"
-                    android:contentDescription="@string/About"
-                    app:tabBackground="@drawable/event_dots"
-                    app:tabGravity="center"
-                    app:tabIndicatorGravity="center"
-                    app:tabIndicator="@null"
-                    app:tabMaxWidth="12dp"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabMode="scrollable" />
+                    </ScrollView>
 
-                <RelativeLayout
-                    android:id="@+id/relAdverts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tabLayout"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="top"
-                    android:layout_marginBottom="16dp"
-                    >
 
-                    <TextView
-                        android:id="@+id/tvEelAdvert"
+                    <View
+                        android:id="@+id/lineBelowEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/black"
+                        android:alpha="0.4"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_below="@+id/scrollEvents"
+                        />
+
+                    <!-- Add a ViewPager to display events -->
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/lineBelowEvents"
+                        android:contentDescription="@string/About" />
+
+                    <!-- Add a TabLayout for navigation between events -->
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/black"
-                        android:text="@string/EelAdvert"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:layout_below="@+id/viewPager"
+                        android:layout_gravity="bottom"
+                        android:contentDescription="@string/About"
+                        app:tabBackground="@drawable/event_dots"
+                        app:tabGravity="center"
+                        app:tabIndicator="@null"
+                        app:tabIndicatorGravity="center"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabMaxWidth="12dp"
+                        app:tabMode="scrollable" />
 
-                    <ImageView
-                        android:id="@+id/imgEelAdvert"
-                        android:layout_width="wrap_content"
-                        android:layout_height="130dp"
-                        android:scaleType="fitXY"
-                        android:layout_marginBottom="8dp"
-                        android:layout_below="@+id/tvEelAdvert"
-                        app:srcCompat="@drawable/home_eel" />
-
-                    <TextView
-                        android:id="@+id/tvLocalStore"
+                    <RelativeLayout
+                        android:id="@+id/relAdverts"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_below="@+id/imgEelAdvert"
-                        android:text="@string/StoreAdvert"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/imgStoreAdvert"
-                        android:layout_width="match_parent"
-                        android:layout_height="130dp"
-                        android:scaleType="fitXY"
-                        android:layout_below="@+id/tvLocalStore"
-                        app:srcCompat="@drawable/home_store" />
-
-            </RelativeLayout>
-            </RelativeLayout>
+                        android:layout_below="@+id/tabLayout"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="top" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>

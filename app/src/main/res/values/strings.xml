@@ -3,7 +3,9 @@
 
 
     <!--Home-->
-    <string name="HomeHeading">Home</string>
+    <string name="HomeHeading">Welcome to Stilbaai</string>
+    <string name="HomeHeadingSubHeading">A TASTE OF EDEN IN THE GARDEN ROUTE</string>
+
     <string name="About">About</string>
     <string name="Stilbaai">Stilbaai</string>
     <string name="Jongensfontein">Jongensfontein</string>

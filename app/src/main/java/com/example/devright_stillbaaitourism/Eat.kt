@@ -65,13 +65,14 @@ class Eat : AppCompatActivity(){
 
                 // Creating an Intent to open the DetailActivity
                 val intent = Intent(this@Eat, DetailActivity::class.java)
-
+                val imageUrls = ArrayList(selectedItem.EAT_IMAGE_URLS)
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("title", selectedItem.EAT_NAME)
                 intent.putExtra("description", selectedItem.EAT_DESCRIPTION)
                 intent.putExtra("imageUrl", selectedItem.EAT_IMAGE_URLS[0])
                 intent.putExtra("WebsiteURL", selectedItem.EAT_WEBSITE)
                 intent.putExtra("address", selectedItem.EAT_ADDRESS)
+                intent.putStringArrayListExtra("imageUrls", imageUrls)
 
                 // Use either mobile number or tell number, whichever is available
                 val contactNumber: String = if (!selectedItem.EAT_MOBILE_NUM.isNullOrBlank()){

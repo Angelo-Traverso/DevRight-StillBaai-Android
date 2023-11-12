@@ -37,19 +37,6 @@
             android:title="@string/contactUsHeading"
             android:icon="@drawable/call" />
 
-        <item
-            android:id="@+id/nav_Settings"
-            android:title="@string/Experience"
-            android:icon="@drawable/baseline_fastfood_24" />
-            <!--<menu>
-                <item
-                    android:id="@+id/nav_dayTrip"
-                    android:title="Day Trip"
-                    />
-            </menu>
-
-        </item>-->
-
 
     </group>
 
