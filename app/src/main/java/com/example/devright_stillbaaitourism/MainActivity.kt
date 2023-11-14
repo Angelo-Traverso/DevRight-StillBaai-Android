@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
             dbHandler.fetchActivityData()
             dbHandler.fetchContactData()
             dbHandler.fetchEatData()
+            dbHandler.fetchBusinessData()
             dbHandler.fetchStayData()
             dbHandler.fetchListingData()
         }

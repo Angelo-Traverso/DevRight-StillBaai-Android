@@ -36,14 +36,14 @@ class BusinessAdapter (private val context: Context, private val businessData: L
         val data = getItem(position)
 
         tvTitle.text = data.BUSINESS_NAME
-        tvCatName.text = "Test"
+        tvCatName.text = data.BUSINESS_CATEGORY_TYPE
 
         // Load the first image from ACTIVITY_IMAGE_URLS (assuming the list is not empty)
 
-//        if (data.Busi.isNotEmpty()) {
-//            val firstImageUrl = data.STAY_IMAGE_URLS[0]
-//            Picasso.get().load(firstImageUrl).into(imageView)
-//        }
+        if (data.BUSINESS_IMAGE_URLS.isNotEmpty()) {
+            val firstImageUrl = data.BUSINESS_IMAGE_URLS[0]
+            Picasso.get().load(firstImageUrl).into(imageView)
+        }
 
         return view
     }
