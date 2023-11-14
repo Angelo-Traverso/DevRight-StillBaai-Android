@@ -41,7 +41,7 @@ class Businesses : AppCompatActivity() {
                 val selectedItem = businessDataList[position]
 
                 // Creating an Intent to open the DetailActivity
-                val intent = Intent(this@Businesses, ActivitiesDetailActivity::class.java)
+                val intent = Intent(this@Businesses, BusinessDetail::class.java)
                 val imageUrls = ArrayList(selectedItem.BUSINESS_IMAGE_URLS)
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("BusinessName", selectedItem.BUSINESS_NAME)

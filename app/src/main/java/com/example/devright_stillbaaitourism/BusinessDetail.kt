@@ -30,9 +30,9 @@ class BusinessDetail : AppCompatActivity() {
            val websiteLink = intent.getStringExtra("WebsiteLink")*/
 
         // Binding views
-        val tvTitle = findViewById<TextView>(R.id.titleTextView)
+        val tvTitle = findViewById<TextView>(R.id.titleTextViewBusiness)
         val tvDescription = findViewById<TextView>(R.id.descriptionTextView)
-        val imagesDisplay = findViewById<ImageSlider>(R.id.imageSlider)
+        val imagesDisplay = findViewById<ImageSlider>(R.id.businessImageSlider)
 
         tvTitle.text = businessName
         tvDescription.text = description

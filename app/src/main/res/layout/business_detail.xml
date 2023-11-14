@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".BusinessDetail">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnBack"
@@ -33,9 +34,9 @@
         app:cardCornerRadius="5dp">
 
         <com.denzcoskun.imageslider.ImageSlider
-            android:id="@+id/imageSlider"
+            android:id="@+id/businessImageSlider"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             app:iss_period="1000"
             app:iss_auto_cycle="false"
             app:iss_delay="1000"
@@ -45,7 +46,7 @@
 
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/titleTextViewBusiness"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/cardView"
@@ -60,7 +61,7 @@
         android:id="@+id/lineAboveDescription"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/titleTextView"
+        android:layout_below="@+id/titleTextViewBusiness"
         android:alpha="0.2"
         android:layout_marginTop="8dp"
         android:background="@color/black"
