@@ -284,32 +284,37 @@ class DBHandler {
                             stayData.STAY_EMAIL = resultSet.getString("STAY_EMAIL")
                             stayData.STAY_WEBSITE = resultSet.getString("STAY_WEBSITE")
                             stayData.STAY_ADDRESS = resultSet.getString("STAY_ADDRESS")
-                            stayData.STAY_CONTACT_PERSON =
-                                resultSet.getString("STAY_CONTACT_PERSON")
+                            stayData.STAY_CONTACT_PERSON = resultSet.getString("STAY_CONTACT_PERSON")
                             stayData.STAY_DESCRIPTION = resultSet.getString("STAY_DESCRIPTION")
                             stayData.STAY_CATEGORY_ID = resultSet.getInt("STAY_CATEGORY_ID")
                             GlobalClass.StayDataList.add(stayData)
                         }
                     }
                 }
+                // Fetch Stay Category Types and associate them with StayData objects
+                // Create a map to store category types by category ID
+                val categoryTypeMap = mutableMapOf<Int, String>()
 
-                // Fetch Stay Category Types and associate them with ActivityData objects
+                // Fetch Stay Category Types and store them in the map
                 conn?.createStatement().use { stmt ->
-                    val categoryResultSet = stmt?.executeQuery("SELECT * FROM Stay_Category_Table")
+                    val categoryResultSet =
+                        stmt?.executeQuery("SELECT * FROM Stay_Category_Table")
 
                     if (categoryResultSet != null) {
                         while (categoryResultSet.next()) {
                             val categoryId = categoryResultSet.getInt("STAY_CATEGORY_ID")
                             val categoryType = categoryResultSet.getString("STAY_CATEGORY_TYPE")
 
-                            // Find the corresponding StayData object by ACTIVITY_CATEGORY_ID
-                            val stayData =
-                                GlobalClass.StayDataList.find { it.STAY_CATEGORY_ID == categoryId }
-
-                            // If an ActivityData object is found, set the ACTIVITY_CATEGORY_TYPE
-                            stayData?.STAY_CATEGORY_TYPE = categoryType
+                            // Store category types in the map
+                            categoryTypeMap[categoryId] = categoryType
                         }
                     }
+                }
+
+                // Associate category types with ActivityData objects
+                for (stayData in GlobalClass.StayDataList) {
+                    val categoryId = stayData.STAY_CATEGORY_ID
+                    stayData.STAY_CATEGORY_TYPE = categoryTypeMap[categoryId]
                 }
                 // Fetch stay image URLs and associate them with EEL objects
                 conn?.createStatement().use { stmt ->
@@ -320,7 +325,7 @@ class DBHandler {
                             val stayId = imageResultSet.getInt("STAY_ID")
                             val imageUrl = imageResultSet.getString("STAY_IMAGE_URL")
 
-                            // Find the corresponding StayData object by EAT_ID
+                            // Find the corresponding StayData object by Stay_ID
                             val stayData = GlobalClass.StayDataList.find { it.STAY_ID == stayId }
 
                             // If an StayData object is found, add the image URL to its list
