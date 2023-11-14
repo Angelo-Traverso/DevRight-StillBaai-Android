@@ -15,4 +15,6 @@ class GlobalClass: Application()
         var StayDataList = arrayListOf<StayData>()
         var ListingDataList = arrayListOf<ListingImagesData>()
     }
+
+
 }

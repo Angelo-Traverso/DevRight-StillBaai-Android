@@ -20,7 +20,6 @@ class CustomAdapter(private val context: Context, private val eatDataList: List<
         val eatData = getItem(position)
         val imageView = itemView?.findViewById<ImageView>(R.id.imageView)
         val titleTextView = itemView?.findViewById<TextView>(R.id.titleTextView)
-        val websiteUrlTextView = itemView?.findViewById<TextView>(R.id.tvWebsite)
         val contactTextView = itemView?.findViewById<TextView>(R.id.tvContactNum)
         val locationToEats = itemView?.findViewById<TextView>(R.id.tvLocationToEats)
 
@@ -40,13 +39,6 @@ class CustomAdapter(private val context: Context, private val eatDataList: List<
         // Setting location
         locationToEats?.text = eatData?.EAT_ADDRESS ?: ""
 
-        // Setting website visibility dependant on if one exists or not
-        if(!eatData?.EAT_WEBSITE.isNullOrBlank()){
-            websiteUrlTextView?.visibility = View.VISIBLE;
-            websiteUrlTextView?.text = eatData?.EAT_WEBSITE
-        }else{
-            websiteUrlTextView?.visibility = View.GONE;
-        }
 
         // Displaying a mobile or tell number, whichever exists
         if(!eatData?.EAT_MOBILE_NUM.isNullOrBlank()){

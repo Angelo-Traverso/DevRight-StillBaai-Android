@@ -24,31 +24,6 @@ class Businesses : AppCompatActivity() {
         burgerMenu.setupDrawer()
 
 
-        /*val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
-
-        // Open drawer on menu button clicked
-        menuBtn.setOnClickListener(){
-            drawerLayout.open()
-        }*/
-        ///--------------------------------------------------------------------//
-
-        /*binding.navView.bringToFront()
-        binding.navView.setNavigationItemSelectedListener(this)*/
-
-        ///--------------------------------------------------------------------///
-
-        // Temporary card display
-        /*val linearLayout = findViewById<LinearLayout>(R.id.linearBusinessesListings);
-        linearLayout.removeAllViews()
-
-        for (i in 1..5)
-        {
-            val customCard = custom_card(this)
-
-            linearLayout.addView(customCard)
-
-        }*/
 
     }
 

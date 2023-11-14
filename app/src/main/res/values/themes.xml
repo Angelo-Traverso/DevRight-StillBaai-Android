@@ -19,7 +19,7 @@
 
     <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--<item name="colorControlNormal">@color/editTextBlue</item>-->
-        <item name="colorControlActivated">#007bff</item>
+        <item name="colorControlActivated">@color/black</item>
       <!--  <item name="colorControlHighlight">@color/primary</item>-->
     </style>
 </resources>

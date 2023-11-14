@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardViewListItem"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_gravity="top|center"
-    android:layout_marginBottom="8dp"
-    android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:padding="16dp"
-    app:cardElevation="40dp"
-    android:focusable="true">
+    android:layout_height="108dp">
 
-    <RelativeLayout
-        android:id="@+id/relLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewHome"
-            android:layout_width="120dp"
-            android:layout_height="70dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="8dp"
             android:layout_margin="8dp"
-            app:cardCornerRadius="16dp"
             app:cardElevation="10dp">
 
             <ImageView
@@ -35,29 +24,33 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tvStayTitle"
+        <RelativeLayout
+            android:id="@+id/relTextAlignment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/cardViewHome"
-            android:layout_marginStart="16dp"
-            android:layout_toEndOf="@id/cardViewHome"
-            android:text="Bed and Breakfast"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/cardViewHome"
+            android:layout_marginTop="8dp"
+            android:gravity="center|top">
+
+            <TextView
+                android:id="@+id/tvStayTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Bed and Breakfast"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
 
-        <TextView
-            android:id="@+id/tvStayCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvStayTitle"
-            android:layout_marginStart="16dp"
-            android:layout_toEndOf="@id/cardViewHome"
-            android:text="Self Catering"
-            tools:ignore="TouchTargetSizeCheck" />
+            <TextView
+                android:id="@+id/tvStayCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvStayTitle"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:text="Self Catering"
+                tools:ignore="TouchTargetSizeCheck" />
+        </RelativeLayout>
 
     </RelativeLayout>
-
-
-</androidx.cardview.widget.CardView>

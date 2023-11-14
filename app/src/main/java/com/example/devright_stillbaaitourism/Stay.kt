@@ -1,24 +1,14 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings.Global
-import android.view.MenuItem
-import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.ListView
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.cardview.widget.CardView
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.denzcoskun.imageslider.ImageSlider
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.models.SlideModel
-import com.example.devright_stillbaaitourism.databinding.ActivityStayBinding
-import com.google.android.material.navigation.NavigationView
-
 class Stay : AppCompatActivity() {
 
     private lateinit var listView: ListView
@@ -31,10 +21,20 @@ class Stay : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_stay)
         burgerMenu.setupDrawer()
 
+        val edtSearch = findViewById<EditText>(R.id.etSearch)
+
         listView = findViewById(R.id.stayListView)
 
 
+        val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
+        btnSearch.setOnClickListener{
+            hideKeyboard()
+            edtSearch.clearFocus()
+        }
+
         val stayDataList = GlobalClass.StayDataList
+
+
 
 
         stayAdapter = StayAdapter(this, stayDataList)
@@ -74,9 +74,11 @@ class Stay : AppCompatActivity() {
             }
         }
 
-
     }
-
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
     //............................................................................................//
 
 }

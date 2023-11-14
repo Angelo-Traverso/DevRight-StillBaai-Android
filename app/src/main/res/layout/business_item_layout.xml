@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewListItem"
     android:layout_width="match_parent"
     android:layout_margin="8dp"
     android:layout_height="108dp">
@@ -22,32 +24,29 @@
 
     </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/relTextViews"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/cardViewHome"
-        android:layout_marginTop="8dp"
-        android:gravity="center|top"
-        >
     <TextView
-        android:id="@+id/tvActivityName"
+        android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Louise Leather"
+        android:layout_toEndOf="@id/cardViewHome"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:layout_alignTop="@id/cardViewHome"
+        android:textSize="18sp"
+        android:text="Business Name" />
+
 
     <TextView
-        android:id="@+id/tvCategoryName"
+        android:id="@+id/tvBusinessCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvActivityName"
+        android:layout_below="@id/titleTextView"
         android:layout_marginStart="16dp"
-        android:layout_centerVertical="true"
-        android:text="Arts and Crafts"
-        android:textSize="14sp" />
-    </RelativeLayout>
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/cardViewHome"
+        android:drawablePadding="8dp"
+        android:text="Building"
+        tools:ignore="TouchTargetSizeCheck" />
+
 
 </RelativeLayout>

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activities">
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
@@ -26,16 +27,19 @@
             android:id="@+id/relDrawerLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <FrameLayout
                 android:id="@+id/frameParentActivities"
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
+
                 <ImageView
                     android:id="@+id/imgActivities"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/activities_image_background"/>
+                    android:src="@drawable/activities_image_background" />
+
                 <ImageButton
                     android:id="@+id/btnMenu"
                     android:layout_width="wrap_content"
@@ -45,6 +49,7 @@
                     android:minWidth="32dp"
                     android:src="@drawable/baseline_menu_24"
                     tools:ignore="SpeakableTextPresentCheck" />
+
                 <TextView
                     android:id="@+id/tvActivitiesHeading"
                     android:layout_width="match_parent"
@@ -66,29 +71,59 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/frameParentActivities">
 
-                <EditText
-                    android:id="@+id/etSearch"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewSearch"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="16dp"
-                    android:alpha="0.6"
-                    android:gravity="center"
-                    android:hint="@string/searchBar"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/searchBarHint"
-                    android:theme="@style/EditTextTheme"
-                    android:autofillHints="" />
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <EditText
+                            android:id="@+id/etSearch"
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:autofillHints=""
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:hint="@string/searchBar"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/searchBarHint"
+                            android:theme="@style/EditTextTheme"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/btnSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/etSearch"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/About"
+                            android:src="@drawable/baseline_search_24"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
                 <ListView
                     android:id="@+id/activityListView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/etSearch"
+                    android:layout_below="@id/cardViewSearch"
                     android:layout_centerInParent="true"
-                    android:divider="@android:color/darker_gray"
                     android:dividerHeight="1dp" />
             </RelativeLayout>
         </RelativeLayout>
