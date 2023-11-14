@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="100dp"
     android:layout_marginStart="16dp"
-    >
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="92dp"
-        android:layout_height="70dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/round_image"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewHome"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground" />
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/relTextViews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/cardViewHome"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        >
     <TextView
         android:id="@+id/tvActivityName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_toEndOf="@id/imageView"
-        android:layout_alignTop="@id/imageView"
-        android:fontFamily="@font/roboto_regular"
-        android:textSize="22sp"
+        android:layout_centerVertical="true"
+        android:text="Louise Leather"
         android:textColor="@color/black"
-        android:text="Louise Leather" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvCategoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="14sp"
-        android:fontFamily="@font/roboto_regular"
-        android:layout_toEndOf="@id/imageView"
         android:layout_below="@id/tvActivityName"
-        android:text="Arts and Crafts" />
+        android:layout_marginStart="16dp"
+        android:layout_centerVertical="true"
+        android:text="Arts and Crafts"
+        android:textSize="14sp" />
+    </RelativeLayout>
 
 </RelativeLayout>
