@@ -16,7 +16,6 @@ class DBHandler {
     */
     fun getConnection() {
         val connectionProps = Properties()
-
         //Username for the DB
         connectionProps.put("user", username)
         //Password for the DB
@@ -125,6 +124,50 @@ class DBHandler {
                             GlobalClass.BusinessDataList.add(businessData)
                         }
                     }
+                }
+
+                // Now, fetch image URLs and associate them with the ActivityData objects
+                conn?.createStatement().use { stmt ->
+                    val imageResultSet = stmt?.executeQuery("SELECT * FROM Business_Image_Table")
+
+                    if (imageResultSet != null) {
+                        while (imageResultSet.next()) {
+                            val businessId = imageResultSet.getInt("BUSINESS_ID")
+                            val imageUrl = imageResultSet.getString("BUSINESS_IMAGE_URL")
+
+                            // Find the corresponding EatData object by EAT_ID
+                            val businessData =
+                                GlobalClass.BusinessDataList.find { it.BUSINESS_ID == businessId }
+
+                            // If an ActivityData object is found, add the image URL to its list
+                            businessData?.BUSINESS_IMAGE_URLS?.add(imageUrl)
+                        }
+                    }
+                }
+
+                // Create a map to store category types by category ID
+                val categoryTypeMap = mutableMapOf<Int, String>()
+
+                // Fetch Business Category Types and store them in the map
+                conn?.createStatement().use { stmt ->
+                    val categoryResultSet =
+                        stmt?.executeQuery("SELECT * FROM Business_Category_Table")
+
+                    if (categoryResultSet != null) {
+                        while (categoryResultSet.next()) {
+                            val categoryId = categoryResultSet.getInt("BUSINESS_CATEGORY_ID")
+                            val categoryType = categoryResultSet.getString("BUSINESS_CATEGORY_TYPE")
+
+                            // Store category types in the map
+                            categoryTypeMap[categoryId] = categoryType
+                        }
+                    }
+                }
+
+                // Associate category types with ActivityData objects
+                for (businessData in GlobalClass.BusinessDataList) {
+                    val categoryId = businessData.BUSINESS_CATEGORY_ID
+                    businessData.BUSINESS_CATEGORY_TYPE = categoryTypeMap[categoryId]
                 }
             }
         } catch (ex: SQLException) {

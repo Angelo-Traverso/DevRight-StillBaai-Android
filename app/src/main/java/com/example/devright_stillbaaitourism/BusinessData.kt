@@ -12,5 +12,7 @@ class BusinessData
     var BUSINESS_CONTACT_PERSON: String? = null
     var BUSINESS_DESCRIPTION: String? = null
     var BUSINESS_CATEGORY_ID: Int = 0
+    var BUSINESS_CATEGORY_TYPE: String? = null
+    var BUSINESS_IMAGE_URLS: MutableList<String> = mutableListOf()
 }
 
