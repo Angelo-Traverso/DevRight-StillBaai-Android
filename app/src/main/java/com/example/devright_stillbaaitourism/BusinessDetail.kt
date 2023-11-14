@@ -1,7 +1,6 @@
 package com.example.devright_stillbaaitourism
 
 import android.os.Bundle
-import android.text.Html
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.ImageSlider
@@ -26,6 +25,7 @@ class BusinessDetail : AppCompatActivity() {
         val businessName = intent.getStringExtra("BusinessName")
         val description = intent.getStringExtra("Description")
         val imageUrls = intent.getStringArrayListExtra("imageUrls")
+
         /*   val contactNumber = intent.getStringExtra("ContactNumber")
            val websiteLink = intent.getStringExtra("WebsiteLink")*/
 
