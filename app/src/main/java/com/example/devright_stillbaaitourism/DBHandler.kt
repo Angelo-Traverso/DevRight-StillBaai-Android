@@ -277,7 +277,7 @@ class DBHandler {
                     if (resultSet != null) {
                         while (resultSet.next()) {
                             val stayData = StayData()
-                            stayData.STAY_ID = resultSet.getString("STAY_ID")
+                            stayData.STAY_ID = resultSet.getInt("STAY_ID")
                             stayData.STAY_NAME = resultSet.getString("STAY_NAME")
                             stayData.STAY_TEL_NUM = resultSet.getString("STAY_TEL_NUM")
                             stayData.STAY_MOBILE_NUM = resultSet.getString("STAY_MOBILE_NUM")
@@ -293,7 +293,7 @@ class DBHandler {
                     }
                 }
 
-                // Fetch Activity Category Types and associate them with ActivityData objects
+                // Fetch Stay Category Types and associate them with ActivityData objects
                 conn?.createStatement().use { stmt ->
                     val categoryResultSet = stmt?.executeQuery("SELECT * FROM Stay_Category_Table")
 
@@ -302,12 +302,29 @@ class DBHandler {
                             val categoryId = categoryResultSet.getInt("STAY_CATEGORY_ID")
                             val categoryType = categoryResultSet.getString("STAY_CATEGORY_TYPE")
 
-                            // Find the corresponding ActivityData object by ACTIVITY_CATEGORY_ID
+                            // Find the corresponding StayData object by ACTIVITY_CATEGORY_ID
                             val stayData =
                                 GlobalClass.StayDataList.find { it.STAY_CATEGORY_ID == categoryId }
 
                             // If an ActivityData object is found, set the ACTIVITY_CATEGORY_TYPE
                             stayData?.STAY_CATEGORY_TYPE = categoryType
+                        }
+                    }
+                }
+                // Fetch stay image URLs and associate them with EEL objects
+                conn?.createStatement().use { stmt ->
+                    val imageResultSet = stmt?.executeQuery("SELECT * FROM Stay_Image_Table")
+
+                    if (imageResultSet != null) {
+                        while (imageResultSet.next()) {
+                            val stayId = imageResultSet.getInt("STAY_ID")
+                            val imageUrl = imageResultSet.getString("STAY_IMAGE_URL")
+
+                            // Find the corresponding StayData object by EAT_ID
+                            val stayData = GlobalClass.StayDataList.find { it.STAY_ID == stayId }
+
+                            // If an StayData object is found, add the image URL to its list
+                            stayData?.STAY_IMAGE_URLS?.add(imageUrl)
                         }
                     }
                 }
