@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val dbHandler = DBHandler();
+        GlobalClass.StayDataList.clear()
         thread {
             dbHandler.getConnection()
             dbHandler.fetchActivityData()

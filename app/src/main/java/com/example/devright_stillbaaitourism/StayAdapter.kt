@@ -41,10 +41,10 @@ class StayAdapter(private val context: Context, private val stayData: List<StayD
 
         // Load the first image from ACTIVITY_IMAGE_URLS (assuming the list is not empty)
 
-        /*if (data.Stay.isNotEmpty()) {
-            val firstImageUrl = data.ACTIVITY_IMAGE_URLS[0]
+        if (data.STAY_IMAGE_URLS.isNotEmpty()) {
+            val firstImageUrl = data.STAY_IMAGE_URLS[0]
             Picasso.get().load(firstImageUrl).into(imageView)
-        }*/
+        }
 
         return view
     }

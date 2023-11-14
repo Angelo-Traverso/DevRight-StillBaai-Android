@@ -11,7 +11,6 @@ import kotlin.collections.ArrayList
 
 class Activities : AppCompatActivity() {
 
-    private lateinit var binding: ActivityActivitiesBinding
 
     private lateinit var activitiesAdapter: ActivityAdapter
 

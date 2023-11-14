@@ -3,6 +3,7 @@
     <style name="Widget.Theme.DevRightStillbaaiTourism.MyView" parent="">
         <item name="android:background">@color/gray_400</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/black</item>
 
     </style>
 </resources>
