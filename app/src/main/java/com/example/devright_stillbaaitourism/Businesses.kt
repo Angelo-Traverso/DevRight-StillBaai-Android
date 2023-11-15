@@ -46,7 +46,9 @@ class Businesses : AppCompatActivity() {
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("BusinessName", selectedItem.BUSINESS_NAME)
                 intent.putExtra("Description", selectedItem.BUSINESS_DESCRIPTION)
-
+                intent.putExtra("mail", selectedItem.BUSINESS_EMAIL)
+                intent.putExtra("Website", selectedItem.BUSINESS_WEBSITE)
+                intent.putExtra("address", selectedItem.BUSINESS_ADDRESS)
                 /*      intent.putExtra("WebsiteLink", selectedItem.ACTIVITY_WEBSITE ?: "")*/
 
                 //intent.putExtra("Address", selectedItem.ACTIVITY_ADDRESS)

@@ -1,6 +1,7 @@
 package com.example.devright_stillbaaitourism
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.ImageSlider
@@ -25,6 +26,9 @@ class BusinessDetail : AppCompatActivity() {
         val businessName = intent.getStringExtra("BusinessName")
         val description = intent.getStringExtra("Description")
         val imageUrls = intent.getStringArrayListExtra("imageUrls")
+        val businessEmail = intent.getStringExtra("mail")
+        val businessWebsite = intent.getStringExtra("Website")
+        val address = intent.getStringExtra("address")
 
         /*   val contactNumber = intent.getStringExtra("ContactNumber")
            val websiteLink = intent.getStringExtra("WebsiteLink")*/
@@ -33,6 +37,28 @@ class BusinessDetail : AppCompatActivity() {
         val tvTitle = findViewById<TextView>(R.id.titleTextViewBusiness)
         val tvDescription = findViewById<TextView>(R.id.descriptionTextView)
         val imagesDisplay = findViewById<ImageSlider>(R.id.businessImageSlider)
+        val tvMail = findViewById<TextView>(R.id.tvEmail)
+        val tvWebsite = findViewById<TextView>(R.id.tvWebsite)
+        val tvAddress = findViewById<TextView>(R.id.tvAddress)
+
+
+        if(!businessEmail.isNullOrEmpty())
+        {
+            tvMail.text = businessEmail
+            tvMail.visibility = View.VISIBLE
+        }
+
+        if(!businessWebsite.isNullOrEmpty())
+        {
+            tvWebsite.text = businessWebsite
+            tvWebsite.visibility = View.VISIBLE
+        }
+
+        if(!address.isNullOrEmpty())
+        {
+            tvAddress.text = address
+            tvAddress.visibility = View.VISIBLE
+        }
 
         tvTitle.text = businessName
         tvDescription.text = description

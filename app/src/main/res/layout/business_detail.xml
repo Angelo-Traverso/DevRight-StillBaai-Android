@@ -25,10 +25,8 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginStart="8dp"
         android:layout_below="@+id/btnBack"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         app:cardBackgroundColor="@color/purple_200"
         app:cardElevation="20dp"
         app:cardCornerRadius="5dp">
@@ -53,15 +51,56 @@
         android:layout_marginTop="16dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:gravity="start"
         android:text="Title" />
 
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextViewBusiness"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:drawableStart="@drawable/mail"
+        android:drawablePadding="8dp"
+        android:gravity="start"
+        android:visibility="gone"
+        android:text="Title" />
+
+    <TextView
+        android:id="@+id/tvWebsite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvEmail"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:drawableStart="@drawable/website"
+        android:drawablePadding="8dp"
+        android:gravity="start"
+        android:visibility="gone"
+
+        android:text="Title" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvWebsite"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:visibility="gone"
+
+        android:drawableStart="@drawable/baseline_location_on_24"
+        android:drawablePadding="8dp"
+        android:gravity="start"
+        android:text="Title" />
 
     <View
         android:id="@+id/lineAboveDescription"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/titleTextViewBusiness"
+        android:layout_below="@+id/tvAddress"
         android:alpha="0.2"
         android:layout_marginTop="8dp"
         android:background="@color/black"
@@ -76,13 +115,19 @@
         android:textSize="20sp"
         android:text="Description" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvDescriptionHeading">
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvDescriptionHeading"
+
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:text="Stuff about our shop" />
+    </ScrollView>
+
 
 </RelativeLayout>

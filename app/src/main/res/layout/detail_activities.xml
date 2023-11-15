@@ -29,7 +29,7 @@
         android:layout_marginEnd="16dp"
         app:cardBackgroundColor="@color/purple_200"
         app:cardElevation="20dp"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="5dp">
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imageSlider"
