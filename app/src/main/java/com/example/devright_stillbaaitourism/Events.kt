@@ -28,7 +28,6 @@ data class Event(
 class Events : AppCompatActivity() {
 
     private lateinit var binding: ActivityEventsBinding
-
     private lateinit var burgerMenu: BurgerMenu
 
   //  private val eventList = GlobalClass.EventDataList
