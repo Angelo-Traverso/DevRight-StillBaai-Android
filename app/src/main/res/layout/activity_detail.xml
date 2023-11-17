@@ -24,13 +24,11 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginStart="16dp"
         android:layout_below="@+id/btnBack"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         app:cardBackgroundColor="@color/purple_200"
         app:cardElevation="20dp"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="5dp">
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imageSlider"
@@ -62,9 +60,26 @@
         android:layout_below="@id/titleTextView"
         android:layout_marginTop="16dp"
         android:textSize="16sp"
+        android:drawablePadding="8dp"
         android:autoLink="web"
+        android:visibility="gone"
         android:text="something@example.co.za"
         android:drawableStart="@drawable/website"/>
+
+    <TextView
+        android:id="@+id/tvEatEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvWebsiteURL"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:drawablePadding="8dp"
+        android:autoLink="web"
+        android:visibility="gone"
+
+        android:text="something@example.co.za"
+        android:drawableStart="@drawable/mail"/>
+
 
 
 
@@ -72,11 +87,14 @@
         android:id="@+id/tvContactNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvWebsiteURL"
+        android:layout_below="@id/tvEatEmail"
         android:layout_marginTop="8dp"
         android:autoLink="phone"
+        android:visibility="gone"
+
         android:drawableStart="@drawable/call"
         android:text="0825649853"
+        android:drawablePadding="8dp"
         android:textSize="16sp"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -86,8 +104,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvContactNumber"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/location"
+        android:drawableStart="@drawable/baseline_location_on_24"
         android:text="Yessssir"
+        android:visibility="gone"
+        android:drawablePadding="8dp"
         android:textSize="16sp"
         tools:ignore="TouchTargetSizeCheck" />
     <View

@@ -74,6 +74,8 @@ class Eat : AppCompatActivity(){
                 intent.putExtra("imageUrl", selectedItem.EAT_IMAGE_URLS[0])
                 intent.putExtra("WebsiteURL", selectedItem.EAT_WEBSITE)
                 intent.putExtra("address", selectedItem.EAT_ADDRESS)
+                //Just added
+                intent.putExtra("email", selectedItem.EAT_EMAIL)
                 intent.putStringArrayListExtra("imageUrls", imageUrls)
 
                 // Use either mobile number or tell number, whichever is available

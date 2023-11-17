@@ -56,27 +56,58 @@
         android:text="Activity Name" />
 
     <TextView
-        android:id="@+id/tvWebsiteURL"
+        android:id="@+id/tvEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvActivityName"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        android:drawablePadding="8dp"
+        android:gravity="start"
+        android:visibility="gone"
+        android:text="Title"
+        app:drawableStartCompat="@drawable/mail" />
+    <TextView
+        android:id="@+id/tvWebsiteURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvEmail"
+        android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:autoLink="web"
+        android:visibility="gone"
         android:layout_marginStart="16dp"
+        android:drawablePadding="8dp"
         android:text="something@example.co.za"
         android:drawableStart="@drawable/website"/>
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvWebsiteURL"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:drawableStart="@drawable/baseline_location_on_24"
+        android:drawablePadding="8dp"
+        android:gravity="start"
+        android:visibility="gone"
+        android:text="Title" />
 
     <TextView
         android:id="@+id/tvContactNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvWebsiteURL"
+        android:layout_below="@id/tvAddress"
         android:layout_marginTop="8dp"
         android:autoLink="phone"
+        android:drawablePadding="8dp"
         android:drawableStart="@drawable/call"
         android:text="0825649853"
         android:textSize="16sp"
+        android:visibility="gone"
         android:layout_marginStart="16dp"
         tools:ignore="TouchTargetSizeCheck" />
 
