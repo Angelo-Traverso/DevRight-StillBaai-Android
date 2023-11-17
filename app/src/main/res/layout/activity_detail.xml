@@ -80,9 +80,6 @@
         android:text="something@example.co.za"
         android:drawableStart="@drawable/mail"/>
 
-
-
-
     <TextView
         android:id="@+id/tvContactNumber"
         android:layout_width="match_parent"
@@ -91,7 +88,6 @@
         android:layout_marginTop="8dp"
         android:autoLink="phone"
         android:visibility="gone"
-
         android:drawableStart="@drawable/call"
         android:text="0825649853"
         android:drawablePadding="8dp"

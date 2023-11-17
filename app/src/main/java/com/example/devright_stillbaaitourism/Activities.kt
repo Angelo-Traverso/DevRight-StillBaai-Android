@@ -52,8 +52,9 @@ class Activities : AppCompatActivity() {
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("ActivityName", selectedItem.ACTIVITY_NAME)
                 intent.putExtra("Description", selectedItem.ACTIVITY_DESCRIPTION)
-
                 intent.putExtra("WebsiteLink", selectedItem.ACTIVITY_WEBSITE ?: "")
+                intent.putExtra("email", selectedItem.ACTIVITY_EMAIL)
+                intent.putExtra("address", selectedItem.ACTIVITY_ADDRESS)
 
                 //intent.putExtra("Address", selectedItem.ACTIVITY_ADDRESS)
                 intent.putStringArrayListExtra("imageUrls", imageUrls)
