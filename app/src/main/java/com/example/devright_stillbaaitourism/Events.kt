@@ -10,37 +10,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 
-// Create a data class to represent an Event
-/*data class Event(
-    val eventName: String,
-    val eventAddress: String,
-    val imageResourceId: Int
-)*/
-
-
 class Events : AppCompatActivity() {
-
-   /* private lateinit var customAdapter: CustomAdapter*/
     private lateinit var burgerMenu: BurgerMenu
     private lateinit var eventList: List<EventData>
-  //  private val eventList = GlobalClass.EventDataList
-/*
-        private val eventList: List<Event> = listOf(
-            Event("Surfing", "Quary Road, 24", R.drawable.eel_event_image),
-            Event("Kite Flying", "Durbanville east, south", R.drawable.eel_event_image),
-            Event("Eel Feedings", "Tracktor Street, plettenberg south", R.drawable.eel_event_image),
-        )*/
-        /*    var EVENT_ID: Int = 0
-    var EVENT_NAME: String = ""
-    var EVENT_NUM: String? = null
-    var EVENT_EMAIL: String? = null
-    var EVENT_WEBSITE: String? = null
-    var EVENT_ADDRESS: String = ""
-    var EVENT_PERSON: String? = null
-    var EVENT_DATE: Date? = null
-    var EVENT_STARTTIME: String? = null
-    var EVENT_DURATION: Double? = null
-    var EVENT_DESCRIPTION: String? = null*/
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             burgerMenu = BurgerMenu(this, R.layout.activity_events)
@@ -60,6 +33,7 @@ class Events : AppCompatActivity() {
                 //val locationTextView: TextView = eventView.findViewById(R.id.locationTextView)
                 val eventImageView: ImageView = eventView.findViewById(R.id.eventImageView)
                 val addToCalendarButton: Button = eventView.findViewById(R.id.addToCalendarButton)
+                val viewEventDetails: Button = eventView.findViewById(R.id.btnViewEventDetails)
 
                 eventNameTextView.text = event.EVENT_NAME
 
@@ -87,6 +61,26 @@ class Events : AppCompatActivity() {
                         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTimeMillis)
                         .putExtra(CalendarContract.Events.ALL_DAY, false)
                         .putExtra(CalendarContract.Events.DESCRIPTION, "Reminder")
+
+                    startActivity(intent)
+                }
+
+                viewEventDetails.setOnClickListener{
+                    val intent = Intent(this@Events, EventDetail::class.java)
+
+                    val imageUrls = ArrayList(event.EVENT_IMAGE_URLS)
+
+                    intent.putExtra("eventName", event.EVENT_NAME)
+                    intent.putExtra("eventNum", event.EVENT_NUM ?: "")
+                    intent.putExtra("eventEmail", event.EVENT_EMAIL ?: "")
+                    intent.putExtra("eventWebsite", event.EVENT_WEBSITE ?: "")
+                    intent.putExtra("eventAddress", event.EVENT_ADDRESS)
+                    intent.putExtra("eventPerson", event.EVENT_PERSON ?: "")
+                    intent.putExtra("eventDate", event.EVENT_DATE ?: "")
+                    intent.putExtra("eventStartTime", event.EVENT_STARTTIME ?: "")
+                    intent.putExtra("eventDuration", event.EVENT_DURATION ?: "")
+                    intent.putExtra("eventDescription", event.EVENT_DESCRIPTION ?: "")
+                    intent.putStringArrayListExtra("eventImageUrls", imageUrls)
 
                     startActivity(intent)
                 }

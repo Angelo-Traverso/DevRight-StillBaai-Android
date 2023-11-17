@@ -197,7 +197,7 @@ class DBHandler {
                             EventData.EVENT_NAME = resultSet.getString("EVENT_NAME")
                             EventData.EVENT_NUM = resultSet.getString("EVENT_NUM")
                             EventData.EVENT_ADDRESS = resultSet.getString("EVENT_ADDRESS")
-                            EventData.EVENT_DATE = resultSet.getDate("EVENT_DATE")
+                            EventData.EVENT_DATE = resultSet.getString("EVENT_DATE")
                             EventData.EVENT_STARTTIME = resultSet.getString("EVENT_STARTTIME")
                             EventData.EVENT_DESCRIPTION = resultSet.getString("EVENT_DESCRIPTION")
                             EventData.EVENT_DURATION = resultSet.getString("EVENT_DURATION")

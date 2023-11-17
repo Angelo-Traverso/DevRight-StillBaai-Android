@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="TODO"
+        android:elevation="50dp"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="30dp"
+        app:srcCompat="@drawable/arrow_back_24px"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/btnBack"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@color/purple_200"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="20dp">
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/eventImageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:iss_auto_cycle="false"
+            app:iss_corner_radius="20"
+            app:iss_delay="1000"
+            app:iss_period="1000" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tvEventName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardView"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:text="Title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/linearEmailDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvEventName"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/mail"
+            android:drawablePadding="8dp"
+            android:gravity="start"
+            android:text="Title"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvEventDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/baseline_calendar_month_24"
+            android:drawablePadding="8dp"
+            android:gravity="start"
+            android:text="Event Date"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearWebsiteStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearEmailDate"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvWebsite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearEmailDate"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/website"
+            android:drawablePadding="8dp"
+            android:gravity="start"
+            android:text="Title"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvStartTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/baseline_access_time_24"
+            android:drawablePadding="8dp"
+            android:gravity="start"
+            android:text="Title"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearWebsiteStartTime"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/baseline_location_on_24"
+        android:drawablePadding="8dp"
+        android:gravity="start"
+        android:text="Title"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvEventNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAddress"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/call"
+        android:drawablePadding="8dp"
+        android:gravity="start"
+        android:text="Title"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/lineAboveDescription"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tvEventNum"
+        android:layout_marginTop="8dp"
+        android:alpha="0.2"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/tvDescriptionHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lineAboveDescription"
+        android:layout_marginTop="8dp"
+        android:text="Description"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvDescriptionHeading">
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:text="Stuff about our shop"
+            android:textSize="16sp" />
+    </ScrollView>
+
+
+</RelativeLayout>
