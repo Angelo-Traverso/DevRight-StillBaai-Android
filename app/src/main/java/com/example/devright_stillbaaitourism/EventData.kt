@@ -15,4 +15,5 @@ class EventData
     var EVENT_STARTTIME: String? = null
     var EVENT_DURATION: Double? = null
     var EVENT_DESCRIPTION: String? = null
+    var EVENT_IMAGE_URLS: MutableList<String> = mutableListOf()
 }

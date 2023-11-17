@@ -208,6 +208,25 @@ class DBHandler {
                         }
                     }
                 }
+
+                // Now, fetch image URLs and associate them with the eventData objects
+                conn?.createStatement().use { stmt ->
+                    val imageResultSet = stmt?.executeQuery("SELECT * FROM Event_Image_Table")
+
+                    if (imageResultSet != null) {
+                        while (imageResultSet.next()) {
+                            val eventId = imageResultSet.getInt("EVENT_ID")
+                            val imageUrl = imageResultSet.getString("EVENT_IMAGE_URL")
+
+                            // Find the corresponding EatData object by EVENT_ID
+                            val eventData =
+                                GlobalClass.EventDataList.find { it.EVENT_ID == eventId }
+
+                            // If an ActivityData object is found, add the image URL to its list
+                            eventData?.EVENT_IMAGE_URLS?.add(imageUrl)
+                        }
+                    }
+                }
             }
         } catch (ex: SQLException) {
             ex.printStackTrace()
