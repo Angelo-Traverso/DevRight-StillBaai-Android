@@ -50,17 +50,20 @@
         android:layout_marginTop="16dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:gravity="start"
         android:text="Title" />
 
-   <!-- <TextView
+    <TextView
         android:id="@+id/tvWebsiteURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleTextView"
+        android:drawablePadding="8dp"
         android:layout_marginTop="16dp"
         android:textSize="16sp"
         android:autoLink="web"
+        android:visibility="gone"
         android:text="something@example.co.za"
         android:drawableStart="@drawable/website"/>
 
@@ -73,26 +76,44 @@
         android:layout_below="@id/tvWebsiteURL"
         android:layout_marginTop="8dp"
         android:autoLink="phone"
+        android:visibility="gone"
+        android:drawablePadding="8dp"
         android:drawableStart="@drawable/call"
         android:text="0825649853"
         android:textSize="16sp"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
-        android:id="@+id/tvLocationToEats"
+        android:id="@+id/tvStayLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvContactNumber"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/location"
-        android:text="Yessssir"
+        android:drawablePadding="8dp"
+        android:visibility="gone"
+        android:drawableStart="@drawable/baseline_location_on_24"
+        android:text="Location"
         android:textSize="16sp"
-        tools:ignore="TouchTargetSizeCheck" />-->
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/tvStayEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvStayLocation"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/mail"
+        android:text="Email"
+        android:textSize="16sp"
+        tools:ignore="TouchTargetSizeCheck" />
+
     <View
         android:id="@+id/lineAboveDescription"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/titleTextView"
+        android:layout_below="@+id/tvStayEmail"
         android:alpha="0.2"
         android:layout_marginTop="8dp"
         android:background="@color/black"

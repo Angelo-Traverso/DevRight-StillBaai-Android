@@ -76,6 +76,11 @@
             android:exported="true" >
 
         </activity>
+        <activity
+            android:name=".StayDetail"
+            android:exported="true" >
+
+        </activity>
     </application>
 
 </manifest>

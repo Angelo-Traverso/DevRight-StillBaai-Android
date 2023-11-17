@@ -48,28 +48,24 @@ class Stay : AppCompatActivity() {
                 val selectedItem = stayDataList[position]
 
                 // Creating an Intent to open the DetailActivity
-                val intent = Intent(this@Stay, ActivitiesDetailActivity::class.java)
+                val intent = Intent(this@Stay, StayDetail::class.java)
                 val imageUrls = ArrayList(selectedItem.STAY_IMAGE_URLS)
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("StayName", selectedItem.STAY_NAME)
                 intent.putExtra("Description", selectedItem.STAY_DESCRIPTION)
-
-          /*      intent.putExtra("WebsiteLink", selectedItem.ACTIVITY_WEBSITE ?: "")*/
-
-                //intent.putExtra("Address", selectedItem.ACTIVITY_ADDRESS)
+                intent.putExtra("WebsiteLink", selectedItem.STAY_WEBSITE ?: "")
                 intent.putStringArrayListExtra("imageUrls", imageUrls)
+                intent.putExtra("email", selectedItem.STAY_EMAIL)
+                intent.putExtra("address", selectedItem.STAY_ADDRESS)
+                val contactNumber: String = if (!selectedItem.STAY_MOBILE_NUM.isNullOrBlank()){
 
-             /*   // Use either mobile number or tell number, whichever is available
-                val contactNumber: String = if (!selectedItem.ACTIVITY_MOBILE_NUM.isNullOrBlank()){
-
-                    selectedItem.ACTIVITY_MOBILE_NUM?:""
+                    selectedItem.STAY_MOBILE_NUM?:""
                 }else
                 {
-                    selectedItem.ACTIVITY_TEL_NUM?:""
+                    selectedItem.STAY_TEL_NUM?:""
                 }
 
                 intent.putExtra("ContactNumber", contactNumber)
-*/
                 startActivity(intent)
             }
         }
