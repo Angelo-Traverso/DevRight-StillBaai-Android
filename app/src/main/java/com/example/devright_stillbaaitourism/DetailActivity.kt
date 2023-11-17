@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.denzcoskun.imageslider.ImageSlider
@@ -27,12 +28,12 @@ class DetailActivity : AppCompatActivity() {
         }
 
         // Get Extras from EAT
-        val imageUrl = intent.getStringExtra("imageUrl")
         val title = intent.getStringExtra("title")
         val description = intent.getStringExtra("description")
         val websiteURL = intent.getStringExtra("WebsiteURL")
         val contactNumber = intent.getStringExtra("ContactNumber")
         val address = intent.getStringExtra("address")
+        val email = intent.getStringExtra("email")
         val imageUrls = intent.getStringArrayListExtra("imageUrls")
 
         // Binding views
@@ -40,9 +41,11 @@ class DetailActivity : AppCompatActivity() {
         val descriptionTextView = findViewById<TextView>(R.id.descriptionTextView)
         val imagesDisplay = findViewById<ImageSlider>(R.id.imageSlider)
         val websiteURLDisplay = findViewById<TextView>(R.id.tvWebsiteURL)
+        val tvEatEmail = findViewById<TextView>(R.id.tvEatEmail)
         val contactNumberDisplay = findViewById<TextView>(R.id.tvContactNumber)
         val addressLocation = findViewById<TextView>(R.id.tvLocationToEats)
 
+        // Taking user to Google Maps navigation
         addressLocation.setOnClickListener {
 
             // Create a Uri for the location (use the "q" parameter)
@@ -58,22 +61,42 @@ class DetailActivity : AppCompatActivity() {
             if (mapIntent.resolveActivity(packageManager) != null) {
                 // Start the intent to open Google Maps
                 startActivity(mapIntent)
+
             } else {
-                // Handle the case where Google Maps is not installed
-                // You can display a message to the user or use an alternative map application
                 Toast.makeText(this, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
             }
         }
 
 
-        // Setting view values
+        // Setting title
         titleTextView.text = Html.fromHtml("<b>$title</b>")
+
+        // Setting description
         descriptionTextView.text = description
 
+        // Setting address text
         addressLocation.text = address
 
-        websiteURLDisplay.text = websiteURL
-        contactNumberDisplay.text = contactNumber
+        // Checking if an email exists
+        if(!email.isNullOrEmpty())
+        {
+            tvEatEmail.text = email
+            tvEatEmail.visibility = View.VISIBLE
+        }
+
+        // Checking if a website exists
+        if(!websiteURL.isNullOrEmpty())
+        {
+            websiteURLDisplay.text = websiteURL
+            websiteURLDisplay.visibility = View.VISIBLE
+        }
+
+        // Checking if a contact number exists
+        if(!contactNumber.isNullOrEmpty())
+        {
+            contactNumberDisplay.text = contactNumber
+            contactNumberDisplay.visibility = View.VISIBLE
+        }
 
         // Dynamically adding images to carousel
         val slideModels = ArrayList<SlideModel>()
