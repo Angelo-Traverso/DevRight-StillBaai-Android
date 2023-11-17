@@ -183,7 +183,7 @@ class DBHandler {
         try {
 
             // Ensure the list is empty before making DB Query
-            if(GlobalClass.EatDataList.isEmpty()) {
+            if(GlobalClass.EventDataList.isEmpty()) {
 
                 // Closes connection automatically
                 conn?.createStatement().use { stmt ->
@@ -198,6 +198,7 @@ class DBHandler {
                             EventData.EVENT_NUM = resultSet.getString("EVENT_NUM")
                             EventData.EVENT_ADDRESS = resultSet.getString("EVENT_ADDRESS")
                             EventData.EVENT_DATE = resultSet.getDate("EVENT_DATE")
+                            EventData.EVENT_STARTTIME = resultSet.getString("EVENT_STARTTIME")
                             EventData.EVENT_DESCRIPTION = resultSet.getString("EVENT_DESCRIPTION")
                             EventData.EVENT_DURATION = resultSet.getDouble("EVENT_DURATION")
                             EventData.EVENT_PERSON = resultSet.getString("EVENT_PERSON")
