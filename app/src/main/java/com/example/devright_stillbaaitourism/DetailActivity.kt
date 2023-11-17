@@ -74,8 +74,12 @@ class DetailActivity : AppCompatActivity() {
         // Setting description
         descriptionTextView.text = description
 
-        // Setting address text
-        addressLocation.text = address
+        if(!address.isNullOrEmpty())
+        {
+            addressLocation.text = address
+            addressLocation.visibility = View.VISIBLE
+        }
+
 
         // Checking if an email exists
         if(!email.isNullOrEmpty())

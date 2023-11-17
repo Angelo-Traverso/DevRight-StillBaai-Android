@@ -22,4 +22,10 @@
         <item name="colorControlActivated">@color/black</item>
       <!--  <item name="colorControlHighlight">@color/primary</item>-->
     </style>
+
+    <style name="TextViewLinkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--<item name="colorControlNormal">@color/editTextBlue</item>-->
+        <item name="android:textColorLink">@color/linkColor</item>
+        <!--  <item name="colorControlHighlight">@color/primary</item>-->
+    </style>
 </resources>

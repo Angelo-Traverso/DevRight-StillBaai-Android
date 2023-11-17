@@ -13,7 +13,6 @@
         android:text="Stillbaai Tourism"
         android:textStyle="bold"
         android:textSize="20sp"
-
         />
 
     <TextView
@@ -34,6 +33,7 @@
         android:layout_below="@id/tvLocation"
         android:text="wefwefefw"
         android:autoLink="email"
+        style="@style/TextViewLinkTheme"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:drawableStart="@drawable/mail"/>
@@ -45,6 +45,7 @@
         android:layout_below="@id/tvEmail"
         android:text="wefwefefw"
         android:autoLink="phone"
+        style="@style/TextViewLinkTheme"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:drawableStart="@drawable/call"/>

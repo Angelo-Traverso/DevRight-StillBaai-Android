@@ -64,6 +64,7 @@
         android:drawablePadding="8dp"
         android:autoLink="web"
         android:visibility="gone"
+        style="@style/TextViewLinkTheme"
         android:text="something@example.co.za"
         android:drawableStart="@drawable/website"/>
 
@@ -76,6 +77,7 @@
         android:textSize="16sp"
         android:drawablePadding="8dp"
         android:autoLink="email"
+        style="@style/TextViewLinkTheme"
         android:visibility="gone"
         android:text="something@example.co.za"
         android:drawableStart="@drawable/mail"/>
@@ -88,6 +90,7 @@
         android:layout_marginTop="8dp"
         android:autoLink="phone"
         android:visibility="gone"
+        style="@style/TextViewLinkTheme"
         android:drawableStart="@drawable/call"
         android:text="0825649853"
         android:drawablePadding="8dp"
@@ -100,6 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvContactNumber"
         android:layout_marginTop="8dp"
+        style="@style/TextViewLinkTheme"
         android:drawableStart="@drawable/baseline_location_on_24"
         android:text="Yessssir"
         android:visibility="gone"
