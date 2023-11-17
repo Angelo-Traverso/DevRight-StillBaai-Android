@@ -200,7 +200,7 @@ class DBHandler {
                             EventData.EVENT_DATE = resultSet.getDate("EVENT_DATE")
                             EventData.EVENT_STARTTIME = resultSet.getString("EVENT_STARTTIME")
                             EventData.EVENT_DESCRIPTION = resultSet.getString("EVENT_DESCRIPTION")
-                            EventData.EVENT_DURATION = resultSet.getDouble("EVENT_DURATION")
+                            EventData.EVENT_DURATION = resultSet.getString("EVENT_DURATION")
                             EventData.EVENT_PERSON = resultSet.getString("EVENT_PERSON")
                             EventData.EVENT_WEBSITE = resultSet.getString("EVENT_WEBSITE")
                             EventData.EVENT_EMAIL = resultSet.getString("EVENT_EMAIL")

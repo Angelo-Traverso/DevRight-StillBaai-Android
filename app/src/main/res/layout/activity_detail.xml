@@ -26,7 +26,7 @@
         android:layout_height="200dp"
         android:layout_below="@+id/btnBack"
         android:layout_marginTop="16dp"
-        app:cardBackgroundColor="@color/purple_200"
+        app:cardBackgroundColor="@color/white"
         app:cardElevation="20dp"
         app:cardCornerRadius="5dp">
 
@@ -50,6 +50,7 @@
         android:layout_marginTop="16dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:gravity="start"
         android:text="Title" />
 
@@ -74,9 +75,8 @@
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:drawablePadding="8dp"
-        android:autoLink="web"
+        android:autoLink="email"
         android:visibility="gone"
-
         android:text="something@example.co.za"
         android:drawableStart="@drawable/mail"/>
 
@@ -135,6 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvDescriptionHeading"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_regular"
         android:textSize="16sp"
         android:text="Stuff about our shop" />
 

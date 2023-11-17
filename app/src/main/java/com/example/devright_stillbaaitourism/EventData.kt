@@ -13,7 +13,7 @@ class EventData
     var EVENT_PERSON: String? = null
     var EVENT_DATE: Date? = null
     var EVENT_STARTTIME: String? = null
-    var EVENT_DURATION: Double? = null
+    var EVENT_DURATION: String? = null
     var EVENT_DESCRIPTION: String? = null
     var EVENT_IMAGE_URLS: MutableList<String> = mutableListOf()
 }

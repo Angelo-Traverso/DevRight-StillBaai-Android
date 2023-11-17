@@ -23,7 +23,7 @@ class CustomAdapter(private val context: Context, private val eatDataList: List<
         val contactTextView = itemView?.findViewById<TextView>(R.id.tvContactNum)
         val locationToEats = itemView?.findViewById<TextView>(R.id.tvLocationToEats)
 
-        val defaultImageResource = R.drawable.ic_launcher_foreground
+        val defaultImageResource = R.drawable.no_image
 
         // Loading images into imageView
         if (eatData?.EAT_IMAGE_URLS?.isNotEmpty() == true) {
