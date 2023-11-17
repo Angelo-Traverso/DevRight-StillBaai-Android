@@ -40,7 +40,8 @@ class Events : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_events)
+            burgerMenu = BurgerMenu(this, R.layout.activity_events)
+            burgerMenu.setupDrawer()
 
             val linearLayout: LinearLayout = findViewById(R.id.linearEventsListings)
 
