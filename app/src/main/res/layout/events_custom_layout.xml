@@ -55,16 +55,16 @@
                 android:id="@+id/timeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="false"
                 android:layout_centerHorizontal="false"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="6dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="6dp"
-                android:layout_toRightOf="@id/eventNameTextView"
-                android:gravity="right"
+                android:foregroundGravity="right"
                 android:text="Time"
-                app:drawableLeftCompat="@drawable/baseline_access_time_24" />
+                app:drawableStartCompat="@drawable/baseline_access_time_24" />
 
         </RelativeLayout>
 
@@ -86,8 +86,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1.2"
-                android:background="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="#DCDCDC"
                 android:text="Add"
                 android:textColor="@color/black"
                 android:textSize="10sp"
@@ -99,8 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="#DCDCDC"
                 android:text="View Event"
                 android:textColor="@color/black"
                 android:textSize="10sp"
