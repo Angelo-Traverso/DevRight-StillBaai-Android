@@ -45,6 +45,7 @@ class DetailActivity : AppCompatActivity() {
         val contactNumberDisplay = findViewById<TextView>(R.id.tvContactNumber)
         val addressLocation = findViewById<TextView>(R.id.tvLocationToEats)
 
+        // Taking user to Google Maps navigation
         addressLocation.setOnClickListener {
 
             // Create a Uri for the location (use the "q" parameter)
@@ -60,33 +61,37 @@ class DetailActivity : AppCompatActivity() {
             if (mapIntent.resolveActivity(packageManager) != null) {
                 // Start the intent to open Google Maps
                 startActivity(mapIntent)
+
             } else {
-                // Handle the case where Google Maps is not installed
-                // You can display a message to the user or use an alternative map application
                 Toast.makeText(this, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
             }
         }
 
 
-        // Setting view values
+        // Setting title
         titleTextView.text = Html.fromHtml("<b>$title</b>")
 
+        // Setting description
         descriptionTextView.text = description
 
+        // Setting address text
         addressLocation.text = address
 
+        // Checking if an email exists
         if(!email.isNullOrEmpty())
         {
             tvEatEmail.text = email
             tvEatEmail.visibility = View.VISIBLE
         }
 
+        // Checking if a website exists
         if(!websiteURL.isNullOrEmpty())
         {
             websiteURLDisplay.text = websiteURL
             websiteURLDisplay.visibility = View.VISIBLE
         }
 
+        // Checking if a contact number exists
         if(!contactNumber.isNullOrEmpty())
         {
             contactNumberDisplay.text = contactNumber
