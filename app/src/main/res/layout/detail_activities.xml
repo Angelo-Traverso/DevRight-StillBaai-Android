@@ -153,6 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvDescriptionHeading"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:isScrollContainer="true"
         android:layout_marginStart="16dp"
         android:paddingBottom="16dp"
