@@ -44,6 +44,8 @@ class StayAdapter(private val context: Context, private var stayData: List<StayD
         if (data.STAY_IMAGE_URLS.isNotEmpty()) {
             val firstImageUrl = data.STAY_IMAGE_URLS[0]
             Picasso.get().load(firstImageUrl).into(imageView)
+        }else {
+            imageView?.setImageResource(R.drawable.no_image)
         }
 
         return view

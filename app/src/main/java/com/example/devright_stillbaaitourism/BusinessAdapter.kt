@@ -43,6 +43,9 @@ class BusinessAdapter (private val context: Context, private var businessData: L
         if (data.BUSINESS_IMAGE_URLS.isNotEmpty()) {
             val firstImageUrl = data.BUSINESS_IMAGE_URLS[0]
             Picasso.get().load(firstImageUrl).into(imageView)
+        }else
+        {
+            imageView.setImageResource(R.drawable.no_image)
         }
 
         return view
