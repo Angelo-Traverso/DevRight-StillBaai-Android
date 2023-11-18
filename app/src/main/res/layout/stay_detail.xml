@@ -63,6 +63,7 @@
         android:layout_marginTop="16dp"
         android:textSize="16sp"
         android:autoLink="web"
+        style="@style/TextViewLinkTheme"
         android:visibility="gone"
         android:text="something@example.co.za"
         android:drawableStart="@drawable/website"/>
@@ -78,6 +79,7 @@
         android:autoLink="phone"
         android:visibility="gone"
         android:drawablePadding="8dp"
+        style="@style/TextViewLinkTheme"
         android:drawableStart="@drawable/call"
         android:text="0825649853"
         android:textSize="16sp"
@@ -91,6 +93,7 @@
         android:layout_marginTop="8dp"
         android:drawablePadding="8dp"
         android:visibility="gone"
+        style="@style/TextViewLinkTheme"
         android:drawableStart="@drawable/baseline_location_on_24"
         android:text="Location"
         android:textSize="16sp"
@@ -104,6 +107,8 @@
         android:layout_marginTop="8dp"
         android:visibility="gone"
         android:drawablePadding="8dp"
+        style="@style/TextViewLinkTheme"
+        android:autoLink="email"
         android:drawableStart="@drawable/mail"
         android:text="Email"
         android:textSize="16sp"
@@ -128,13 +133,18 @@
         android:textSize="20sp"
         android:text="Description" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvDescriptionHeading">
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvDescriptionHeading"
         android:layout_marginTop="8dp"
+        android:paddingBottom="16dp"
         android:textSize="16sp"
         android:text="Stuff about our shop" />
+    </ScrollView>
 
 </RelativeLayout>

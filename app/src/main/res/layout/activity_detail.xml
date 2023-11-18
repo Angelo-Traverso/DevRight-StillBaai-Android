@@ -129,14 +129,23 @@
         android:textSize="20sp"
         android:text="Description" />
 
+
+    <ScrollView
+        android:id="@+id/scrollDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_below="@+id/tvDescriptionHeading">
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvDescriptionHeading"
         android:layout_marginTop="8dp"
+        android:paddingBottom="16dp"
         android:fontFamily="@font/roboto_regular"
         android:textSize="16sp"
         android:text="Stuff about our shop" />
+    </ScrollView>
 
 </RelativeLayout>

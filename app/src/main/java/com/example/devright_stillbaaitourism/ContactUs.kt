@@ -1,10 +1,13 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 
 class ContactUs : AppCompatActivity() {
 
@@ -26,6 +29,28 @@ class ContactUs : AppCompatActivity() {
             val contactNumberTextView = customView.findViewById<TextView>(R.id.tvContact)
             val emailTextView = customView.findViewById<TextView>(R.id.tvEmail)
             val contactAddress = customView.findViewById<TextView>(R.id.tvLocation)
+
+            // Taking user to Google Maps navigation
+            contactAddress.setOnClickListener {
+
+                // Create a Uri for the location (use the "q" parameter)
+                val uri = Uri.parse("geo:0,0?q=${contactData.CONTACT_ADDRESS}")
+
+                // Create an Intent to view the location on Google Maps
+                val mapIntent = Intent(Intent.ACTION_VIEW, uri)
+
+                // Set the package to specify that you want to use Google Maps
+                mapIntent.setPackage("com.google.android.apps.maps")
+
+                // Check if there's an app available to handle the intent
+                if (mapIntent.resolveActivity(packageManager) != null) {
+                    // Start the intent to open Google Maps
+                    startActivity(mapIntent)
+
+                } else {
+                    Toast.makeText(this, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
+                }
+            }
 
             // Populate the TextViews with data from ContactData
             titleTextView.text = contactData.CONTACT_NAME

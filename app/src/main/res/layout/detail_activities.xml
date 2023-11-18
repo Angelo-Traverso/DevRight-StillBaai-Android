@@ -62,6 +62,8 @@
         android:layout_below="@id/tvActivityName"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:autoLink="email"
+        style="@style/TextViewLinkTheme"
         android:textSize="16sp"
         android:drawablePadding="8dp"
         android:gravity="start"
@@ -75,12 +77,13 @@
         android:layout_below="@id/tvEmail"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
+        style="@style/TextViewLinkTheme"
         android:autoLink="web"
         android:visibility="gone"
         android:layout_marginStart="16dp"
         android:drawablePadding="8dp"
         android:text="something@example.co.za"
-        android:drawableStart="@drawable/website"/>
+        app:drawableStartCompat="@drawable/website" />
 
     <TextView
         android:id="@+id/tvAddress"
@@ -90,11 +93,12 @@
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:layout_marginStart="16dp"
-        android:drawableStart="@drawable/baseline_location_on_24"
         android:drawablePadding="8dp"
+        style="@style/TextViewLinkTheme"
         android:gravity="start"
         android:visibility="gone"
-        android:text="Title" />
+        android:text="Title"
+        app:drawableStartCompat="@drawable/baseline_location_on_24" />
 
     <TextView
         android:id="@+id/tvContactNumber"
@@ -104,12 +108,13 @@
         android:layout_marginTop="8dp"
         android:autoLink="phone"
         android:drawablePadding="8dp"
-        android:drawableStart="@drawable/call"
+        style="@style/TextViewLinkTheme"
         android:text="0825649853"
         android:textSize="16sp"
         android:visibility="gone"
         android:layout_marginStart="16dp"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck"
+        app:drawableStartCompat="@drawable/call" />
 
     <View
         android:id="@+id/lineAboveDescription"
