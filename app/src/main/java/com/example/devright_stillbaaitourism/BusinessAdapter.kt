@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 
-class BusinessAdapter (private val context: Context, private val businessData: List<BusinessData>) : BaseAdapter() {
+class BusinessAdapter (private val context: Context, private var businessData: List<BusinessData>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return businessData.size
@@ -46,5 +46,10 @@ class BusinessAdapter (private val context: Context, private val businessData: L
         }
 
         return view
+    }
+
+    fun updateData(newList: List<BusinessData>) {
+        businessData = newList.toMutableList()
+        notifyDataSetChanged()
     }
 }

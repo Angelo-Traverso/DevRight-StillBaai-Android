@@ -3,8 +3,11 @@ package com.example.devright_stillbaaitourism
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ListView
@@ -29,6 +32,8 @@ class Businesses : AppCompatActivity() {
 
         listView = findViewById(R.id.businessListView)
 
+        val edtSearch = findViewById<EditText>(R.id.etSearch)
+
         val businessDataList = GlobalClass.BusinessDataList
 
         businessAdapter = BusinessAdapter(this, businessDataList)
@@ -49,27 +54,35 @@ class Businesses : AppCompatActivity() {
                 intent.putExtra("mail", selectedItem.BUSINESS_EMAIL)
                 intent.putExtra("Website", selectedItem.BUSINESS_WEBSITE)
                 intent.putExtra("address", selectedItem.BUSINESS_ADDRESS)
-                /*      intent.putExtra("WebsiteLink", selectedItem.ACTIVITY_WEBSITE ?: "")*/
 
-                //intent.putExtra("Address", selectedItem.ACTIVITY_ADDRESS)
                 intent.putStringArrayListExtra("imageUrls", imageUrls)
 
-                /*   // Use either mobile number or tell number, whichever is available
-                   val contactNumber: String = if (!selectedItem.ACTIVITY_MOBILE_NUM.isNullOrBlank()){
+                // ADD CONTACT DETAILS
 
-                       selectedItem.ACTIVITY_MOBILE_NUM?:""
-                   }else
-                   {
-                       selectedItem.ACTIVITY_TEL_NUM?:""
-                   }
-
-                   intent.putExtra("ContactNumber", contactNumber)
-   */
                 startActivity(intent)
             }
         }
 
-    }
+        edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed for this implementation
+            }
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed for this implementation
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Filter activityDataList based on the search query
+                val searchText = s.toString().toLowerCase()
+                val filteredList = businessDataList.filter {
+                    it.BUSINESS_NAME.toLowerCase().contains(searchText)
+                }
+
+                // Update the adapter with the filtered list
+                businessAdapter.updateData(filteredList)
+            }
+        })
+    }
     //............................................................................................//
 }

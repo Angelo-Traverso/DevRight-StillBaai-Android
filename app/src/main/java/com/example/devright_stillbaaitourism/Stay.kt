@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -70,11 +72,29 @@ class Stay : AppCompatActivity() {
             }
         }
 
+        edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed for this implementation
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed for this implementation
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Filter activityDataList based on the search query
+                val searchText = s.toString().toLowerCase()
+                val filteredList = stayDataList.filter {
+                    it.STAY_NAME.toLowerCase().contains(searchText)
+                }
+
+                // Update the adapter with the filtered list
+                stayAdapter.updateData(filteredList)
+            }
+        })
     }
     private fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
-    //............................................................................................//
-
 }

@@ -93,7 +93,7 @@
                         android:padding="8dp">
 
                         <EditText
-                            android:id="@+id/etSearch"
+                            android:id="@+id/etSearchEat"
                             android:layout_width="300dp"
                             android:layout_height="match_parent"
                             android:autofillHints=""
@@ -102,6 +102,8 @@
                             android:hint="@string/searchBar"
                             android:inputType="text"
                             android:maxLines="1"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textColorHint="@color/searchBarHint"
@@ -114,7 +116,7 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_toEndOf="@+id/etSearch"
+                            android:layout_toEndOf="@+id/etSearchEat"
                             android:background="@android:color/transparent"
                             android:contentDescription="@string/About"
                             android:src="@drawable/baseline_search_24"

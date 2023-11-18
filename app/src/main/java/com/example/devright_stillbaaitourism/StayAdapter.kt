@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso
 
 // EVERYTHING IS SETUP, DATA NEEDS TO BE STORED PROPERLY
 
-class StayAdapter(private val context: Context, private val stayData: List<StayData>) : BaseAdapter() {
+class StayAdapter(private val context: Context, private var stayData: List<StayData>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return stayData.size
@@ -47,5 +47,10 @@ class StayAdapter(private val context: Context, private val stayData: List<StayD
         }
 
         return view
+    }
+
+    fun updateData(newList: List<StayData>) {
+        stayData = newList.toMutableList()
+        notifyDataSetChanged()
     }
 }
