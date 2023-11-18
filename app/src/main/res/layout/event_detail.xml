@@ -25,7 +25,7 @@
         android:layout_height="200dp"
         android:layout_below="@+id/btnBack"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/purple_200"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="5dp"
         app:cardElevation="20dp">
 

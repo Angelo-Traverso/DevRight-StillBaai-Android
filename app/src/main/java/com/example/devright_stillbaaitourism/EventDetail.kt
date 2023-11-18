@@ -103,13 +103,16 @@ class EventDetail: AppCompatActivity() {
         val slideModels = ArrayList<SlideModel>()
 
         // Check if imageUrls is not null and load images into slideModels
-        if (imageUrls != null) {
+        if (!imageUrls.isNullOrEmpty()) {
             for (imageUrl in imageUrls) {
                 slideModels.add(SlideModel(imageUrl))
             }
+            // Bind the list to the Image Slider
+            imageDisplay.setImageList(slideModels, ScaleTypes.FIT)
+        }else
+        {
+            slideModels.add(SlideModel(R.drawable.no_image))
+            imageDisplay.setImageList(slideModels, ScaleTypes.FIT)
         }
-
-        // Set the slideModels as the data source for ImageSlider
-        imageDisplay.setImageList(slideModels, ScaleTypes.FIT)
     }
 }

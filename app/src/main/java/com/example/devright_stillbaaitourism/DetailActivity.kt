@@ -1,6 +1,7 @@
 package com.example.devright_stillbaaitourism;
 
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -104,15 +105,16 @@ class DetailActivity : AppCompatActivity() {
 
         // Dynamically adding images to carousel
         val slideModels = ArrayList<SlideModel>()
-        if (imageUrls != null) {
+        if (!imageUrls.isNullOrEmpty()) {
             for (imageUrl in imageUrls) {
                 slideModels.add(SlideModel(imageUrl))
             }
+            // Bind the list to the Image Slider
+            imagesDisplay.setImageList(slideModels, ScaleTypes.FIT)
+        }else
+        {
+            slideModels.add(SlideModel(R.drawable.no_image))
+            imagesDisplay.setImageList(slideModels, ScaleTypes.FIT)
         }
-
-        // Bind the list to the Image Slider
-        imagesDisplay.setImageList(slideModels, ScaleTypes.FIT)
-
-
     }
 }
