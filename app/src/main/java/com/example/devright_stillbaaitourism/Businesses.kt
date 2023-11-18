@@ -6,23 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.MenuItem
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.ListView
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.example.devright_stillbaaitourism.databinding.ActivityBusinessesBinding
-import com.google.android.material.navigation.NavigationView
+import android.widget.*
 
 class Businesses : AppCompatActivity() {
 
     private lateinit var listView: ListView
-    private lateinit var binding: ActivityBusinessesBinding
     private lateinit var businessAdapter: BusinessAdapter
 
     private lateinit var burgerMenu: BurgerMenu
@@ -32,23 +21,21 @@ class Businesses : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_businesses)
         burgerMenu.setupDrawer()
 
-        listView = findViewById(R.id.businessListView)
-
-        val edtSearch = findViewById<EditText>(R.id.etSearch)
-
-        val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
-        btnSearch.setOnClickListener{
-            hideKeyboard()
-            edtSearch.clearFocus()
-        }
-
         val businessDataList = GlobalClass.BusinessDataList
+        val btnFilter = findViewById<ImageButton>(R.id.btnFilter)
+        val edtSearch = findViewById<EditText>(R.id.etSearch)
+        val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
+
+        listView = findViewById(R.id.businessListView)
 
         businessAdapter = BusinessAdapter(this, businessDataList)
 
         listView.adapter = businessAdapter
 
 
+        /*
+       * List view on click listener
+       * */
         listView.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < businessDataList.size) {
                 val selectedItem = businessDataList[position]
@@ -71,6 +58,47 @@ class Businesses : AppCompatActivity() {
             }
         }
 
+        /*
+        * Search click event
+        */
+        btnSearch.setOnClickListener{
+            hideKeyboard()
+            edtSearch.clearFocus()
+        }
+        /*
+        * Filter to let users filter by category
+        * */
+        btnFilter.setOnClickListener {
+            val popupMenu = PopupMenu(this, btnFilter)
+
+            // Get unique categories from your businessDataList
+            val categories = businessDataList.map { it.BUSINESS_CATEGORY_TYPE }.distinct()
+            popupMenu.menu.add("All")
+            // Create menu items dynamically
+            for (category in categories) {
+                popupMenu.menu.add(category)
+            }
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                // Handle menu item click
+                val selectedCategory = item.title.toString()
+                val filteredList = if (selectedCategory.equals("All", ignoreCase = true)) {
+                    businessDataList
+                } else {
+                    businessDataList.filter {
+                        it.BUSINESS_CATEGORY_TYPE.equals(selectedCategory, ignoreCase = true)
+                    }
+                }
+                businessAdapter.updateData(filteredList)
+                true
+            }
+
+            popupMenu.show()
+        }
+
+        /*
+       * Search filtering
+       * */
         edtSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // Not needed for this implementation
