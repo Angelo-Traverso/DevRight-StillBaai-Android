@@ -126,6 +126,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lineAboveDescription"
         android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:text="Description" />
 
@@ -143,6 +145,7 @@
         android:layout_below="@id/tvDescriptionHeading"
         android:layout_marginTop="8dp"
         android:paddingBottom="16dp"
+        android:textColor="@color/black"
         android:fontFamily="@font/roboto_regular"
         android:textSize="16sp"
         android:text="Stuff about our shop" />

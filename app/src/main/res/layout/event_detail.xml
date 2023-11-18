@@ -164,6 +164,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lineAboveDescription"
         android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:text="Description"
         android:textSize="20sp" />
 
@@ -177,6 +179,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
+            android:textColor="@color/black"
             android:layout_marginTop="8dp"
             android:text="Stuff about our shop"
             android:textSize="16sp" />

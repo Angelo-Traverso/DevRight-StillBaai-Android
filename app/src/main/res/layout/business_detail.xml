@@ -116,6 +116,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lineAboveDescription"
         android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:text="Description" />
 
@@ -127,6 +129,7 @@
         android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:paddingBottom="16dp"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
