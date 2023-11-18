@@ -3,7 +3,7 @@ package com.example.devright_stillbaaitourism
 import java.sql.*
 import java.util.*
 
-class DBHandler {
+class DBHandler (private val callback: DataFetchCallback) {
 
     // ------------------- Declarations ------------------- //
     private var conn: Connection? = null
@@ -228,7 +228,7 @@ class DBHandler {
                     }
                 }
             }
-
+            callback.onDataFetched()
         } catch (ex: SQLException) {
             ex.printStackTrace()
         }

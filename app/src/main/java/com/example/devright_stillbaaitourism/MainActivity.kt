@@ -12,7 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import kotlin.concurrent.thread
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DataFetchCallback {
 
     private lateinit var burgerMenu: BurgerMenu
     private val stilBaaiUrl: String = "https://stilbaaitourism.co.za/"
@@ -23,61 +23,33 @@ class MainActivity : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_main)
         burgerMenu.setupDrawer()
 
-        val dbHandler = DBHandler();
-        GlobalClass.StayDataList.clear()
-        thread {
-            dbHandler.getConnection()
-            dbHandler.fetchActivityData()
-            dbHandler.fetchContactData()
-            dbHandler.fetchEatData()
-            dbHandler.fetchBusinessData()
-            dbHandler.fetchStayData()
-            dbHandler.fetchListingData()
-            dbHandler.fetchEventsData()
+        if(GlobalClass.EventDataList.isEmpty()) {
+            val dbHandler = DBHandler(this)
+            GlobalClass.StayDataList.clear()
+            thread {
+                dbHandler.getConnection()
+                dbHandler.fetchActivityData()
+                dbHandler.fetchContactData()
+                dbHandler.fetchEatData()
+                dbHandler.fetchBusinessData()
+                dbHandler.fetchStayData()
+                dbHandler.fetchListingData()
+                dbHandler.fetchEventsData()
+            }
+
+            dbHandler.getConnection();
+        }else
+        {
+            populateEvents()
         }
-
-        dbHandler.getConnection();
-
-        val stilBaaiClick = findViewById<TextView>(R.id.btnStil)
-        val jongensClick = findViewById<TextView>(R.id.btnJong)
-        val melkClick = findViewById<TextView>(R.id.btnMelk)
-
-
-        stilBaaiClick.setOnClickListener{
-            val uri = Uri.parse(stilBaaiUrl)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
-        }
-        jongensClick.setOnClickListener{
-            val uri = Uri.parse(stilBaaiUrl)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
-        }
-        melkClick.setOnClickListener{
-            val uri = Uri.parse(stilBaaiUrl)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
-        }
-
-
-        val viewPager = findViewById<ViewPager>(R.id.viewPager)
-        val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
-        val linearLayoutEvents = findViewById<LinearLayout>(R.id.linearEventsDisplay)
-
-        // Fecthing Event List
-        val eventList = GlobalClass.EventDataList
-        // Create event fragments for each event
-        val eventFragments = listOf(
-            EventFragment.newInstance("Eel Feeding", "18:00", "Backyard, 2440"),
-            EventFragment.newInstance("Dua Lipa", "19:00", "Open Field, 2440"),
-            EventFragment.newInstance("Mamma Mia", "15:00", "Open Field, 2440"),
-        )
-
         val advertFragment = listOf(
             AdvertFragment.newInstance("Come visit our store!", "https://fabricatecapetown.co.za/wp-content/uploads/2020/11/Fabricate_November-2019_006b-11-scaled.jpg"),
             AdvertFragment.newInstance("Come visit our store!", "https://fabricatecapetown.co.za/wp-content/uploads/2020/11/Fabricate_November-2019_006b-11-scaled.jpg")
 
         )
+
+        val viewPager = findViewById<ViewPager>(R.id.viewPager)
+        val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
 
         // Create the FragmentPagerAdapter and set it to the ViewPager
         val adapter = EventPagerAdapter(supportFragmentManager, advertFragment)
@@ -89,9 +61,9 @@ class MainActivity : AppCompatActivity() {
 
         val handler = Handler()
 
-            // Set the initial delay and duration
-        val initialDelay = 4000L  // 2 seconds delay before auto-scroll starts
-        val scrollDuration = 6000L // 3 seconds duration for each scroll
+        // Set the initial delay and duration
+        val initialDelay = 4000L  // 4 seconds delay before auto-scroll starts
+        val scrollDuration = 6000L // 6 seconds duration for each scroll
 
         // Start auto-scrolling when the activity is created
         handler.postDelayed(object : Runnable {
@@ -109,7 +81,21 @@ class MainActivity : AppCompatActivity() {
                 handler.postDelayed(this, scrollDuration)
             }
         }, initialDelay)
+    }
 
+    override fun onDataFetched() {
+        // This method will be called when data is fetched
+        runOnUiThread {
+            // Update UI or populate views here
+            populateEvents()
+        }
+    }
+
+    private fun populateEvents() {
+        val linearLayoutEvents = findViewById<LinearLayout>(R.id.linearEventsDisplay)
+
+        // Fetching Event List
+        val eventList = GlobalClass.EventDataList
 
         for (event in eventList) {
             val eventView = layoutInflater.inflate(R.layout.events_home, null)
@@ -120,13 +106,6 @@ class MainActivity : AppCompatActivity() {
 
             linearLayoutEvents.addView(eventView)
         }
-
-
-
-
-        // ------------------- End Test ------------------- //
-
-
     }
 
 }
