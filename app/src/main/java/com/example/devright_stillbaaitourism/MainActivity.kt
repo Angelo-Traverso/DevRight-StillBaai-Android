@@ -23,6 +23,21 @@ class MainActivity : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_main)
         burgerMenu.setupDrawer()
 
+        val dbHandler = DBHandler();
+        GlobalClass.StayDataList.clear()
+        thread {
+            dbHandler.getConnection()
+            dbHandler.fetchActivityData()
+            dbHandler.fetchContactData()
+            dbHandler.fetchEatData()
+            dbHandler.fetchBusinessData()
+            dbHandler.fetchStayData()
+            dbHandler.fetchListingData()
+            dbHandler.fetchEventsData()
+        }
+
+        dbHandler.getConnection();
+
         val stilBaaiClick = findViewById<TextView>(R.id.btnStil)
         val jongensClick = findViewById<TextView>(R.id.btnJong)
         val melkClick = findViewById<TextView>(R.id.btnMelk)
@@ -49,7 +64,8 @@ class MainActivity : AppCompatActivity() {
         val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
         val linearLayoutEvents = findViewById<LinearLayout>(R.id.linearEventsDisplay)
 
-
+        // Fecthing Event List
+        val eventList = GlobalClass.EventDataList
         // Create event fragments for each event
         val eventFragments = listOf(
             EventFragment.newInstance("Eel Feeding", "18:00", "Backyard, 2440"),
@@ -95,30 +111,17 @@ class MainActivity : AppCompatActivity() {
         }, initialDelay)
 
 
-        for (eventFragment in eventFragments) {
+        for (event in eventList) {
             val eventView = layoutInflater.inflate(R.layout.events_home, null)
 
-            eventView.findViewById<TextView>(R.id.eventName).text = "Test Event Name"
-            eventView.findViewById<TextView>(R.id.eventTime).text = "19:00"
-            eventView.findViewById<TextView>(R.id.eventLocation).text = "Down Town"
+            eventView.findViewById<TextView>(R.id.eventName).text = event.EVENT_NAME ?: ""
+            eventView.findViewById<TextView>(R.id.eventTime).text = event.EVENT_STARTTIME ?: ""
+            eventView.findViewById<TextView>(R.id.eventLocation).text = event.EVENT_ADDRESS ?: ""
 
             linearLayoutEvents.addView(eventView)
         }
 
-        val dbHandler = DBHandler();
-        GlobalClass.StayDataList.clear()
-        thread {
-            dbHandler.getConnection()
-            dbHandler.fetchActivityData()
-            dbHandler.fetchContactData()
-            dbHandler.fetchEatData()
-            dbHandler.fetchBusinessData()
-            dbHandler.fetchStayData()
-            dbHandler.fetchListingData()
-            dbHandler.fetchEventsData()
-        }
 
-        dbHandler.getConnection();
 
 
         // ------------------- End Test ------------------- //

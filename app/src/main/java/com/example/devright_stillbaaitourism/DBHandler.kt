@@ -228,6 +228,7 @@ class DBHandler {
                     }
                 }
             }
+
         } catch (ex: SQLException) {
             ex.printStackTrace()
         }

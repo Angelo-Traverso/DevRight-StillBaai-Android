@@ -168,7 +168,6 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-
                     <ScrollView
                         android:id="@+id/scrollEvents"
                         android:layout_width="match_parent"
@@ -181,9 +180,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical" />
-
                     </ScrollView>
-
 
                     <View
                         android:id="@+id/lineBelowEvents"
@@ -197,13 +194,17 @@
                         />
 
                     <!-- Add a ViewPager to display events -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="8dp"
+                        >
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/viewPager"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/lineBelowEvents"
                         android:contentDescription="@string/About" />
 
                     <!-- Add a TabLayout for navigation between events -->
@@ -221,15 +222,7 @@
                         app:tabIndicatorHeight="0dp"
                         app:tabMaxWidth="12dp"
                         app:tabMode="scrollable" />
-
-                    <RelativeLayout
-                        android:id="@+id/relAdverts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tabLayout"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="16dp"
-                        android:gravity="top" />
+                    </RelativeLayout>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
