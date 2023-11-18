@@ -61,9 +61,9 @@ class Businesses : AppCompatActivity() {
         * Search click event
         */
         btnSearch.setOnClickListener{
-            hideKeyboard()
-            edtSearch.clearFocus()
+            GlobalClass.hideUserKeyboard(this, edtSearch , edtSearch)
         }
+
         /*
         * Filter to let users filter by category
         * */
@@ -78,6 +78,9 @@ class Businesses : AppCompatActivity() {
                 popupMenu.menu.add(category)
             }
 
+            /*
+            * popupMenu on item select listener, this will filter the list to match the user required category
+            * */
             popupMenu.setOnMenuItemClickListener { item ->
                 // Handle menu item click
                 val selectedCategory = item.title.toString()
@@ -118,10 +121,6 @@ class Businesses : AppCompatActivity() {
                 businessAdapter.updateData(filteredList)
             }
         })
-    }
-    private fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
     //............................................................................................//
 }

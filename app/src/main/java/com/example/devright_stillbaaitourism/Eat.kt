@@ -29,22 +29,14 @@ class Eat : AppCompatActivity() {
 
 
         val edtSearch = findViewById<EditText>(R.id.etSearchEat)
-
-        listview = findViewById(R.id.listView)
-
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
-        btnSearch.setOnClickListener{
-            hideKeyboard()
-            edtSearch.clearFocus()
-        }
-
         // Instance of EatDataList
         val eatDataList = GlobalClass.EatDataList
 
+        listview = findViewById(R.id.listView)
 
         // Create a custom adapter with the EatData list
         customAdapter = CustomAdapter(this, eatDataList)
-
 
         // Set the adapter for the ListView
         listview.adapter = customAdapter
@@ -81,6 +73,17 @@ class Eat : AppCompatActivity() {
             }
         }
 
+
+        /*
+        * Search click event
+        */
+        btnSearch.setOnClickListener{
+            GlobalClass.hideUserKeyboard(this, edtSearch , edtSearch)
+        }
+
+        /*
+        * Filter to let users filter by category
+        * */
         edtSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // Not needed for this implementation
@@ -102,10 +105,5 @@ class Eat : AppCompatActivity() {
 
             }
         })
-    }
-
-    private fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }

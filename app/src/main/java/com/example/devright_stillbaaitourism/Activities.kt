@@ -74,8 +74,7 @@ class Activities : AppCompatActivity() {
         * Search click event
         */
         btnSearch.setOnClickListener{
-            hideKeyboard()
-            etSearch.clearFocus()
+            GlobalClass.hideUserKeyboard(this, etSearch , etSearch)
         }
 
         /*
@@ -131,10 +130,5 @@ class Activities : AppCompatActivity() {
             }
         })
     }
-    private fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-    }
-
     //............................................................................................//
 }

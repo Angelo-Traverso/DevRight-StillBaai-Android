@@ -63,10 +63,10 @@ class Stay : AppCompatActivity() {
         /*
         * Search click event
         */
-        btnSearch.setOnClickListener {
-            hideKeyboard()
-            edtSearch.clearFocus()
+        btnSearch.setOnClickListener{
+            GlobalClass.hideUserKeyboard(this, edtSearch , edtSearch)
         }
+
 
         /*
        * Filter to let users filter by category
@@ -122,10 +122,5 @@ class Stay : AppCompatActivity() {
                 stayAdapter.updateData(filteredList)
             }
         })
-    }
-
-    private fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }
