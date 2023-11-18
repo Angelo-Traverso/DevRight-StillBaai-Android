@@ -33,6 +33,11 @@
             android:icon="@drawable/events" />
 
         <item
+            android:id="@+id/nav_eelFeeding"
+            android:title="@string/eelFeeding"
+            android:icon="@drawable/hiking" />
+
+        <item
             android:id="@+id/nav_Contacts"
             android:title="@string/contactUsHeading"
             android:icon="@drawable/call" />

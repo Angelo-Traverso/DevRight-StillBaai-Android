@@ -466,23 +466,25 @@ class DBHandler (private val callback: DataFetchCallback) {
 
                 conn?.createStatement().use { stmt ->
                     val resultSet = stmt?.executeQuery("SELECT * FROM Eel_Table")
+                    println("REACHED SELECT ALL!!!!")
 
                     // Executes until no more records are found
                     if (resultSet != null) {
                         while (resultSet.next()) {
-                            val EelData = EelData()
-                            EelData.EEL_ID = resultSet.getInt("EEL_ID")
-                            EelData.EEL_NAME = resultSet.getString("EEL_NAME")
-                            EelData.EEL_ADDRESS = resultSet.getString("EEL_ADDRESS")
-                            EelData.EEL_DESCRIPTION = resultSet.getString("EEL_DESCRIPTION")
-                            EelData.EEL_CONTACT_NUM = resultSet.getNString("EEL_CONTACT_NUM")
-                            GlobalClass.EelDataList.add(EelData)
+                            val eelData = EelData()
+                            eelData.EEL_ID = resultSet.getInt("EEL_ID")
+                            eelData.EEL_NAME = resultSet.getString("EEL_NAME")
+                            eelData.EEL_CONTACT_NUM = resultSet.getString("EEL_CONTACT_NUM")
+                            eelData.EEL_ADDRESS = resultSet.getString("EEL_ADDRESS")
+                            eelData.EEL_DESCRIPTION = resultSet.getString("EEL_DESCRIPTION")
+                            GlobalClass.EelDataList.add(eelData)
                         }
                     }
                 }
                 // Fetch eel image URLs and associate them with EEL objects
                 conn?.createStatement().use { stmt ->
                     val imageResultSet = stmt?.executeQuery("SELECT * FROM Eel_Image_Table")
+                    println("REACHED SELECT ALL IMAGES!!!!")
 
                     if (imageResultSet != null) {
                         while (imageResultSet.next()) {

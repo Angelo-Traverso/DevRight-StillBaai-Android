@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
                 dbHandler.fetchStayData()
                 dbHandler.fetchListingData()
                 dbHandler.fetchEventsData()
+                dbHandler.fetchEelData()
             }
 
             dbHandler.getConnection();

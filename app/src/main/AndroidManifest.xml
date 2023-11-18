@@ -33,58 +33,70 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ActivitiesDetailActivity"
             android:exported="true" >
         </activity>
+
         <activity
             android:name=".Stay"
             android:exported="true" >
         </activity>
+
         <activity
             android:name=".Eat"
             android:exported="true">
         </activity>
+
         <activity
             android:name=".Businesses"
             android:exported="true">
         </activity>
+
         <activity
             android:name=".Activities"
             android:exported="true">
         </activity>
+
         <activity
             android:name=".Events"
             android:exported="true">
         </activity>
+
         <activity
             android:name=".ContactUs"
             android:exported="true" >
         </activity>
+
         <activity
             android:name=".Eels"
             android:exported="true" >
         </activity>
+
         <activity
             android:name=".DetailActivity"
             android:exported="true" >
-
         </activity>
 
         <activity
             android:name=".BusinessDetail"
             android:exported="true" >
-
         </activity>
+
         <activity
             android:name=".StayDetail"
             android:exported="true" >
-
         </activity>
+
         <activity
             android:name=".EventDetail"
             android:exported="true" >
+        </activity>
 
+        <activity
+            android:name=".EelFeeding"
+            android:exported="true" >
         </activity>
 
     </application>

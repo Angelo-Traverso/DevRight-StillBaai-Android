@@ -38,6 +38,7 @@ class BurgerMenu(private val activity: AppCompatActivity, private val layoutResI
             R.id.nav_business -> navigateTo(Businesses::class.java)
             R.id.nav_Activities -> navigateTo(Activities::class.java)
             R.id.nav_Events -> navigateTo(Events::class.java)
+            R.id.nav_eelFeeding -> navigateTo(EelFeeding::class.java)
             R.id.nav_Contacts -> navigateTo(ContactUs::class.java)
         }
         drawerLayout.closeDrawer(GravityCompat.START)
