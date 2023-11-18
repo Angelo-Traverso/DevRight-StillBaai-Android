@@ -13,7 +13,6 @@ class Businesses : AppCompatActivity() {
 
     private lateinit var listView: ListView
     private lateinit var businessAdapter: BusinessAdapter
-
     private lateinit var burgerMenu: BurgerMenu
 
     override fun onCreate(savedInstanceState: Bundle?) {
