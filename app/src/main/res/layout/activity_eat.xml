@@ -91,7 +91,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp">
-
+                        <ImageButton
+                            android:id="@+id/btnSearch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/About"
+                            android:src="@drawable/baseline_search_24"
+                            tools:ignore="TouchTargetSizeCheck" />
                         <EditText
                             android:id="@+id/etSearchEat"
                             android:layout_width="300dp"
@@ -102,6 +110,7 @@
                             android:hint="@string/searchBar"
                             android:inputType="text"
                             android:maxLines="1"
+                            android:layout_toEndOf="@+id/btnSearch"
                             android:focusable="true"
                             android:focusableInTouchMode="true"
                             android:textAlignment="center"
@@ -110,17 +119,7 @@
                             android:theme="@style/EditTextTheme"
                             tools:ignore="TouchTargetSizeCheck" />
 
-                        <ImageButton
-                            android:id="@+id/btnSearch"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@+id/etSearchEat"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="@string/About"
-                            android:src="@drawable/baseline_search_24"
-                            tools:ignore="TouchTargetSizeCheck" />
+
 
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>

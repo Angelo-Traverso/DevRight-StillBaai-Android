@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ListView
 
 class Eat : AppCompatActivity() {
@@ -31,11 +32,11 @@ class Eat : AppCompatActivity() {
 
         listview = findViewById(R.id.listView)
 
-        /*val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
+        val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
         btnSearch.setOnClickListener{
             hideKeyboard()
             edtSearch.clearFocus()
-        }*/
+        }
 
         // Instance of EatDataList
         val eatDataList = GlobalClass.EatDataList
