@@ -1,5 +1,9 @@
 package com.example.devright_stillbaaitourism
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class EventData
@@ -16,4 +20,14 @@ class EventData
     var EVENT_DURATION: String? = null
     var EVENT_DESCRIPTION: String? = null
     var EVENT_IMAGE_URLS: MutableList<String> = mutableListOf()
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun isEventToday(): Boolean {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val currentDate = LocalDate.now().format(formatter)
+        return EVENT_DATE == currentDate
+    }
+
+
 }

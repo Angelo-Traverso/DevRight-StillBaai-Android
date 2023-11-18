@@ -2,11 +2,14 @@ package com.example.devright_stillbaaitourism
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
@@ -92,13 +95,17 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun populateEvents() {
         val linearLayoutEvents = findViewById<LinearLayout>(R.id.linearEventsDisplay)
 
         // Fetching Event List
         val eventList = GlobalClass.EventDataList
 
+        var eventcount: Int = 1
+
         for (event in eventList) {
+
             val eventView = layoutInflater.inflate(R.layout.events_home, null)
 
             eventView.findViewById<TextView>(R.id.eventName).text = event.EVENT_NAME ?: ""
@@ -106,7 +113,39 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
             eventView.findViewById<TextView>(R.id.eventLocation).text = event.EVENT_ADDRESS ?: ""
 
             linearLayoutEvents.addView(eventView)
+
+            if (event.isEventToday())
+            {
+                eventcount++
+                val eventView = layoutInflater.inflate(R.layout.events_home, null)
+
+                eventView.findViewById<TextView>(R.id.eventName).text = event.EVENT_NAME ?: ""
+                eventView.findViewById<TextView>(R.id.eventTime).text = event.EVENT_STARTTIME ?: ""
+                eventView.findViewById<TextView>(R.id.eventLocation).text = event.EVENT_ADDRESS ?: ""
+
+                linearLayoutEvents.addView(eventView)
+
+            }
         }
+
+        //set event image
+        val imageView = ImageView(this)
+
+        if (eventcount == 0) {
+            imageView.setImageResource(R.drawable.img_no_events)
+            imageView.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                650 // replace this with the desired height in pixels for the first image
+            )
+        } else {
+            imageView.setImageResource(R.drawable.img_event_end)
+            imageView.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                250 // replace this with the desired height in pixels for the second image
+            )
+        }
+        linearLayoutEvents.addView(imageView)
+
     }
 
 }
