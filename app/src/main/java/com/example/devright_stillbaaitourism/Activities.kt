@@ -27,15 +27,11 @@ class Activities : AppCompatActivity() {
         val etSearch = findViewById<EditText>(R.id.etSearch)
         val activityDataList = GlobalClass.ActivityDataList
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
-        btnSearch.setOnClickListener{
-            hideKeyboard()
-            etSearch.clearFocus()
-        }
+        val btnFilter = findViewById<ImageButton>(R.id.btnFilter)
 
-         listView = findViewById(R.id.activityListView)
 
-        // Instance of EatDataList
 
+        listView = findViewById(R.id.activityListView)
 
         activitiesAdapter = ActivityAdapter(this, activityDataList)
 
@@ -73,6 +69,46 @@ class Activities : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        /*
+        * Search click event
+        */
+        btnSearch.setOnClickListener{
+            hideKeyboard()
+            etSearch.clearFocus()
+        }
+
+        /*
+        * Filter to let users filter by category
+        * */
+        btnFilter.setOnClickListener {
+            val popupMenu = PopupMenu(this, btnFilter)
+
+            // Get unique categories from your businessDataList
+            val categories = activityDataList.map { it.ACTIVITY_CATEGORY_TYPE }.distinct()
+            popupMenu.menu.add("All")
+            // Create menu items dynamically
+            for (category in categories) {
+                popupMenu.menu.add(category)
+            }
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                // Handle menu item click
+                val selectedCategory = item.title.toString()
+                val filteredList = if (selectedCategory.equals("All", ignoreCase = true)) {
+                    activityDataList
+                } else {
+                    activityDataList.filter {
+                        it.ACTIVITY_CATEGORY_TYPE.equals(selectedCategory, ignoreCase = true)
+                    }
+                }
+                activitiesAdapter.updateData(filteredList)
+                true
+            }
+
+            popupMenu.show()
+        }
+
 
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

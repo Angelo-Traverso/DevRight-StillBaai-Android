@@ -69,7 +69,8 @@
         android:gravity="start"
         android:visibility="gone"
         android:text="Title"
-        app:drawableStartCompat="@drawable/mail" />
+        app:drawableStartCompat="@drawable/mail"
+        app:drawableTint="@color/black"/>
     <TextView
         android:id="@+id/tvWebsiteURL"
         android:layout_width="match_parent"
@@ -83,7 +84,8 @@
         android:layout_marginStart="16dp"
         android:drawablePadding="8dp"
         android:text="something@example.co.za"
-        app:drawableStartCompat="@drawable/website" />
+        app:drawableStartCompat="@drawable/website"
+        app:drawableTint="@color/black"/>
 
     <TextView
         android:id="@+id/tvAddress"
@@ -98,7 +100,8 @@
         android:gravity="start"
         android:visibility="gone"
         android:text="Title"
-        app:drawableStartCompat="@drawable/baseline_location_on_24" />
+        app:drawableStartCompat="@drawable/baseline_location_on_24"
+        app:drawableTint="@color/black"/>
 
     <TextView
         android:id="@+id/tvContactNumber"
@@ -114,7 +117,8 @@
         android:visibility="gone"
         android:layout_marginStart="16dp"
         tools:ignore="TouchTargetSizeCheck"
-        app:drawableStartCompat="@drawable/call" />
+        app:drawableStartCompat="@drawable/call"
+        app:drawableTint="@color/black"/>
 
     <View
         android:id="@+id/lineAboveDescription"

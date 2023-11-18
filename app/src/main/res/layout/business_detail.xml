@@ -68,7 +68,8 @@
         android:drawablePadding="8dp"
         android:gravity="start"
         android:visibility="gone"
-        android:text="Title" />
+        android:text="Title"
+        app:drawableTint="@color/black"/>
 
     <TextView
         android:id="@+id/tvWebsite"
@@ -83,8 +84,8 @@
         android:drawablePadding="8dp"
         android:gravity="start"
         android:visibility="gone"
-
-        android:text="Title" />
+        android:text="Title"
+        app:drawableTint="@color/black"/>
 
     <TextView
         android:id="@+id/tvAddress"
@@ -98,7 +99,8 @@
         android:drawableStart="@drawable/baseline_location_on_24"
         android:drawablePadding="8dp"
         android:gravity="start"
-        android:text="Title" />
+        android:text="Title"
+        app:drawableTint="@color/black"/>
 
     <View
         android:id="@+id/lineAboveDescription"

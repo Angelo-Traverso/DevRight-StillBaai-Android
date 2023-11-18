@@ -118,12 +118,13 @@
                     android:layout_below="@+id/tvEelTitle"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:drawableStart="@drawable/baseline_location_on_24"
                     android:drawablePadding="8dp"
                     android:gravity="start"
                     android:text="Event Date"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    app:drawableTint="@color/black"
+                    app:drawableStartCompat="@drawable/baseline_location_on_24" />
 
 
                 <TextView
@@ -133,13 +134,14 @@
                     android:layout_below="@id/tvEelAddress"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:drawableStart="@drawable/call"
                     android:drawablePadding="8dp"
                     android:autoLink="phone"
                     android:gravity="start"
                     android:text="Title"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    app:drawableTint="@color/black"
+                    app:drawableStartCompat="@drawable/call" />
 
                 <View
                     android:id="@+id/lineAboveDescription"

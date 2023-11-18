@@ -1,11 +1,8 @@
 package com.example.devright_stillbaaitourism
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,9 +15,9 @@ import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity(), DataFetchCallback {
 
     private lateinit var burgerMenu: BurgerMenu
-    private val stilBaaiUrl: String = "https://stilbaaitourism.co.za/"
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         burgerMenu = BurgerMenu(this, R.layout.activity_main)
@@ -41,7 +38,7 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
                 dbHandler.fetchEelData()
             }
 
-            dbHandler.getConnection();
+            dbHandler.getConnection()
         }else
         {
             populateEvents()
@@ -87,6 +84,7 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         }, initialDelay)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onDataFetched() {
         // This method will be called when data is fetched
         runOnUiThread {
@@ -104,48 +102,43 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
 
         var eventcount: Int = 1
 
+        // Track if there are any events today
+        var eventsToday = false
+
         for (event in eventList) {
+            if (event.isEventToday()) {
+                eventsToday = true
 
-            val eventView = layoutInflater.inflate(R.layout.events_home, null)
-
-            eventView.findViewById<TextView>(R.id.eventName).text = event.EVENT_NAME ?: ""
-            eventView.findViewById<TextView>(R.id.eventTime).text = event.EVENT_STARTTIME ?: ""
-            eventView.findViewById<TextView>(R.id.eventLocation).text = event.EVENT_ADDRESS ?: ""
-
-            linearLayoutEvents.addView(eventView)
-
-            if (event.isEventToday())
-            {
-                eventcount++
                 val eventView = layoutInflater.inflate(R.layout.events_home, null)
 
                 eventView.findViewById<TextView>(R.id.eventName).text = event.EVENT_NAME ?: ""
                 eventView.findViewById<TextView>(R.id.eventTime).text = event.EVENT_STARTTIME ?: ""
-                eventView.findViewById<TextView>(R.id.eventLocation).text = event.EVENT_ADDRESS ?: ""
+                eventView.findViewById<TextView>(R.id.eventLocation).text =
+                    event.EVENT_ADDRESS ?: ""
 
                 linearLayoutEvents.addView(eventView)
+            }
 
+            /// Set event image based on whether there are events today
+            val imageView = ImageView(this)
+            if (!eventsToday) {
+                imageView.setImageResource(R.drawable.img_no_events)
+                imageView.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    650 // replace this with the desired height in pixels for the image when there are no events today
+                )
+                linearLayoutEvents.addView(imageView)
+                return
+            } else {
+                imageView.setImageResource(R.drawable.img_event_end)
+                imageView.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    250 // replace this with the desired height in pixels for the image when there are events today
+                )
+                linearLayoutEvents.addView(imageView)
+                return
             }
         }
 
-        //set event image
-        val imageView = ImageView(this)
-
-        if (eventcount == 0) {
-            imageView.setImageResource(R.drawable.img_no_events)
-            imageView.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                650 // replace this with the desired height in pixels for the first image
-            )
-        } else {
-            imageView.setImageResource(R.drawable.img_event_end)
-            imageView.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                250 // replace this with the desired height in pixels for the second image
-            )
-        }
-        linearLayoutEvents.addView(imageView)
-
     }
-
 }

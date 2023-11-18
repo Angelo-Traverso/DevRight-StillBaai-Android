@@ -7,10 +7,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ListView
+import android.widget.*
+
 class Stay : AppCompatActivity() {
 
     private lateinit var listView: ListView
@@ -24,20 +22,11 @@ class Stay : AppCompatActivity() {
         burgerMenu.setupDrawer()
 
         val edtSearch = findViewById<EditText>(R.id.etSearch)
-
-        listView = findViewById(R.id.stayListView)
-
-
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
-        btnSearch.setOnClickListener{
-            hideKeyboard()
-            edtSearch.clearFocus()
-        }
-
+        val btnFilter = findViewById<ImageButton>(R.id.btnFilter)
         val stayDataList = GlobalClass.StayDataList
 
-
-
+        listView = findViewById(R.id.stayListView)
 
         stayAdapter = StayAdapter(this, stayDataList)
 
@@ -59,12 +48,11 @@ class Stay : AppCompatActivity() {
                 intent.putStringArrayListExtra("imageUrls", imageUrls)
                 intent.putExtra("email", selectedItem.STAY_EMAIL)
                 intent.putExtra("address", selectedItem.STAY_ADDRESS)
-                val contactNumber: String = if (!selectedItem.STAY_MOBILE_NUM.isNullOrBlank()){
+                val contactNumber: String = if (!selectedItem.STAY_MOBILE_NUM.isNullOrBlank()) {
 
-                    selectedItem.STAY_MOBILE_NUM?:""
-                }else
-                {
-                    selectedItem.STAY_TEL_NUM?:""
+                    selectedItem.STAY_MOBILE_NUM ?: ""
+                } else {
+                    selectedItem.STAY_TEL_NUM ?: ""
                 }
 
                 intent.putExtra("ContactNumber", contactNumber)
@@ -72,6 +60,48 @@ class Stay : AppCompatActivity() {
             }
         }
 
+        /*
+        * Search click event
+        */
+        btnSearch.setOnClickListener {
+            hideKeyboard()
+            edtSearch.clearFocus()
+        }
+
+        /*
+       * Filter to let users filter by category
+       */
+        btnFilter.setOnClickListener {
+            val popupMenu = PopupMenu(this, btnFilter)
+
+            // Get unique categories from your businessDataList
+            val categories = stayDataList.map { it.STAY_CATEGORY_TYPE }.distinct()
+            popupMenu.menu.add("All")
+            // Create menu items dynamically
+            for (category in categories) {
+                popupMenu.menu.add(category)
+            }
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                // Handle menu item click
+                val selectedCategory = item.title.toString()
+                val filteredList = if (selectedCategory.equals("All", ignoreCase = true)) {
+                    stayDataList
+                } else {
+                    stayDataList.filter {
+                        it.STAY_CATEGORY_TYPE.equals(selectedCategory, ignoreCase = true)
+                    }
+                }
+                stayAdapter.updateData(filteredList)
+                true
+            }
+
+            popupMenu.show()
+        }
+
+        /*
+        * Search filtering
+        */
         edtSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // Not needed for this implementation
@@ -93,6 +123,7 @@ class Stay : AppCompatActivity() {
             }
         })
     }
+
     private fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)

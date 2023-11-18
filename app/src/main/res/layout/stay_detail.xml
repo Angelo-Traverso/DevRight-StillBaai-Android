@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -13,12 +12,12 @@
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:backgroundTint="@color/white"
+        android:contentDescription="TODO"
         android:elevation="50dp"
+        app:backgroundTint="@color/white"
         app:fabCustomSize="30dp"
         app:srcCompat="@drawable/arrow_back_24px"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        android:contentDescription="TODO"/>
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -27,17 +26,17 @@
         android:layout_below="@+id/btnBack"
         android:layout_marginTop="16dp"
         app:cardBackgroundColor="@color/white"
-        app:cardElevation="20dp"
-        app:cardCornerRadius="5dp">
+        app:cardCornerRadius="5dp"
+        app:cardElevation="20dp">
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:iss_period="1000"
             app:iss_auto_cycle="false"
+            app:iss_corner_radius="5"
             app:iss_delay="1000"
-            app:iss_corner_radius="5" />
+            app:iss_period="1000" />
 
     </androidx.cardview.widget.CardView>
 
@@ -48,81 +47,82 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/cardView"
         android:layout_marginTop="16dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         android:gravity="start"
-        android:text="Title" />
+        android:text="Title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvWebsiteURL"
+        style="@style/TextViewLinkTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleTextView"
-        android:drawablePadding="8dp"
         android:layout_marginTop="16dp"
-        android:textSize="16sp"
         android:autoLink="web"
-        style="@style/TextViewLinkTheme"
-        android:visibility="gone"
+        android:drawablePadding="8dp"
         android:text="something@example.co.za"
-        android:drawableStart="@drawable/website"/>
-
-
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/website" />
 
     <TextView
-        android:id="@+id/tvContactNumber"
+        android:id="@+id/tvStayLocation"
+        style="@style/TextViewLinkTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvWebsiteURL"
         android:layout_marginTop="8dp"
-        android:autoLink="phone"
-        android:visibility="gone"
         android:drawablePadding="8dp"
-        style="@style/TextViewLinkTheme"
-        android:drawableStart="@drawable/call"
-        android:text="0825649853"
-        android:textSize="16sp"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/tvStayLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvContactNumber"
-        android:layout_marginTop="8dp"
-        android:drawablePadding="8dp"
-        android:visibility="gone"
-        style="@style/TextViewLinkTheme"
-        android:drawableStart="@drawable/baseline_location_on_24"
         android:text="Location"
         android:textSize="16sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:visibility="gone"
+        app:drawableTint="@color/black"
+        tools:ignore="TouchTargetSizeCheck"
+        app:drawableStartCompat="@drawable/baseline_location_on_24" />
 
     <TextView
         android:id="@+id/tvStayEmail"
+        style="@style/TextViewLinkTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvStayLocation"
         android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:drawablePadding="8dp"
-        style="@style/TextViewLinkTheme"
         android:autoLink="email"
-        android:drawableStart="@drawable/mail"
+        android:drawablePadding="8dp"
         android:text="Email"
         android:textSize="16sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:visibility="visible"
+        app:drawableTint="@color/black"
+        tools:ignore="TouchTargetSizeCheck"
+        app:drawableStartCompat="@drawable/mail" />
+
+    <TextView
+        android:id="@+id/tvContactNumber"
+        style="@style/TextViewLinkTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvStayEmail"
+        android:layout_marginTop="8dp"
+        android:autoLink="phone"
+        android:drawablePadding="8dp"
+        android:text="0825649853"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:drawableTint="@color/black"
+        tools:ignore="TouchTargetSizeCheck"
+        app:drawableStartCompat="@drawable/call" />
 
     <View
         android:id="@+id/lineAboveDescription"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/tvStayEmail"
-        android:alpha="0.2"
+        android:layout_below="@+id/tvContactNumber"
         android:layout_marginTop="8dp"
-        android:background="@color/black"
-        />
+        android:alpha="0.2"
+        android:background="@color/black" />
 
     <TextView
         android:id="@+id/tvDescriptionHeading"
@@ -130,24 +130,25 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lineAboveDescription"
         android:layout_marginTop="8dp"
-        android:textStyle="bold"
+        android:text="Description"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="Description" />
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tvDescriptionHeading">
-    <TextView
-        android:id="@+id/descriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_marginTop="8dp"
-        android:paddingBottom="16dp"
-        android:textSize="16sp"
-        android:text="Stuff about our shop" />
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="16dp"
+            android:text="Stuff about our shop"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
     </ScrollView>
 
 </RelativeLayout>
