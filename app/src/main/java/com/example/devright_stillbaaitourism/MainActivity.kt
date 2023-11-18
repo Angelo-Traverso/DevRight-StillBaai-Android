@@ -3,6 +3,7 @@ package com.example.devright_stillbaaitourism
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val stilBaaiClick = findViewById<TextView>(R.id.btnStil)
         val jongensClick = findViewById<TextView>(R.id.btnJong)
         val melkClick = findViewById<TextView>(R.id.btnMelk)
+
 
         stilBaaiClick.setOnClickListener{
             val uri = Uri.parse(stilBaaiUrl)
@@ -67,6 +69,31 @@ class MainActivity : AppCompatActivity() {
 
         // Connect the TabLayout with the ViewPager for navigation
         tabLayout.setupWithViewPager(viewPager)
+        val viewPagerr: ViewPager = findViewById(R.id.viewPager)
+
+        val handler = Handler()
+
+            // Set the initial delay and duration
+        val initialDelay = 4000L  // 2 seconds delay before auto-scroll starts
+        val scrollDuration = 6000L // 3 seconds duration for each scroll
+
+        // Start auto-scrolling when the activity is created
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                // Get the current item index
+                var currentItem = viewPagerr.currentItem
+
+                // Calculate the next item index (circular scrolling)
+                currentItem = (currentItem + 1) % adapter.getCount()
+
+                // Scroll to the next item with smooth scroll
+                viewPagerr.setCurrentItem(currentItem, true)
+
+                // Schedule the next auto-scroll after the specified duration
+                handler.postDelayed(this, scrollDuration)
+            }
+        }, initialDelay)
+
 
         for (eventFragment in eventFragments) {
             val eventView = layoutInflater.inflate(R.layout.events_home, null)
@@ -98,4 +125,5 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 }
