@@ -44,52 +44,46 @@
         android:layout_below="@+id/eventName"
         android:textSize="14sp"
         android:drawablePadding="4dp"
-        android:drawableTint="@color/black"
         android:fontFamily="@font/roboto_regular"
         android:textColor="@color/black"
-        android:drawableStart="@drawable/clock_24px"
         android:layout_toEndOf="@+id/cardViewHome"
-        android:text="18:00" />
+        android:text="18:00"
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/clock_24px" />
 
 
     <!--Event Location-->
     <TextView
         android:id="@+id/eventLocation"
-        android:layout_width="180dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/eventTime"
         android:layout_toEndOf="@+id/cardViewHome"
         android:textSize="14sp"
         android:drawablePadding="4dp"
-        android:fontFamily="@font/roboto_regular"
-        android:drawableTint="@color/black"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
         android:ellipsize="end"
+        android:fontFamily="@font/roboto_regular"
         android:textColor="@color/black"
-        android:drawableStart="@drawable/location"
-        android:text="Backyard, 2440" />
+        android:text="Backyard, 2440"
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/location" />
 
-    <View
-        android:id="@+id/viewLine"
-        android:layout_width="2dp"
-        android:layout_height="80dp"
-        android:layout_toStartOf="@+id/btnGoToEvent"
-        android:layout_marginEnd="16dp"
-        android:background="@color/black"
-        android:alpha="0.2"
-        android:layout_marginTop="8dp"
-        />
+
 
     <!--Save Event-->
     <Button
         android:id="@+id/btnGoToEvent"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="60dp"
         android:backgroundTint="@android:color/transparent"
         android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
         android:layout_centerVertical="true"
         android:textColor="@color/black"
-        android:text="Go" />
+        android:textSize="12sp"
+        android:text="View" />
 
 
 </RelativeLayout>

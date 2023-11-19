@@ -61,7 +61,7 @@
                     android:shadowDx="1"
                     android:shadowDy="10"
                     android:shadowRadius="10"
-                    android:text="Eels Feeding"
+                    android:text="Eel Feeding"
                     android:textColor="@color/white"
                     android:textSize="45sp"
                     android:textStyle="bold" />
@@ -136,6 +136,7 @@
                     android:layout_weight="1"
                     android:drawablePadding="8dp"
                     android:autoLink="phone"
+                    style="@style/TextViewLinkTheme"
                     android:gravity="start"
                     android:text="Title"
                     android:textSize="16sp"
