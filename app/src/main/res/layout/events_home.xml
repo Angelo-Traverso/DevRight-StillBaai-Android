@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewHome"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        >
+    <ImageView
+        android:id="@+id/imgEvent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/eel_event_image" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Event name -->
+    <TextView
+        android:id="@+id/eventName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
+        android:layout_toEndOf="@+id/cardViewHome"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Eel Feeding" />
+
+
+    <!--Event Time-->
+    <TextView
+        android:id="@+id/eventTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eventName"
+        android:textSize="14sp"
+        android:drawablePadding="4dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        android:layout_toEndOf="@+id/cardViewHome"
+        android:text="18:00"
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/clock_24px" />
+
+
+    <!--Event Location-->
+    <TextView
+        android:id="@+id/eventLocation"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eventTime"
+        android:layout_toEndOf="@+id/cardViewHome"
+        android:textSize="14sp"
+        android:drawablePadding="4dp"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        android:text="Backyard, 2440"
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/location" />
+
+
+
+    <!--Save Event-->
+    <Button
+        android:id="@+id/btnGoToEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:text="View" />
+
+
+</RelativeLayout>

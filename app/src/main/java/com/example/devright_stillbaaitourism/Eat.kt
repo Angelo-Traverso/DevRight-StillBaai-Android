@@ -1,112 +1,106 @@
 package com.example.devright_stillbaaitourism
 
+import CustomAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.LinearLayout
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.example.devright_stillbaaitourism.databinding.ActivityEatBinding
-import com.google.android.material.navigation.NavigationView
+import android.widget.ListView
 
-class Eat : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+class Eat : AppCompatActivity() {
 
-    private lateinit var binding: ActivityEatBinding
+    private lateinit var burgerMenu: BurgerMenu
+
+    private lateinit var listview: ListView
+
+    private lateinit var customAdapter: CustomAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEatBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_eat)
+        burgerMenu = BurgerMenu(this, R.layout.activity_eat)
+        burgerMenu.setupDrawer()
 
 
-        val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val edtSearch = findViewById<EditText>(R.id.etSearchEat)
+        val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
+        // Instance of EatDataList
+        val eatDataList = GlobalClass.EatDataList
 
-        // Open drawer on menu button clicked
-        menuBtn.setOnClickListener(){
-            drawerLayout.open()
-        }
-        ///--------------------------------------------------------------------//
+        listview = findViewById(R.id.listView)
 
-        binding.navView.bringToFront()
-        binding.navView.setNavigationItemSelectedListener(this)
+        // Create a custom adapter with the EatData list
+        customAdapter = CustomAdapter(this, eatDataList)
 
-        ///--------------------------------------------------------------------///
+        // Set the adapter for the ListView
+        listview.adapter = customAdapter
 
-        // Temporary card display
-        val linearLayout = findViewById<LinearLayout>(R.id.linearEatListings);
-        linearLayout.removeAllViews()
+        // Item click listener for the ListView
+        listview.setOnItemClickListener { _, _, position, _ ->
+            if (position >= 0 && position < eatDataList.size) {
+                val selectedItem = eatDataList[position]
 
-        for (i in 1..5)
-        {
-            val customCard = custom_card(this)
+                // Creating an Intent to open the DetailActivity
+                val intent = Intent(this@Eat, DetailActivity::class.java)
+                val imageUrls = ArrayList(selectedItem.EAT_IMAGE_URLS)
+                // Passing data to the DetailActivity using Intent extras
+                intent.putExtra("title", selectedItem.EAT_NAME)
+                intent.putExtra("description", selectedItem.EAT_DESCRIPTION)
+                intent.putExtra("imageUrl", selectedItem.EAT_IMAGE_URLS[0])
+                intent.putExtra("WebsiteURL", selectedItem.EAT_WEBSITE)
+                intent.putExtra("address", selectedItem.EAT_ADDRESS)
+                //Just added
+                intent.putExtra("email", selectedItem.EAT_EMAIL)
+                intent.putStringArrayListExtra("imageUrls", imageUrls)
 
-            linearLayout.addView(customCard)
+                // Use either mobile number or tell number, whichever is available
+                val contactNumber: String = if (!selectedItem.EAT_MOBILE_NUM.isNullOrBlank()) {
 
-        }
+                    selectedItem.EAT_MOBILE_NUM ?: ""
+                } else {
+                    selectedItem.EAT_TEL_NUM ?: ""
+                }
 
-    }
+                intent.putExtra("ContactNumber", contactNumber)
 
-    //............................................................................................//
-
-    /// It will allow the user to navigate through pages.
-    override fun onNavigationItemSelected(item: MenuItem): Boolean
-    {
-        // When the activity pages are ready, uncomment the below code
-        when(item.itemId)
-        {
-            /*R.id.nav_home -> {
-                val intent = Intent(applicationContext, Home::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+            }
+        }
 
+
+        /*
+        * Search click event
+        */
+        btnSearch.setOnClickListener{
+            GlobalClass.hideUserKeyboard(this, edtSearch , edtSearch)
+        }
+
+        /*
+        * Filter to let users filter by category
+        * */
+        edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed for this implementation
             }
 
-            R.id.nav_stay -> {
-                val intent = Intent(applicationContext, Stay::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed for this implementation
             }
 
-            R.id.nav_eat -> {
-                val intent = Intent(applicationContext, Eat::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+            override fun afterTextChanged(s: Editable?) {
+                // Filter activityDataList based on the search query
+                val searchText = s.toString().toLowerCase()
+                val filteredList = eatDataList.filter {
+                    it.EAT_NAME.toLowerCase().contains(searchText)
+                }
 
-            }*/
-        }
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
-        // return true marks the item as selected
-        return true
+                // Update the adapter with the filtered list
+                customAdapter.updateData(filteredList)
+
+            }
+        })
     }
-
-    //............................................................................................//
-
-    /// Opens/closses the navigation drawer.
-    override fun onBackPressed()
-    {
-        //if the drawer is open, close it
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        }
-        else
-        {
-            //otherwise, let the super class handle it
-            super.onBackPressed()
-        }
-    }
-
-    //............................................................................................//
-
-    override fun onClick(v: View?) {
-        /*TODO("Not yet implemented")*/
-    }
-
-    //............................................................................................//
-
 }

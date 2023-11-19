@@ -11,7 +11,13 @@
     <color name="light_blue_600">#FF039BE5</color>
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
+    <color name="linkColor">#0C98E8</color>
+    <color name="stilbaaiBlue">#16c6f0</color>
+    <color name="stilbaaiBlue2">#1692F0</color>
 
+
+    <!--EDIT TEXTS-->
+<color name="editTextBlue">#007bff</color>
 
     <!--custom_card-->
     <color name="placeName">#404040</color>

@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
 android {
     namespace 'com.example.devright_stillbaaitourism'
     compileSdk 33
@@ -16,6 +19,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Set API keys in BuildConfig
+        buildConfigField("String", "STIL_USERNAME", "\"${properties.getProperty("STIL_USERNAME")}\"")
+        buildConfigField("String", "STIL_PASSWORD", "\"${properties.getProperty("STIL_PASSWORD")}\"")
     }
 
     buildTypes {
@@ -38,10 +45,36 @@ android {
 
 dependencies {
 
+    // Carousal
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+    // Transition
+    implementation 'androidx.transition:transition:1.4.1'
+    // Image retrieval
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    //SQLDroid for JDBC
+    implementation 'org.sqldroid:sqldroid:1.0.3'
+    implementation 'mysql:mysql-connector-java:5.1.49'
+    //HTTP3
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    //Android Core implementations
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //material
+    implementation 'com.google.android.material:material:1.9.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+    //lifecycle
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha03'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

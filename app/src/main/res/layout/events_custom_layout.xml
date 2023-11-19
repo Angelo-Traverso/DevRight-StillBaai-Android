@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_margin="8dp"
+    android:elevation="12dp"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewEventImage"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <ImageView
+                android:id="@+id/eventImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/eel_event_image" />
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/relContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/cardViewEventImage">
+
+            <TextView
+                android:id="@+id/eventNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:gravity="start"
+                android:text="Event Name"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/timeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="false"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:layout_marginStart="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="6dp"
+                android:foregroundGravity="right"
+                android:drawablePadding="8dp"
+                android:text="Time"
+                app:drawableStartCompat="@drawable/baseline_access_time_24" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relContent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/cardViewEventImage"
+            android:layout_toRightOf="@id/cardViewEventImage"
+            android:gravity="bottom|end">
+
+            <Button
+                android:id="@+id/addToCalendarButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1.2"
+                android:backgroundTint="#DCDCDC"
+                android:text="Add"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:drawableLeftCompat="@drawable/baseline_calendar_month_24"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/btnViewEventDetails"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:backgroundTint="#DCDCDC"
+                android:text="View Event"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:drawableLeftCompat="@drawable/baseline_search_24"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

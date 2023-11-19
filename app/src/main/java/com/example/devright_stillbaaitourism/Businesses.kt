@@ -1,112 +1,146 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.example.devright_stillbaaitourism.databinding.ActivityBusinessesBinding
-import com.google.android.material.navigation.NavigationView
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.*
 
-class Businesses : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+class Businesses : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBusinessesBinding
+    private lateinit var listView: ListView
+    private lateinit var businessAdapter: BusinessAdapter
+    private lateinit var burgerMenu: BurgerMenu
 
+    // Store the filtered list at the class level
+    private var filteredBusinessList: List<BusinessData> = emptyList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBusinessesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        burgerMenu = BurgerMenu(this, R.layout.activity_businesses)
+        burgerMenu.setupDrawer()
 
+        val businessDataList = GlobalClass.BusinessDataList
+        val btnFilter = findViewById<ImageButton>(R.id.btnFilter)
+        val edtSearch = findViewById<EditText>(R.id.etSearch)
+        val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
 
-        val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        listView = findViewById(R.id.businessListView)
 
-        // Open drawer on menu button clicked
-        menuBtn.setOnClickListener(){
-            drawerLayout.open()
-        }
-        ///--------------------------------------------------------------------//
+        businessAdapter = BusinessAdapter(this, businessDataList)
 
-        binding.navView.bringToFront()
-        binding.navView.setNavigationItemSelectedListener(this)
+        // Initially, use the unfiltered list
+        filteredBusinessList = businessDataList
+        listView.adapter = businessAdapter
 
-        ///--------------------------------------------------------------------///
+        /*
+     * List view on click listener
+     * */
+        listView.setOnItemClickListener { _, _, position, _ ->
+            if (position >= 0 && position < filteredBusinessList.size) {
+                val selectedItem = filteredBusinessList[position]
 
-        // Temporary card display
-        val linearLayout = findViewById<LinearLayout>(R.id.linearBusinessesListings);
-        linearLayout.removeAllViews()
+                // Creating an Intent to open the DetailActivity
+                val intent = Intent(this@Businesses, BusinessDetail::class.java)
+                val imageUrls = ArrayList(selectedItem.BUSINESS_IMAGE_URLS)
 
-        for (i in 1..5)
-        {
-            val customCard = custom_card(this)
+                // Passing data to the DetailActivity using Intent extras
+                intent.putExtra("BusinessName", selectedItem.BUSINESS_NAME)
+                intent.putExtra("Description", selectedItem.BUSINESS_DESCRIPTION)
+                intent.putExtra("mail", selectedItem.BUSINESS_EMAIL)
+                intent.putExtra("Website", selectedItem.BUSINESS_WEBSITE)
+                intent.putExtra("address", selectedItem.BUSINESS_ADDRESS)
+                intent.putStringArrayListExtra("imageUrls", imageUrls)
+                val contactNumber: String = if (!selectedItem.BUSINESS_MOBILE_NUM.isNullOrBlank()){
 
-            linearLayout.addView(customCard)
+                    selectedItem.BUSINESS_MOBILE_NUM?:""
+                }else
+                {
+                    selectedItem.BUSINESS_TELL_NUM?:""
+                }
 
-        }
+                intent.putExtra("ContactNumber", contactNumber)
 
-    }
+                // ADD CONTACT DETAILS
 
-    //............................................................................................//
-
-    /// It will allow the user to navigate through pages.
-    override fun onNavigationItemSelected(item: MenuItem): Boolean
-    {
-        // When the activity pages are ready, uncomment the below code
-        when(item.itemId)
-        {
-            /*R.id.nav_home -> {
-                val intent = Intent(applicationContext, Home::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+            }
+        }
 
+        /*
+        * Search click event
+        */
+        btnSearch.setOnClickListener {
+            GlobalClass.hideUserKeyboard(this, edtSearch, edtSearch)
+        }
+
+        /*
+        * Filter to let users filter by category
+        * */
+        btnFilter.setOnClickListener {
+            val popupMenu = PopupMenu(this, btnFilter)
+
+            // Get unique categories from your businessDataList
+            val categories = businessDataList.map { it.BUSINESS_CATEGORY_TYPE }.distinct()
+            popupMenu.menu.add("All")
+            // Create menu items dynamically
+            for (category in categories) {
+                popupMenu.menu.add(category)
             }
 
-            R.id.nav_stay -> {
-                val intent = Intent(applicationContext, Stay::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
+            /*
+            * popupMenu on item select listener, this will filter the list to match the user required category
+            * */
+            popupMenu.setOnMenuItemClickListener { item ->
+                // Handle menu item click
+                val selectedCategory = item.title.toString()
+                filteredBusinessList = if (selectedCategory.equals("All", ignoreCase = true)) {
+                    businessDataList
+                } else {
+                    businessDataList.filter {
+                        it.BUSINESS_CATEGORY_TYPE.equals(selectedCategory, ignoreCase = true)
+                    }
+                }
+                businessAdapter.updateData(filteredBusinessList)
+                true
             }
 
-            R.id.nav_eat -> {
-                val intent = Intent(applicationContext, Eat::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }*/
+            popupMenu.show()
         }
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
-        // return true marks the item as selected
-        return true
-    }
 
-    //............................................................................................//
+        /*
+         * Filter to let users filter by category
+         * */
+        btnFilter.setOnClickListener {
+            val popupMenu = PopupMenu(this, btnFilter)
 
-    /// Opens/closses the navigation drawer.
-    override fun onBackPressed()
-    {
-        //if the drawer is open, close it
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            // Get unique categories from your businessDataList
+            val categories = businessDataList.map { it.BUSINESS_CATEGORY_TYPE }.distinct()
+            popupMenu.menu.add("All")
+            // Create menu items dynamically
+            for (category in categories) {
+                popupMenu.menu.add(category)
+            }
+
+            /*
+            * popupMenu on item select listener, this will filter the list to match the user required category
+            * */
+            popupMenu.setOnMenuItemClickListener { item ->
+                // Handle menu item click
+                val selectedCategory = item.title.toString()
+                filteredBusinessList = if (selectedCategory.equals("All", ignoreCase = true)) {
+                    businessDataList
+                } else {
+                    businessDataList.filter {
+                        it.BUSINESS_CATEGORY_TYPE.equals(selectedCategory, ignoreCase = true)
+                    }
+                }
+                businessAdapter.updateData(filteredBusinessList)
+                true
+            }
+
+            popupMenu.show()
         }
-        else
-        {
-            //otherwise, let the super class handle it
-            super.onBackPressed()
-        }
     }
-
     //............................................................................................//
-
-    override fun onClick(v: View?) {
-        /*TODO("Not yet implemented")*/
-    }
-
-    //............................................................................................//
-
 }

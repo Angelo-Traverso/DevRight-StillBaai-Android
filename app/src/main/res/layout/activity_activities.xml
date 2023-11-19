@@ -7,10 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activities">
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <!--Need to alter the margin values (currently hardcoded)-->
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
@@ -20,20 +22,24 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/drawer_header_layout"
             app:menu="@menu/drawer_menu" />
+
         <RelativeLayout
             android:id="@+id/relDrawerLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <FrameLayout
                 android:id="@+id/frameParentActivities"
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
+
                 <ImageView
                     android:id="@+id/imgActivities"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/activities_image_background"/>
+                    android:src="@drawable/activities_image_background" />
+
                 <ImageButton
                     android:id="@+id/btnMenu"
                     android:layout_width="wrap_content"
@@ -43,54 +49,104 @@
                     android:minWidth="32dp"
                     android:src="@drawable/baseline_menu_24"
                     tools:ignore="SpeakableTextPresentCheck" />
+
                 <TextView
                     android:id="@+id/tvActivitiesHeading"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="48dp"
                     android:gravity="center|start"
                     android:shadowColor="@color/black"
                     android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="20"
+                    android:shadowDy="10"
+                    android:shadowRadius="10"
                     android:text="@string/activitiesHeading"
                     android:textColor="@color/white"
                     android:textSize="45sp"
                     android:textStyle="bold" />
             </FrameLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/frameParentActivities">
-                <EditText
-                    android:id="@+id/etSearch"
+
+                <LinearLayout
+                    android:id="@+id/linearFilterSearch"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="25dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="25dp"
                     android:layout_marginBottom="16dp"
-                    android:alpha="0.6"
-                    android:gravity="center"
-                    android:hint="@string/searchBar"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/searchBarHint"
-                    android:textStyle="italic"
-                    android:autofillHints="" />
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/etSearch"
-                    tools:ignore="SpeakableTextPresentCheck">
-                    <LinearLayout
-                        android:id="@+id/linearActivitiesListings"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnFilter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/Experience"
+                        android:minWidth="48dp"
+                        android:minHeight="48dp"
+                        android:src="@drawable/baseline_filter_list_24" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardViewSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/custom_corner_radius_stay"
-                        android:orientation="vertical">
-                    </LinearLayout>
-                </ScrollView>
+                        android:layout_marginEnd="8dp"
+                        android:padding="8dp">
+
+                        <ImageButton
+                            android:id="@+id/btnSearch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/About"
+                            android:src="@drawable/baseline_search_24"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <EditText
+                            android:id="@+id/etSearch"
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@+id/btnSearch"
+                            android:autofillHints=""
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:layout_marginEnd="8dp"
+                            android:hint="@string/searchBar"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/searchBarHint"
+                            android:theme="@style/EditTextTheme"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/activityListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/linearFilterSearch"
+                    android:layout_centerInParent="true"
+                    android:dividerHeight="1dp" />
             </RelativeLayout>
         </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>

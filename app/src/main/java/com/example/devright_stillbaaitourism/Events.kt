@@ -1,112 +1,137 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Intent
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import android.widget.ImageButton
+import android.provider.CalendarContract
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.example.devright_stillbaaitourism.databinding.ActivityEventsBinding
-import com.google.android.material.navigation.NavigationView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class Events : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
-
-    private lateinit var binding: ActivityEventsBinding
+class Events : AppCompatActivity() {
+    private lateinit var burgerMenu: BurgerMenu
+    private lateinit var eventList: List<EventData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEventsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        burgerMenu = BurgerMenu(this, R.layout.activity_events)
+        burgerMenu.setupDrawer()
+
+        eventList = GlobalClass.EventDataList
+
+        val linearLayout: LinearLayout = findViewById(R.id.linearEventsListings)
+        var currentDate: String? = null
 
 
-        val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        // Sort the eventList based on the event dates
+        val sortedEventList = eventList.sortedBy { it.EVENT_DATE }
 
-        // Open drawer on menu button clicked
-        menuBtn.setOnClickListener(){
-            drawerLayout.open()
-        }
-        ///--------------------------------------------------------------------//
+        // Loop through the sorted event list
+        for (event in sortedEventList) {
+            // Check if a new date is encountered
+            if (currentDate != event.EVENT_DATE) {
+                // Add a heading for the new date dynamically
+                val dateHeadingTextView = TextView(this)
+                dateHeadingTextView.text = formatDate(event.EVENT_DATE.toString())
+                dateHeadingTextView.textSize = 24f
+                dateHeadingTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
+                dateHeadingTextView.setTypeface(null, Typeface.BOLD)
+                dateHeadingTextView.setPadding(0, 16, 0, 8)
+                linearLayout.addView(dateHeadingTextView)
+                currentDate = event.EVENT_DATE
 
-        binding.navView.bringToFront()
-        binding.navView.setNavigationItemSelectedListener(this)
+                // Iterate through the events with the current date and display them
+                for (eventForDate in sortedEventList.filter { it.EVENT_DATE == currentDate }) {
+                    val eventView = layoutInflater.inflate(R.layout.events_custom_layout, null)
 
-        ///--------------------------------------------------------------------///
+                    // Set data for each event (assuming you have setter methods in your layout)
+                    val eventNameTextView: TextView = eventView.findViewById(R.id.eventNameTextView)
+                    val timeTextView: TextView = eventView.findViewById(R.id.timeTextView)
+                    //val locationTextView: TextView = eventView.findViewById(R.id.locationTextView)
+                    val eventImageView: ImageView = eventView.findViewById(R.id.eventImageView)
+                    val addToCalendarButton: Button = eventView.findViewById(R.id.addToCalendarButton)
+                    val viewEventDetails: Button = eventView.findViewById(R.id.btnViewEventDetails)
 
-        // Temporary card display
-        val linearLayout = findViewById<LinearLayout>(R.id.linearEventsListings);
-        linearLayout.removeAllViews()
+                    eventNameTextView.text = eventForDate.EVENT_NAME
 
-        for (i in 1..5)
-        {
-            val customCard = custom_card(this)
+                    val defaultImageResource = R.drawable.no_image
 
-            linearLayout.addView(customCard)
+                    // Loading images into imageView
+                    if (eventForDate.EVENT_IMAGE_URLS.isNotEmpty()) {
+                        val imageUrl = eventForDate.EVENT_IMAGE_URLS[0]
+                        Picasso.get().load(imageUrl).into(eventImageView)
+                    } else {
+                        eventImageView.setImageResource(defaultImageResource)
+                    }
 
-        }
+                    timeTextView.text = eventForDate.EVENT_STARTTIME
 
-    }
+                    // Set click listener for "Add to Calendar" button
+                    addToCalendarButton.setOnClickListener {
+                        val startTimeMillis = System.currentTimeMillis()
+                        val endTimeMillis = startTimeMillis + 2 * 60 * 60 * 1000
 
-    //............................................................................................//
+                        val intent = Intent(Intent.ACTION_INSERT)
+                            .setData(CalendarContract.Events.CONTENT_URI)
+                            .putExtra(CalendarContract.Events.TITLE, eventForDate.EVENT_NAME)
+                            .putExtra(CalendarContract.Events.EVENT_LOCATION, eventForDate.EVENT_ADDRESS)
+                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventForDate.EVENT_STARTTIME)
+                            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTimeMillis)
+                            .putExtra(CalendarContract.Events.ALL_DAY, false)
+                            .putExtra(CalendarContract.Events.DESCRIPTION, "Reminder")
 
-    /// It will allow the user to navigate through pages.
-    override fun onNavigationItemSelected(item: MenuItem): Boolean
-    {
-        // When the activity pages are ready, uncomment the below code
-        when(item.itemId)
-        {
-            /*R.id.nav_home -> {
-                val intent = Intent(applicationContext, Home::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                        startActivity(intent)
+                    }
 
+                    viewEventDetails.setOnClickListener {
+                        val intent = Intent(this@Events, EventDetail::class.java)
+
+                        val imageUrls = ArrayList(eventForDate.EVENT_IMAGE_URLS)
+
+                        intent.putExtra("eventName", eventForDate.EVENT_NAME)
+                        intent.putExtra("eventNum", eventForDate.EVENT_NUM ?: "")
+                        intent.putExtra("eventEmail", eventForDate.EVENT_EMAIL ?: "")
+                        intent.putExtra("eventWebsite", eventForDate.EVENT_WEBSITE ?: "")
+                        intent.putExtra("eventAddress", eventForDate.EVENT_ADDRESS)
+                        intent.putExtra("eventPerson", eventForDate.EVENT_PERSON ?: "")
+                        intent.putExtra("eventDate", eventForDate.EVENT_DATE ?: "")
+                        intent.putExtra("eventStartTime", eventForDate.EVENT_STARTTIME ?: "")
+                        intent.putExtra("eventDuration", eventForDate.EVENT_DURATION ?: "")
+                        intent.putExtra("eventDescription", eventForDate.EVENT_DESCRIPTION ?: "")
+                        intent.putStringArrayListExtra("eventImageUrls", imageUrls)
+
+                        startActivity(intent)
+                    }
+
+                    val layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+                    layoutParams.setMargins(0, 0, 0, 16)
+                    eventView.layoutParams = layoutParams
+                    // Add the inflated layout to your LinearLayout
+                    linearLayout.addView(eventView)
+                }
             }
-
-            R.id.nav_stay -> {
-                val intent = Intent(applicationContext, Stay::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }
-
-            R.id.nav_eat -> {
-                val intent = Intent(applicationContext, Eat::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }*/
-        }
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
-        // return true marks the item as selected
-        return true
-    }
-
-    //............................................................................................//
-
-    /// Opens/closses the navigation drawer.
-    override fun onBackPressed()
-    {
-        //if the drawer is open, close it
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        }
-        else
-        {
-            //otherwise, let the super class handle it
-            super.onBackPressed()
         }
     }
 
-    //............................................................................................//
+    private fun formatDate(inputDate: String): String {
+        // Parse the input date string
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = inputFormat.parse(inputDate)
 
-    override fun onClick(v: View?) {
-        /*TODO("Not yet implemented")*/
+        // Format the date in the desired output format
+        val outputFormat = SimpleDateFormat("EEEE, d MMMM", Locale.getDefault())
+        return outputFormat.format(date ?: Date())
     }
-
     //............................................................................................//
-
 }

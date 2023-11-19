@@ -3,7 +3,9 @@
 
 
     <!--Home-->
-    <string name="HomeHeading">Home</string>
+    <string name="HomeHeading">Welcome to Stilbaai</string>
+    <string name="HomeHeadingSubHeading">A TASTE OF EDEN IN THE GARDEN ROUTE</string>
+
     <string name="About">About</string>
     <string name="Stilbaai">Stilbaai</string>
     <string name="Jongensfontein">Jongensfontein</string>
@@ -19,8 +21,18 @@
     <string name="stay">Stay</string>
     <string name="eat">Eat</string>
     <string name="Experience">Experience</string>
+
     <!--Eat-->
     <string name="eatHeading">Eat</string>
+
+    <!--Contact Us-->
+    <string name="contactUsHeading">Contact Us</string>
+
+    <!--Eel feeding-->
+    <string name="eelFeeding">Eel Feeding</string>
+
+    <!--Eel-->
+    <string name="eelsHeading">Eels</string>
     <!--Activities-->
     <string name="activitiesHeading">Activities</string>
     <!--Events-->
@@ -29,6 +41,8 @@
     <string name="BusinessesHeading">Businesses</string>
     <!--Menu open and close-->
     <string name="navigation_drawer_open">Open Navigation</string>
-    <string name="navigation_drawer_close">Close Navigation</string>Experience
+    <string name="navigation_drawer_close">Close Navigation</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>Experience
 
 </resources>

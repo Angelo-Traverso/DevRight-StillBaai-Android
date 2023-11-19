@@ -11,6 +11,7 @@
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <!--Need to alter the margin values (currently hardcoded)-->
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
@@ -20,6 +21,7 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/drawer_header_layout"
             app:menu="@menu/drawer_menu"/>
+
         <RelativeLayout
             android:id="@+id/relDrawerLayout"
             android:layout_width="match_parent"
@@ -46,13 +48,13 @@
                 <TextView
                     android:id="@+id/tvEventsHeading"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="48dp"
                     android:gravity="center|start"
                     android:shadowColor="@color/black"
                     android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="20"
+                    android:shadowDy="10"
+                    android:shadowRadius="10"
                     android:text="@string/eventsHeading"
                     android:textColor="@color/white"
                     android:textSize="45sp"
@@ -62,26 +64,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/frameParentEvents">
-                <EditText
-                    android:id="@+id/etSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="16dp"
-                    android:alpha="0.6"
-                    android:gravity="center"
-                    android:hint="@string/searchBar"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/searchBarHint"
-                    android:textStyle="italic"
-                    android:autofillHints="" />
+
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/etSearch"
                     tools:ignore="SpeakableTextPresentCheck">
                     <LinearLayout
                         android:id="@+id/linearEventsListings"
