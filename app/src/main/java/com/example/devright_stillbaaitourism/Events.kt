@@ -40,10 +40,10 @@ class Events : AppCompatActivity() {
                 // Add a heading for the new date dynamically
                 val dateHeadingTextView = TextView(this)
                 dateHeadingTextView.text = formatDate(event.EVENT_DATE.toString())
-                dateHeadingTextView.textSize = 24f
+                dateHeadingTextView.textSize = 20f
                 dateHeadingTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
                 dateHeadingTextView.setTypeface(null, Typeface.BOLD)
-                dateHeadingTextView.setPadding(0, 16, 0, 8)
+                dateHeadingTextView.setPadding(20, 20, 0, 8)
                 linearLayout.addView(dateHeadingTextView)
                 currentDate = event.EVENT_DATE
 
@@ -115,7 +115,7 @@ class Events : AppCompatActivity() {
                         LinearLayout.LayoutParams.WRAP_CONTENT
                     )
 
-                    layoutParams.setMargins(0, 0, 0, 16)
+                    layoutParams.setMargins(0, 7, 0, 16)
                     eventView.layoutParams = layoutParams
                     // Add the inflated layout to your LinearLayout
                     linearLayout.addView(eventView)

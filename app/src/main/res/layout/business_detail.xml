@@ -127,7 +127,7 @@
         android:gravity="start"
         android:text="Contact Number"
         app:drawableTint="@color/black"
-        app:drawableStartCompat="@drawable/baseline_location_on_24" />
+        app:drawableStartCompat="@drawable/call" />
 
     <View
         android:id="@+id/lineAboveDescription"
