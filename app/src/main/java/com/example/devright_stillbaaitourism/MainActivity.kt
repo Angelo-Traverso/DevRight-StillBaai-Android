@@ -1,5 +1,6 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import kotlin.concurrent.thread
@@ -121,6 +123,26 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
                 eventView.findViewById<TextView>(R.id.eventLocation).text =
                     event.EVENT_ADDRESS ?: ""
                 val imageDisplay = eventView.findViewById<ImageView>(R.id.imgEvent)
+                val btnGoToEvent = eventView.findViewById<MaterialButton>(R.id.btnGoToEvent)
+
+                btnGoToEvent.setOnClickListener {
+                    val intent = Intent(this@MainActivity, EventDetail::class.java)
+                    val imageUrls = ArrayList(event.EVENT_IMAGE_URLS)
+                    intent.putExtra("eventName", event.EVENT_NAME)
+                    intent.putExtra("eventNum", event.EVENT_NUM ?: "")
+                    intent.putExtra("eventEmail", event.EVENT_EMAIL ?: "")
+                    intent.putExtra("eventWebsite", event.EVENT_WEBSITE ?: "")
+                    intent.putExtra("eventAddress", event.EVENT_ADDRESS)
+                    intent.putExtra("eventPerson", event.EVENT_PERSON ?: "")
+                    intent.putExtra("eventDate", event.EVENT_DATE ?: "")
+                    intent.putExtra("eventStartTime", event.EVENT_STARTTIME ?: "")
+                    intent.putExtra("eventDuration", event.EVENT_DURATION ?: "")
+                    intent.putExtra("eventDescription", event.EVENT_DESCRIPTION ?: "")
+                    intent.putStringArrayListExtra("eventImageUrls", imageUrls)
+
+                    startActivity(intent)
+                }
+
                 // Check if imageUrls is not null and load images into slideModels
                 if (event.EVENT_IMAGE_URLS.isNotEmpty()) {
                     val imageUrl = event.EVENT_IMAGE_URLS[0]
