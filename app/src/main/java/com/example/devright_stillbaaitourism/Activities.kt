@@ -30,8 +30,6 @@ class Activities : AppCompatActivity() {
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
         val btnFilter = findViewById<ImageButton>(R.id.btnFilter)
 
-
-
         listView = findViewById(R.id.activityListView)
 
         activitiesAdapter = ActivityAdapter(this, activityDataList)

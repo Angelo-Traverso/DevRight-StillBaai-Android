@@ -35,7 +35,6 @@ class Stay : AppCompatActivity() {
         filteredStayList = stayDataList
         listView.adapter = stayAdapter
 
-
         // Item click listener for the ListView
         listView.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < filteredStayList.size) {
@@ -44,6 +43,7 @@ class Stay : AppCompatActivity() {
                 // Creating an Intent to open the DetailActivity
                 val intent = Intent(this@Stay, StayDetail::class.java)
                 val imageUrls = ArrayList(selectedItem.STAY_IMAGE_URLS)
+
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("StayName", selectedItem.STAY_NAME)
                 intent.putExtra("Description", selectedItem.STAY_DESCRIPTION)
@@ -51,8 +51,8 @@ class Stay : AppCompatActivity() {
                 intent.putStringArrayListExtra("imageUrls", imageUrls)
                 intent.putExtra("email", selectedItem.STAY_EMAIL)
                 intent.putExtra("address", selectedItem.STAY_ADDRESS)
-                val contactNumber: String = if (!selectedItem.STAY_MOBILE_NUM.isNullOrBlank()) {
 
+                val contactNumber: String = if (!selectedItem.STAY_MOBILE_NUM.isNullOrBlank()) {
                     selectedItem.STAY_MOBILE_NUM ?: ""
                 } else {
                     selectedItem.STAY_TEL_NUM ?: ""
