@@ -13,6 +13,9 @@ class Stay : AppCompatActivity() {
     private lateinit var stayAdapter: StayAdapter
     private lateinit var burgerMenu: BurgerMenu
 
+    // Store the filtered list at the class level
+    private var filteredStayList: List<StayData> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stay)
@@ -28,13 +31,15 @@ class Stay : AppCompatActivity() {
 
         stayAdapter = StayAdapter(this, stayDataList)
 
+        // Initially, use the unfiltered list
+        filteredStayList = stayDataList
         listView.adapter = stayAdapter
 
 
         // Item click listener for the ListView
         listView.setOnItemClickListener { _, _, position, _ ->
-            if (position >= 0 && position < stayDataList.size) {
-                val selectedItem = stayDataList[position]
+            if (position >= 0 && position < filteredStayList.size) {
+                val selectedItem = filteredStayList[position]
 
                 // Creating an Intent to open the DetailActivity
                 val intent = Intent(this@Stay, StayDetail::class.java)
@@ -83,14 +88,14 @@ class Stay : AppCompatActivity() {
             popupMenu.setOnMenuItemClickListener { item ->
                 // Handle menu item click
                 val selectedCategory = item.title.toString()
-                val filteredList = if (selectedCategory.equals("All", ignoreCase = true)) {
+                filteredStayList = if (selectedCategory.equals("All", ignoreCase = true)) {
                     stayDataList
                 } else {
                     stayDataList.filter {
                         it.STAY_CATEGORY_TYPE.equals(selectedCategory, ignoreCase = true)
                     }
                 }
-                stayAdapter.updateData(filteredList)
+                stayAdapter.updateData(filteredStayList)
                 true
             }
 

@@ -17,6 +17,9 @@ class Activities : AppCompatActivity() {
 
     private lateinit var burgerMenu: BurgerMenu
 
+    // Store the filtered list at the class level
+    private var filteredActivityList: List<ActivityData> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         burgerMenu = BurgerMenu(this, R.layout.activity_activities)
@@ -33,12 +36,13 @@ class Activities : AppCompatActivity() {
 
         activitiesAdapter = ActivityAdapter(this, activityDataList)
 
+        filteredActivityList = activityDataList
         listView.adapter = activitiesAdapter
 
         // Item click listener for the ListView
         listView.setOnItemClickListener { _, _, position, _ ->
-            if (position >= 0 && position < activityDataList.size) {
-                val selectedItem = activityDataList[position]
+            if (position >= 0 && position < filteredActivityList.size) {
+                val selectedItem = filteredActivityList[position]
 
                 // Creating an Intent to open the DetailActivity
                 val intent = Intent(this@Activities, ActivitiesDetailActivity::class.java)
@@ -92,14 +96,14 @@ class Activities : AppCompatActivity() {
             popupMenu.setOnMenuItemClickListener { item ->
                 // Handle menu item click
                 val selectedCategory = item.title.toString()
-                val filteredList = if (selectedCategory.equals("All", ignoreCase = true)) {
+                filteredActivityList = if (selectedCategory.equals("All", ignoreCase = true)) {
                     activityDataList
                 } else {
                     activityDataList.filter {
                         it.ACTIVITY_CATEGORY_TYPE.equals(selectedCategory, ignoreCase = true)
                     }
                 }
-                activitiesAdapter.updateData(filteredList)
+                activitiesAdapter.updateData(filteredActivityList)
                 true
             }
 
