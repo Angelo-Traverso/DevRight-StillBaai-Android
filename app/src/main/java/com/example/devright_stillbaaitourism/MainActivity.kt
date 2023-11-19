@@ -9,7 +9,10 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.tabs.TabLayout
+import com.squareup.picasso.Picasso
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), DataFetchCallback {
@@ -97,6 +100,8 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
     private fun populateEvents() {
         val linearLayoutEvents = findViewById<LinearLayout>(R.id.linearEventsDisplay)
 
+        val defaultImageResource = R.drawable.no_image
+
         // Fetching Event List
         val eventList = GlobalClass.EventDataList
 
@@ -115,29 +120,36 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
                 eventView.findViewById<TextView>(R.id.eventTime).text = event.EVENT_STARTTIME ?: ""
                 eventView.findViewById<TextView>(R.id.eventLocation).text =
                     event.EVENT_ADDRESS ?: ""
+                val imageDisplay = eventView.findViewById<ImageView>(R.id.imgEvent)
+                // Check if imageUrls is not null and load images into slideModels
+                if (event.EVENT_IMAGE_URLS.isNotEmpty()) {
+                    val imageUrl = event.EVENT_IMAGE_URLS[0]
+                    Picasso.get().load(imageUrl).into(imageDisplay)
+                } else {
+                    imageDisplay?.setImageResource(defaultImageResource)
+                }
 
                 linearLayoutEvents.addView(eventView)
             }
 
             /// Set event image based on whether there are events today
-            val imageView = ImageView(this)
-            if (!eventsToday) {
-                imageView.setImageResource(R.drawable.img_no_events)
-                imageView.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    650 // replace this with the desired height in pixels for the image when there are no events today
-                )
-                linearLayoutEvents.addView(imageView)
-                return
-            } else {
-                imageView.setImageResource(R.drawable.img_event_end)
-                imageView.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    250 // replace this with the desired height in pixels for the image when there are events today
-                )
-                linearLayoutEvents.addView(imageView)
-                return
-            }
+
+        }
+        val imageView = ImageView(this)
+        if (!eventsToday) {
+            imageView.setImageResource(R.drawable.img_no_events)
+            imageView.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                650 // replace this with the desired height in pixels for the image when there are no events today
+            )
+            linearLayoutEvents.addView(imageView)
+        } else {
+            imageView.setImageResource(R.drawable.img_event_end)
+            imageView.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                250 // replace this with the desired height in pixels for the image when there are events today
+            )
+            linearLayoutEvents.addView(imageView)
         }
 
     }

@@ -1,6 +1,7 @@
 package com.example.devright_stillbaaitourism
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -26,6 +27,7 @@ class EventData
     fun isEventToday(): Boolean {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val currentDate = LocalDate.now().format(formatter)
+        Log.d("Event Date Check", "EVENT_DATE: $EVENT_DATE, Current Date: $currentDate")
         return EVENT_DATE == currentDate
     }
 

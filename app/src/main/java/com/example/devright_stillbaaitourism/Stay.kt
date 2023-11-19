@@ -1,12 +1,10 @@
 package com.example.devright_stillbaaitourism
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 
 class Stay : AppCompatActivity() {

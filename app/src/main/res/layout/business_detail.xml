@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".BusinessDetail">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,6 +26,8 @@
         android:layout_height="200dp"
         android:layout_below="@+id/btnBack"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="20dp"
         app:cardCornerRadius="5dp">
@@ -49,6 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/cardView"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -61,15 +64,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/titleTextViewBusiness"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:textSize="16sp"
         android:autoLink="email"
         style="@style/TextViewLinkTheme"
-        android:drawableStart="@drawable/mail"
         android:drawablePadding="8dp"
         android:gravity="start"
         android:visibility="gone"
         android:text="Title"
-        app:drawableTint="@color/black"/>
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/mail" />
 
     <TextView
         android:id="@+id/tvWebsite"
@@ -77,15 +82,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvEmail"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:textSize="16sp"
         style="@style/TextViewLinkTheme"
         android:autoLink="web"
-        android:drawableStart="@drawable/website"
         android:drawablePadding="8dp"
         android:gravity="start"
         android:visibility="gone"
         android:text="Title"
-        app:drawableTint="@color/black"/>
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/website" />
 
     <TextView
         android:id="@+id/tvAddress"
@@ -94,19 +101,39 @@
         android:layout_below="@id/tvWebsite"
         style="@style/TextViewLinkTheme"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:textSize="16sp"
         android:visibility="gone"
-        android:drawableStart="@drawable/baseline_location_on_24"
         android:drawablePadding="8dp"
         android:gravity="start"
         android:text="Title"
-        app:drawableTint="@color/black"/>
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/baseline_location_on_24" />
+
+    <TextView
+        android:id="@+id/tvContactNumberBusiness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAddress"
+        style="@style/TextViewLinkTheme"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:autoLink="phone"
+        android:drawablePadding="8dp"
+        android:gravity="start"
+        android:text="Contact Number"
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/baseline_location_on_24" />
 
     <View
         android:id="@+id/lineAboveDescription"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/tvAddress"
+        android:layout_below="@+id/tvContactNumberBusiness"
         android:alpha="0.2"
         android:layout_marginTop="8dp"
         android:background="@color/black"
@@ -118,6 +145,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lineAboveDescription"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -127,16 +156,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tvDescriptionHeading">
-    <TextView
-        android:id="@+id/descriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:paddingBottom="16dp"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        android:text="Stuff about our shop" />
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:paddingBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            android:text="Stuff about our shop" />
     </ScrollView>
-
-
 </RelativeLayout>

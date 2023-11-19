@@ -32,6 +32,7 @@ class BusinessDetail : AppCompatActivity() {
         val businessEmail = intent.getStringExtra("mail")
         val businessWebsite = intent.getStringExtra("Website")
         val address = intent.getStringExtra("address")
+        val contactNumber = intent.getStringExtra("ContactNumber")
 
         // Binding views
         val tvTitle = findViewById<TextView>(R.id.titleTextViewBusiness)
@@ -40,6 +41,7 @@ class BusinessDetail : AppCompatActivity() {
         val tvMail = findViewById<TextView>(R.id.tvEmail)
         val tvWebsite = findViewById<TextView>(R.id.tvWebsite)
         val tvAddress = findViewById<TextView>(R.id.tvAddress)
+        val tvContactNumber = findViewById<TextView>(R.id.tvContactNumberBusiness)
 
         // Taking user to Google Maps navigation
         tvAddress.setOnClickListener {
@@ -62,6 +64,7 @@ class BusinessDetail : AppCompatActivity() {
                 Toast.makeText(this, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
             }
         }
+
         if(!businessEmail.isNullOrEmpty())
         {
             tvMail.text = businessEmail
@@ -78,6 +81,12 @@ class BusinessDetail : AppCompatActivity() {
         {
             tvAddress.text = address
             tvAddress.visibility = View.VISIBLE
+        }
+
+        if(!contactNumber.isNullOrEmpty())
+        {
+            tvContactNumber.text = contactNumber
+            tvContactNumber.visibility = View.VISIBLE
         }
 
         tvTitle.text = businessName

@@ -6,16 +6,16 @@
             android:innerRadius="0dp"
             android:thickness="4dp"
             android:useLevel="false">
-            <solid android:color="@android:color/holo_red_dark"/>
+            <solid android:color="@color/stilbaaiBlue"/>
         </shape>
     </item>
     <item>
         <shape
             android:shape="ring"
-            android:innerRadius="0dp"
-            android:thickness="3dp"
+            android:innerRadius="2dp"
+            android:thickness="1dp"
             android:useLevel="false">
-            <solid android:color="@android:color/holo_orange_light"/>
+            <solid android:color="@android:color/holo_red_dark"/>
         </shape>
     </item>
 </selector>
