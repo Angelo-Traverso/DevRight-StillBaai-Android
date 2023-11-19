@@ -1,5 +1,6 @@
 package com.example.devright_stillbaaitourism
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
     private lateinit var burgerMenu: BurgerMenu
 
 
+    @SuppressLint("CutPasteId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
