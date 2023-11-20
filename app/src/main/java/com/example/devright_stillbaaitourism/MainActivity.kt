@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -15,6 +17,8 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.messaging.Constants.TAG
+import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.picasso.Picasso
 import kotlin.concurrent.thread
 
@@ -29,6 +33,16 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         super.onCreate(savedInstanceState)
         burgerMenu = BurgerMenu(this, R.layout.activity_main)
         burgerMenu.setupDrawer()
+
+        //subcribe for notifications
+        FirebaseMessaging.getInstance().subscribeToTopic("Notification")
+            .addOnCompleteListener { task ->
+                var msg = "Subscribed"
+                if (!task.isSuccessful) {
+                    msg = "Subscribe failed"
+                }
+                Log.d(TAG, msg)
+            }
 
         if(GlobalClass.EventDataList.isEmpty()) {
             val dbHandler = DBHandler(this)

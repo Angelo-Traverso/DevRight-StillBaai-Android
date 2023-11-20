@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "666046079229",
+    "project_id": "devrightpushnotifications",
+    "storage_bucket": "devrightpushnotifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666046079229:android:d4e404af6dcf5350755e94",
+        "android_client_info": {
+          "package_name": "com.example.devright_stillbaaitourism"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV3Wx1Lw4FqwdQQlz22Qr7zc79F7jSoto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
