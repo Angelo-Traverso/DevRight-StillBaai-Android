@@ -2,6 +2,7 @@ package com.example.devright_stillbaaitourism
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -9,12 +10,9 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.Constants.TAG
@@ -37,7 +35,24 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         burgerMenu = BurgerMenu(this, R.layout.activity_main)
         burgerMenu.setupDrawer()
 
-        //subcribe for notifications
+        val stilBaaiInfo = findViewById<TextView>(R.id.btnStil)
+        val jongens = findViewById<TextView>(R.id.btnJong)
+        val melk = findViewById<TextView>(R.id.btnMelk)
+
+        stilBaaiInfo.setOnClickListener{
+            intentForAbout()
+        }
+
+        jongens.setOnClickListener{
+            intentForAbout()
+        }
+
+        melk.setOnClickListener{
+            intentForAbout()
+        }
+
+
+        // Subscribe for notifications
         FirebaseMessaging.getInstance().subscribeToTopic("Notification")
             .addOnCompleteListener { task ->
                 var msg = "Subscribed"
@@ -68,9 +83,8 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
             populateEvents()
         }
         val advertFragment = listOf(
-            AdvertFragment.newInstance("Come visit our store!", "https://fabricatecapetown.co.za/wp-content/uploads/2020/11/Fabricate_November-2019_006b-11-scaled.jpg"),
-            AdvertFragment.newInstance("Come visit our store!", "https://fabricatecapetown.co.za/wp-content/uploads/2020/11/Fabricate_November-2019_006b-11-scaled.jpg")
-
+            AdvertFragment.newInstance("Come visit us today!", R.drawable.home_store, "https://stilbaaitourism.co.za/"),
+            AdvertFragment.newInstance("Come feed the eels!", R.drawable.home_eel, "https://stilbaaitourism.co.za/stilbaai-eels/")
         )
 
         val viewPager = findViewById<ViewPager>(R.id.viewPager)
@@ -207,5 +221,14 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         }
 
         return null
+    }
+
+    fun intentForAbout()
+    {
+        val url = "https://stilbaaitourism.co.za/"
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse(url)
+        startActivity(i)
+
     }
 }
