@@ -20,6 +20,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.messaging.Constants.TAG
 import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.picasso.Picasso
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), DataFetchCallback {
@@ -123,14 +126,11 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         // Fetching Event List
         val eventList = GlobalClass.EventDataList
 
-        var eventcount: Int = 1
+        val sortedEventList = eventList.sortedBy { it.parseDate()?.atStartOfDay() }
 
-        // Track if there are any events today
-        var eventsToday = false
+        val upcomingEvents = sortedEventList.take(3)
 
-        for (event in eventList) {
-            if (event.isEventToday()) {
-                eventsToday = true
+        for (event in upcomingEvents) {
 
                 val eventView = layoutInflater.inflate(R.layout.events_home, null)
 
@@ -168,27 +168,44 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
                 }
 
                 linearLayoutEvents.addView(eventView)
-            }
 
             /// Set event image based on whether there are events today
-
         }
         val imageView = ImageView(this)
-        if (!eventsToday) {
+        if (upcomingEvents.isEmpty()) {
             imageView.setImageResource(R.drawable.img_no_events)
             imageView.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 650 // replace this with the desired height in pixels for the image when there are no events today
             )
             linearLayoutEvents.addView(imageView)
-        } else {
+        } /*else {
             imageView.setImageResource(R.drawable.img_event_end)
             imageView.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 250 // replace this with the desired height in pixels for the image when there are events today
             )
             linearLayoutEvents.addView(imageView)
+        }*/
+
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun EventData.parseDate(): LocalDate? {
+        val formats = arrayOf(
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
+            DateTimeFormatter.ofPattern("yyyyMMdd-HH:mm:ss")
+            // Add more date formats as needed
+        )
+
+        for (format in formats) {
+            try {
+                return LocalDate.parse(this.EVENT_DATE, format)
+            } catch (e: DateTimeParseException) {
+                // Continue to the next format if parsing fails
+            }
         }
 
+        return null
     }
 }

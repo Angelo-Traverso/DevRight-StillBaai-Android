@@ -66,13 +66,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:drawableStart="@drawable/mail"
+            android:autoLink="email"
             android:drawablePadding="8dp"
             app:drawableTint="@color/black"
             android:gravity="start"
             android:text="Title"
+            style="@style/TextViewLinkTheme"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/mail" />
 
         <TextView
             android:id="@+id/tvEventDate"
@@ -80,13 +82,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:drawableStart="@drawable/baseline_calendar_month_24"
             android:drawablePadding="8dp"
             android:gravity="start"
+            android:layout_marginStart="8dp"
             app:drawableTint="@color/black"
             android:text="Event Date"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/baseline_calendar_month_24" />
     </LinearLayout>
 
 
@@ -101,16 +104,17 @@
             android:id="@+id/tvWebsite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linearEmailDate"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:drawableStart="@drawable/website"
             android:drawablePadding="8dp"
+            android:autoLink="web"
             android:gravity="start"
+            style="@style/TextViewLinkTheme"
             android:text="Title"
             android:textSize="16sp"
             android:visibility="gone"
-            app:drawableTint="@color/black"/>
+            app:drawableTint="@color/black"
+            app:drawableStartCompat="@drawable/website" />
 
         <TextView
             android:id="@+id/tvStartTime"
@@ -118,13 +122,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:drawableStart="@drawable/baseline_access_time_24"
             android:drawablePadding="8dp"
             android:gravity="start"
             android:text="Title"
             android:textSize="16sp"
             android:visibility="gone"
-            app:drawableTint="@color/black"/>
+            android:layout_marginStart="8dp"
+            app:drawableTint="@color/black"
+            app:drawableStartCompat="@drawable/baseline_access_time_24" />
     </LinearLayout>
 
     <TextView
@@ -133,13 +138,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linearWebsiteStartTime"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/baseline_location_on_24"
         android:drawablePadding="8dp"
+        style="@style/TextViewLinkTheme"
         android:gravity="start"
         android:text="Title"
         android:textSize="16sp"
         android:visibility="gone"
-        app:drawableTint="@color/black"/>
+        app:drawableTint="@color/black"
+        app:drawableStartCompat="@drawable/baseline_location_on_24" />
 
     <TextView
         android:id="@+id/tvEventNum"
@@ -147,13 +153,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvAddress"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/call"
         android:drawablePadding="8dp"
         android:gravity="start"
+        android:autoLink="phone"
+        style="@style/TextViewLinkTheme"
         android:text="Title"
         app:drawableTint="@color/black"
         android:textSize="16sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/call" />
 
     <View
         android:id="@+id/lineAboveDescription"
