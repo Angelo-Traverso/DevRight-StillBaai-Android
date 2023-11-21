@@ -1,7 +1,12 @@
 package com.example.devright_stillbaaitourism
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -10,8 +15,11 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
@@ -26,7 +34,14 @@ import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity(), DataFetchCallback {
 
     private lateinit var burgerMenu: BurgerMenu
-
+    lateinit var sharedPref: SharedPreferences
+    private lateinit var notificationService: NotificationService
+    private val pushNotificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+        if (isGranted) {
+            notificationService.subscribeToNotifications()
+        }
+    }
 
     @SuppressLint("CutPasteId")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -34,6 +49,8 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         super.onCreate(savedInstanceState)
         burgerMenu = BurgerMenu(this, R.layout.activity_main)
         burgerMenu.setupDrawer()
+
+        notificationService = NotificationService()
 
         val stilBaaiInfo = findViewById<TextView>(R.id.btnStil)
         val jongens = findViewById<TextView>(R.id.btnJong)
@@ -51,16 +68,19 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
             intentForAbout()
         }
 
+        askNotificationPermission()
+
 
         // Subscribe for notifications
-        FirebaseMessaging.getInstance().subscribeToTopic("Notification")
-            .addOnCompleteListener { task ->
-                var msg = "Subscribed"
-                if (!task.isSuccessful) {
-                    msg = "Subscribe failed"
-                }
-                Log.d(TAG, msg)
-            }
+//        FirebaseMessaging.getInstance().subscribeToTopic("Notification")
+//            .addOnCompleteListener { task ->
+//                var msg = "Subscribed"
+//                if (!task.isSuccessful) {
+//                    msg = "Subscribe failed"
+//                }
+//                Log.d(TAG, msg)
+//            }
+
 
         if(GlobalClass.EventDataList.isEmpty()) {
             val dbHandler = DBHandler(this)
@@ -121,6 +141,31 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
             }
         }, initialDelay)
     }
+
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                notificationService.subscribeToNotifications()
+            } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.POST_NOTIFICATIONS)) {
+                pushNotificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            // For Android versions lower than 13, show a popup asking the user if they want notifications.
+            // If they do, subscribe. If not, unsubscribe.
+            AlertDialog.Builder(this)
+                .setTitle("Notifications")
+                .setMessage("Do you want to enable notifications?")
+                .setPositiveButton("Yes") { _, _ ->
+                    notificationService.subscribeToNotifications()
+                }
+                .setNegativeButton("No") { _, _ ->
+                    notificationService.unsubscribeFromNotifications()
+                }
+                .show()
+        }
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onDataFetched() {

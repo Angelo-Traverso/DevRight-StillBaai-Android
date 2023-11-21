@@ -1,17 +1,23 @@
 package com.example.devright_stillbaaitourism
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.RemoteViews
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.google.firebase.messaging.Constants.TAG
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -22,8 +28,11 @@ import okhttp3.internal.notify
 
 const val channelID = "notification_channel"
 const val channelName = "com.example.devright_stillbaaitourism"
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class NotificationService : FirebaseMessagingService()
 {
+    //---------------------------------------------------------------------------------
+    //received notifications
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if (remoteMessage.getNotification() != null)
         {
@@ -34,14 +43,12 @@ class NotificationService : FirebaseMessagingService()
     fun getRemoteView(title: String, message: String): RemoteViews
     {
         val remoteView = RemoteViews("com.example.devright_stillbaaitourism", R.layout.custom_notification)
-
         remoteView.setTextViewText(R.id.tvNotificationTitle, title)
         remoteView.setTextViewText(R.id.tvNotificationMessage, message)
         remoteView.setImageViewResource(R.id.imgNotificationImage, R.drawable.app_logo)
 
         return remoteView
     }
-
 
     fun generateNotification(title: String, message: String)
     {
@@ -53,7 +60,6 @@ class NotificationService : FirebaseMessagingService()
         } else {
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         }
-
 
         //channel id, channel name
         var builder: NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channelID)
@@ -72,7 +78,37 @@ class NotificationService : FirebaseMessagingService()
             notificationManager.createNotificationChannel(notificationChannel)
 
         }
-
         notificationManager.notify(0,builder.build())
     }
+    //---------------------------------------------------------------------------------
+
+
+
+
+    public fun subscribeToNotifications() {
+        FirebaseMessaging.getInstance().subscribeToTopic("Notification")
+            .addOnCompleteListener { task ->
+                var msg = "Subscribed"
+                if (!task.isSuccessful) {
+                    msg = "Subscribe failed"
+                }
+                Log.d(TAG, msg)
+            }
+    }
+
+    public fun unsubscribeFromNotifications() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("Notification")
+            .addOnCompleteListener { task ->
+                var msg = "Unsubscribed"
+                if (!task.isSuccessful) {
+                    msg = "Unsubscribe failed"
+                }
+                Log.d(TAG, msg)
+            }
+    }
+
+
+
+
+
 }
