@@ -18,6 +18,8 @@ class Eat : AppCompatActivity() {
 
     private lateinit var customAdapter: CustomAdapter
 
+    private var filteredEatList: List<EatData> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eat)
@@ -27,7 +29,6 @@ class Eat : AppCompatActivity() {
 
         val edtSearch = findViewById<EditText>(R.id.etSearchEat)
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
-        // Instance of EatDataList
         val eatDataList = GlobalClass.EatDataList
 
         listview = findViewById(R.id.listView)
@@ -35,13 +36,15 @@ class Eat : AppCompatActivity() {
         // Create a custom adapter with the EatData list
         customAdapter = CustomAdapter(this, eatDataList)
 
+        filteredEatList = GlobalClass.EatDataList
+
         // Set the adapter for the ListView
         listview.adapter = customAdapter
 
         // Item click listener for the ListView
         listview.setOnItemClickListener { _, _, position, _ ->
-            if (position >= 0 && position < eatDataList.size) {
-                val selectedItem = eatDataList[position]
+            if (position >= 0 && position < filteredEatList.size) {
+                val selectedItem = filteredEatList[position]
 
                 // Creating an Intent to open the DetailActivity
                 val intent = Intent(this@Eat, DetailActivity::class.java)
@@ -70,7 +73,6 @@ class Eat : AppCompatActivity() {
             }
         }
 
-
         /*
         * Search click event
         */
@@ -93,12 +95,12 @@ class Eat : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 // Filter activityDataList based on the search query
                 val searchText = s.toString().toLowerCase()
-                val filteredList = eatDataList.filter {
+                filteredEatList = eatDataList.filter {
                     it.EAT_NAME.toLowerCase().contains(searchText)
                 }
 
                 // Update the adapter with the filtered list
-                customAdapter.updateData(filteredList)
+                customAdapter.updateData(filteredEatList)
 
             }
         })

@@ -10,7 +10,6 @@ import kotlin.collections.ArrayList
 
 class Activities : AppCompatActivity() {
 
-
     private lateinit var activitiesAdapter: ActivityAdapter
 
     private lateinit var listView: ListView
