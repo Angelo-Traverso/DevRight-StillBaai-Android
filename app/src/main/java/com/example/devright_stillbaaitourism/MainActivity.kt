@@ -34,13 +34,6 @@ import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity(), DataFetchCallback {
 
     private lateinit var burgerMenu: BurgerMenu
-    private lateinit var notificationService: NotificationService
-    private val pushNotificationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-        if (isGranted) {
-            notificationService.subscribeToNotifications()
-        }
-    }
 
     @SuppressLint("CutPasteId")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -48,8 +41,6 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         super.onCreate(savedInstanceState)
         burgerMenu = BurgerMenu(this, R.layout.activity_main)
         burgerMenu.setupDrawer()
-
-        notificationService = NotificationService()
 
         val stilBaaiInfo = findViewById<TextView>(R.id.btnStil)
         val jongens = findViewById<TextView>(R.id.btnJong)
@@ -67,18 +58,15 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
             intentForAbout()
         }
 
-        askNotificationPermission()
-
-
         // Subscribe for notifications
-//        FirebaseMessaging.getInstance().subscribeToTopic("Notification")
-//            .addOnCompleteListener { task ->
-//                var msg = "Subscribed"
-//                if (!task.isSuccessful) {
-//                    msg = "Subscribe failed"
-//                }
-//                Log.d(TAG, msg)
-//            }
+        FirebaseMessaging.getInstance().subscribeToTopic("Notification")
+            .addOnCompleteListener { task ->
+                var msg = "Subscribed"
+                if (!task.isSuccessful) {
+                    msg = "Subscribe failed"
+                }
+                Log.d(TAG, msg)
+            }
 
 
         if(GlobalClass.EventDataList.isEmpty()) {
@@ -139,30 +127,6 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
                 handler.postDelayed(this, scrollDuration)
             }
         }, initialDelay)
-    }
-
-    private fun askNotificationPermission() {
-        // This is only necessary for API level >= 33 (TIRAMISU)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                notificationService.subscribeToNotifications()
-            } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.POST_NOTIFICATIONS)) {
-                pushNotificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-            }
-        } else {
-            // For Android versions lower than 13, show a popup asking the user if they want notifications.
-            // If they do, subscribe. If not, unsubscribe.
-            AlertDialog.Builder(this)
-                .setTitle("Notifications")
-                .setMessage("Do you want to enable notifications?")
-                .setPositiveButton("Yes") { _, _ ->
-                    notificationService.subscribeToNotifications()
-                }
-                .setNegativeButton("No") { _, _ ->
-                    notificationService.unsubscribeFromNotifications()
-                }
-                .show()
-        }
     }
 
 
