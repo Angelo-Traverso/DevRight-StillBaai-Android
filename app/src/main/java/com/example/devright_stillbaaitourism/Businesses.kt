@@ -67,6 +67,28 @@ class Businesses : AppCompatActivity() {
             }
         }
 
+
+        edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed for this implementation
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed for this implementation
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Filter activityDataList based on the search query
+                val searchText = s.toString().lowercase()
+                filteredBusinessList = businessDataList.filter {
+                    it.BUSINESS_NAME.lowercase().contains(searchText)
+                }
+
+                // Update the adapter with the filtered list
+                businessAdapter.updateData(filteredBusinessList)
+            }
+        })
+
         /*
         * Search click event
         */
@@ -77,40 +99,6 @@ class Businesses : AppCompatActivity() {
         /*
         * Filter to let users filter by category
         * */
-        btnFilter.setOnClickListener {
-            val popupMenu = PopupMenu(this, btnFilter)
-
-            // Get unique categories from your businessDataList
-            val categories = businessDataList.map { it.BUSINESS_CATEGORY_TYPE }.distinct()
-            popupMenu.menu.add("All")
-            // Create menu items dynamically
-            for (category in categories) {
-                popupMenu.menu.add(category)
-            }
-
-            /*
-            * popupMenu on item select listener, this will filter the list to match the user required category
-            * */
-            popupMenu.setOnMenuItemClickListener { item ->
-                // Handle menu item click
-                val selectedCategory = item.title.toString()
-                filteredBusinessList = if (selectedCategory.equals("All", ignoreCase = true)) {
-                    businessDataList
-                } else {
-                    businessDataList.filter {
-                        it.BUSINESS_CATEGORY_TYPE.equals(selectedCategory, ignoreCase = true)
-                    }
-                }
-                businessAdapter.updateData(filteredBusinessList)
-                true
-            }
-
-            popupMenu.show()
-        }
-
-        /*
-         * Filter to let users filter by category
-         * */
         btnFilter.setOnClickListener {
             val popupMenu = PopupMenu(this, btnFilter)
 

@@ -5,10 +5,12 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
@@ -40,10 +42,10 @@ class Events : AppCompatActivity() {
                 // Add a heading for the new date dynamically
                 val dateHeadingTextView = TextView(this)
                 dateHeadingTextView.text = formatDate(event.EVENT_DATE.toString())
-                dateHeadingTextView.textSize = 24f
+                dateHeadingTextView.textSize = 20f
                 dateHeadingTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
                 dateHeadingTextView.setTypeface(null, Typeface.BOLD)
-                dateHeadingTextView.setPadding(0, 16, 0, 8)
+                dateHeadingTextView.setPadding(20, 20, 0, 8)
                 linearLayout.addView(dateHeadingTextView)
                 currentDate = event.EVENT_DATE
 
@@ -54,12 +56,19 @@ class Events : AppCompatActivity() {
                     // Set data for each event (assuming you have setter methods in your layout)
                     val eventNameTextView: TextView = eventView.findViewById(R.id.eventNameTextView)
                     val timeTextView: TextView = eventView.findViewById(R.id.timeTextView)
-                    //val locationTextView: TextView = eventView.findViewById(R.id.locationTextView)
+                    val locationTextView: TextView = eventView.findViewById(R.id.tvEventLocation)
                     val eventImageView: ImageView = eventView.findViewById(R.id.eventImageView)
-                    val addToCalendarButton: Button = eventView.findViewById(R.id.addToCalendarButton)
-                    val viewEventDetails: Button = eventView.findViewById(R.id.btnViewEventDetails)
+                    val addToCalendarButton: TextView = eventView.findViewById(R.id.addToCalendarButton)
+                    val cardViewEvent = eventView.findViewById<CardView>(R.id.cardEvent)
 
                     eventNameTextView.text = eventForDate.EVENT_NAME
+
+                    if(!eventForDate.EVENT_ADDRESS.isNullOrEmpty())
+                    {
+                        locationTextView.visibility = View.VISIBLE
+                        locationTextView.text = eventForDate.EVENT_ADDRESS
+                    }
+
 
                     val defaultImageResource = R.drawable.no_image
 
@@ -90,7 +99,7 @@ class Events : AppCompatActivity() {
                         startActivity(intent)
                     }
 
-                    viewEventDetails.setOnClickListener {
+                    cardViewEvent.setOnClickListener {
                         val intent = Intent(this@Events, EventDetail::class.java)
 
                         val imageUrls = ArrayList(eventForDate.EVENT_IMAGE_URLS)
@@ -115,7 +124,7 @@ class Events : AppCompatActivity() {
                         LinearLayout.LayoutParams.WRAP_CONTENT
                     )
 
-                    layoutParams.setMargins(0, 0, 0, 16)
+                    layoutParams.setMargins(0, 7, 0, 16)
                     eventView.layoutParams = layoutParams
                     // Add the inflated layout to your LinearLayout
                     linearLayout.addView(eventView)
