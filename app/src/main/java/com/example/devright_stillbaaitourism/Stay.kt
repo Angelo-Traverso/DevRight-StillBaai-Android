@@ -33,6 +33,7 @@ class Stay : AppCompatActivity() {
 
         // Initially, use the unfiltered list
         filteredStayList = stayDataList
+
         listView.adapter = stayAdapter
 
         // Item click listener for the ListView
@@ -117,12 +118,12 @@ class Stay : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 // Filter activityDataList based on the search query
                 val searchText = s.toString().toLowerCase()
-                val filteredList = stayDataList.filter {
+                filteredStayList = stayDataList.filter {
                     it.STAY_NAME.toLowerCase().contains(searchText)
                 }
 
                 // Update the adapter with the filtered list
-                stayAdapter.updateData(filteredList)
+                stayAdapter.updateData(filteredStayList)
             }
         })
     }
