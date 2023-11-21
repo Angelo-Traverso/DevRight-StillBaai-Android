@@ -121,12 +121,12 @@ class Activities : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 // Filter activityDataList based on the search query
                 val searchText = s.toString().toLowerCase()
-                val filteredList = activityDataList.filter {
+                 filteredActivityList = activityDataList.filter {
                     it.ACTIVITY_NAME.toLowerCase().contains(searchText)
                 }
 
                 // Update the adapter with the filtered list
-                activitiesAdapter.updateData(filteredList)
+                activitiesAdapter.updateData(filteredActivityList)
             }
         })
     }
