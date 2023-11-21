@@ -34,7 +34,6 @@ import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity(), DataFetchCallback {
 
     private lateinit var burgerMenu: BurgerMenu
-    lateinit var sharedPref: SharedPreferences
     private lateinit var notificationService: NotificationService
     private val pushNotificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
