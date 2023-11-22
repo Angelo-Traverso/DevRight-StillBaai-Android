@@ -49,24 +49,7 @@ class StayDetail : AppCompatActivity() {
 
         // Taking user to Google Maps navigation
         tvAddress.setOnClickListener {
-
-            // Create a Uri for the location (use the "q" parameter)
-            val uri = Uri.parse("geo:0,0?q=$address")
-
-            // Create an Intent to view the location on Google Maps
-            val mapIntent = Intent(Intent.ACTION_VIEW, uri)
-
-            // Set the package to specify that you want to use Google Maps
-            mapIntent.setPackage("com.google.android.apps.maps")
-
-            // Check if there's an app available to handle the intent
-            if (mapIntent.resolveActivity(packageManager) != null) {
-                // Start the intent to open Google Maps
-                startActivity(mapIntent)
-
-            } else {
-                Toast.makeText(this, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
-            }
+            GlobalClass.openGoogleMaps(this, address.toString())
         }
 
         tvActName.text = stayName

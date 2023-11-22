@@ -35,8 +35,6 @@ class EventDetail: AppCompatActivity() {
         val eventDuration = intent.getStringExtra("eventDuration")
         val eventDescription = intent.getStringExtra("eventDescription")
         val imageUrls = intent.getStringArrayListExtra("eventImageUrls")
-        /*   val contactNumber = intent.getStringExtra("ContactNumber")
-           val websiteLink = intent.getStringExtra("WebsiteLink")*/
 
         // Binding views
         val tvEventName = findViewById<TextView>(R.id.tvEventName)
@@ -97,6 +95,10 @@ class EventDetail: AppCompatActivity() {
         {
             tvEventStartTime.text = eventStartTime
             tvEventStartTime.visibility = View.VISIBLE
+        }
+
+        tvAddress.setOnClickListener{
+            GlobalClass.openGoogleMaps(this, eventAddress.toString())
         }
 
         // Create a list of SlideModel to hold image data

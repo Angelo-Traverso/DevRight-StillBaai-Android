@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
@@ -30,7 +27,6 @@ class Events : AppCompatActivity() {
 
         val linearLayout: LinearLayout = findViewById(R.id.linearEventsListings)
         var currentDate: String? = null
-
 
         // Sort the eventList based on the event dates
         val sortedEventList = eventList.sortedBy { it.EVENT_DATE }
@@ -58,17 +54,16 @@ class Events : AppCompatActivity() {
                     val timeTextView: TextView = eventView.findViewById(R.id.timeTextView)
                     val locationTextView: TextView = eventView.findViewById(R.id.tvEventLocation)
                     val eventImageView: ImageView = eventView.findViewById(R.id.eventImageView)
-                    val addToCalendarButton: TextView = eventView.findViewById(R.id.addToCalendarButton)
+                    val addToCalendarButton: TextView =
+                        eventView.findViewById(R.id.addToCalendarButton)
                     val cardViewEvent = eventView.findViewById<CardView>(R.id.cardEvent)
 
                     eventNameTextView.text = eventForDate.EVENT_NAME
 
-                    if(!eventForDate.EVENT_ADDRESS.isNullOrEmpty())
-                    {
+                    if (!eventForDate.EVENT_ADDRESS.isNullOrEmpty()) {
                         locationTextView.visibility = View.VISIBLE
                         locationTextView.text = eventForDate.EVENT_ADDRESS
                     }
-
 
                     val defaultImageResource = R.drawable.no_image
 
@@ -90,8 +85,14 @@ class Events : AppCompatActivity() {
                         val intent = Intent(Intent.ACTION_INSERT)
                             .setData(CalendarContract.Events.CONTENT_URI)
                             .putExtra(CalendarContract.Events.TITLE, eventForDate.EVENT_NAME)
-                            .putExtra(CalendarContract.Events.EVENT_LOCATION, eventForDate.EVENT_ADDRESS)
-                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventForDate.EVENT_STARTTIME)
+                            .putExtra(
+                                CalendarContract.Events.EVENT_LOCATION,
+                                eventForDate.EVENT_ADDRESS
+                            )
+                            .putExtra(
+                                CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                                eventForDate.EVENT_STARTTIME
+                            )
                             .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTimeMillis)
                             .putExtra(CalendarContract.Events.ALL_DAY, false)
                             .putExtra(CalendarContract.Events.DESCRIPTION, "Reminder")
@@ -119,6 +120,10 @@ class Events : AppCompatActivity() {
                         startActivity(intent)
                     }
 
+                    locationTextView.setOnClickListener {
+                        GlobalClass.openGoogleMaps(this, locationTextView.text.toString())
+                    }
+
                     val layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -126,7 +131,6 @@ class Events : AppCompatActivity() {
 
                     layoutParams.setMargins(0, 7, 0, 16)
                     eventView.layoutParams = layoutParams
-                    // Add the inflated layout to your LinearLayout
                     linearLayout.addView(eventView)
                 }
             }
