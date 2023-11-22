@@ -1,0 +1,1 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f9ee9b64c4e04b57abba2021780ee9d5)](https://app.codacy.com/gh/Angelo-Traverso/DevRight-StillBaai-Android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
