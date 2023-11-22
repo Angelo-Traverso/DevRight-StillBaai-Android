@@ -12,8 +12,6 @@ class Stay : AppCompatActivity() {
     private lateinit var listView: ListView
     private lateinit var stayAdapter: StayAdapter
     private lateinit var burgerMenu: BurgerMenu
-
-    // Store the filtered list at the class level
     private var filteredStayList: List<StayData> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +29,13 @@ class Stay : AppCompatActivity() {
 
         stayAdapter = StayAdapter(this, stayDataList)
 
-        // Initially, use the unfiltered list
         filteredStayList = stayDataList
 
         listView.adapter = stayAdapter
 
-        // Item click listener for the ListView
+        /**
+         * On Click for listView items. Intents user to detail view, passing all data needed
+         */
         listView.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < filteredStayList.size) {
                 val selectedItem = filteredStayList[position]
@@ -128,3 +127,4 @@ class Stay : AppCompatActivity() {
         })
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

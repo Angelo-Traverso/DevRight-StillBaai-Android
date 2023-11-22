@@ -22,7 +22,9 @@ class EventDetail: AppCompatActivity() {
             onBackPressed()
         }
 
-        // Retrieving data from Activities.kt
+        /**
+         * Getting values from events, values used to display detailed view
+         */
         val imageDisplay = findViewById<ImageSlider>(R.id.eventImageSlider)
         val eventName = intent.getStringExtra("eventName")
         val eventNum = intent.getStringExtra("eventNum")
@@ -35,34 +37,27 @@ class EventDetail: AppCompatActivity() {
         val eventDuration = intent.getStringExtra("eventDuration")
         val eventDescription = intent.getStringExtra("eventDescription")
         val imageUrls = intent.getStringArrayListExtra("eventImageUrls")
-        /*   val contactNumber = intent.getStringExtra("ContactNumber")
-           val websiteLink = intent.getStringExtra("WebsiteLink")*/
 
-        // Binding views
+        /**
+         * Binding views
+         */
         val tvEventName = findViewById<TextView>(R.id.tvEventName)
-
         val tvEventNum = findViewById<TextView>(R.id.tvEventNum)
-
         val tvEventEmail = findViewById<TextView>(R.id.tvEmail)
-
         val tvWebsite = findViewById<TextView>(R.id.tvWebsite)
-
         val tvAddress = findViewById<TextView>(R.id.tvAddress)
-
-
-        //val tvEventPerson = findViewById<TextView>(R.id.tvEventName)
-
         val tvEventDate = findViewById<TextView>(R.id.tvEventDate)
-
         val tvEventStartTime = findViewById<TextView>(R.id.tvStartTime)
-
-        //val tvDuration = findViewById<TextView>(R.id.tvEventName)
-
         val tvEventDescription = findViewById<TextView>(R.id.descriptionTextView)
 
         tvEventName.text = eventName
         tvEventDescription.text = eventDescription
 
+        /**
+         * Ensuring values are not null or empty before displaying.
+         * If view is NOT null or empty, then the view will be set to visible and its values will
+         * be displayed.
+         */
         if(!eventNum.isNullOrEmpty())
         {
             tvEventNum.text = eventNum
@@ -99,6 +94,11 @@ class EventDetail: AppCompatActivity() {
             tvEventStartTime.visibility = View.VISIBLE
         }
 
+        // Taking user to google maps
+        tvAddress.setOnClickListener{
+            GlobalClass.openGoogleMaps(this, eventAddress.toString())
+        }
+
         // Create a list of SlideModel to hold image data
         val slideModels = ArrayList<SlideModel>()
 
@@ -116,3 +116,4 @@ class EventDetail: AppCompatActivity() {
         }
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

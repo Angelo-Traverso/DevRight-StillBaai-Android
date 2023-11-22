@@ -1,6 +1,5 @@
 package com.example.devright_stillbaaitourism
 
-import CustomAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,11 +12,8 @@ import android.widget.ListView
 class Eat : AppCompatActivity() {
 
     private lateinit var burgerMenu: BurgerMenu
-
     private lateinit var listview: ListView
-
     private lateinit var customAdapter: CustomAdapter
-
     private var filteredEatList: List<EatData> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,36 +22,33 @@ class Eat : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_eat)
         burgerMenu.setupDrawer()
 
-
         val edtSearch = findViewById<EditText>(R.id.etSearchEat)
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
         val eatDataList = GlobalClass.EatDataList
 
         listview = findViewById(R.id.listView)
-
-        // Create a custom adapter with the EatData list
         customAdapter = CustomAdapter(this, eatDataList)
-
         filteredEatList = GlobalClass.EatDataList
-
-        // Set the adapter for the ListView
         listview.adapter = customAdapter
 
-        // Item click listener for the ListView
+        /**
+         * On Click for listView items. Intents user to detail view, passing all data needed
+         */
         listview.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < filteredEatList.size) {
-                val selectedItem = filteredEatList[position]
 
-                // Creating an Intent to open the DetailActivity
+                val selectedItem = filteredEatList[position]
                 val intent = Intent(this@Eat, DetailActivity::class.java)
                 val imageUrls = ArrayList(selectedItem.EAT_IMAGE_URLS)
+
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("title", selectedItem.EAT_NAME)
                 intent.putExtra("description", selectedItem.EAT_DESCRIPTION)
                 intent.putExtra("imageUrl", selectedItem.EAT_IMAGE_URLS[0])
                 intent.putExtra("WebsiteURL", selectedItem.EAT_WEBSITE)
                 intent.putExtra("address", selectedItem.EAT_ADDRESS)
-                //Just added
+
+                // Just added
                 intent.putExtra("email", selectedItem.EAT_EMAIL)
                 intent.putStringArrayListExtra("imageUrls", imageUrls)
 
@@ -106,3 +99,4 @@ class Eat : AppCompatActivity() {
         })
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

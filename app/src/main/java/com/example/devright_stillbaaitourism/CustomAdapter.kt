@@ -1,29 +1,57 @@
+package com.example.devright_stillbaaitourism
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.devright_stillbaaitourism.BusinessData
-import com.example.devright_stillbaaitourism.EatData
 import com.squareup.picasso.Picasso
-import com.example.devright_stillbaaitourism.R
 
+/**
+ * Custom adapter for the list of EatData.
+ *
+ * @param context The context of the activity or fragment.
+ * @param eatDataList The list of EatData to be displayed.
+ */
 class CustomAdapter (private val context: Context, private var eatDataList: List<EatData>) : BaseAdapter() {
 
+    /**
+     * Gets the number of items in the EatData list.
+     *
+     * @return The number of items.
+     */
     override fun getCount(): Int {
         return eatDataList.size
     }
 
+    /**
+     * Gets the EatData item at the specified position.
+     *
+     * @param position The position of the item.
+     * @return The EatData item.
+     */
     override fun getItem(position: Int): EatData {
         return eatDataList[position]
     }
 
+    /**
+     * Gets the ID of the EatData item at the specified position.
+     *
+     * @param position The position of the item.
+     * @return The ID of the EatData item.
+     */
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
+
+    /**
+     * Gets the ID of the EatData item at the specified position.
+     *
+     * @param position The position of the item.
+     * @return The ID of the EatData item.
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var itemView = convertView
         if (itemView == null) {
@@ -36,9 +64,7 @@ class CustomAdapter (private val context: Context, private var eatDataList: List
         val titleTextView = itemView?.findViewById<TextView>(R.id.titleTextView)
         val contactTextView = itemView?.findViewById<TextView>(R.id.tvContactNum)
         val locationToEats = itemView?.findViewById<TextView>(R.id.tvLocationToEats)
-
         val defaultImageResource = R.drawable.no_image
-
 
         // Loading images into imageView
         if (eatData.EAT_IMAGE_URLS.isNotEmpty()) {
@@ -54,7 +80,6 @@ class CustomAdapter (private val context: Context, private var eatDataList: List
         // Setting location
         locationToEats?.text = eatData.EAT_ADDRESS
 
-
         // Displaying a mobile or tell number, whichever exists
         if(!eatData.EAT_MOBILE_NUM.isNullOrBlank()){
             contactTextView?.text = eatData.EAT_MOBILE_NUM
@@ -67,9 +92,14 @@ class CustomAdapter (private val context: Context, private var eatDataList: List
         return itemView ?: View(context)
     }
 
+    /**
+     * Updates the adapter with a new list of EatData.
+     *
+     * @param newList The new list of EatData.
+     */
     fun updateData(newList: List<EatData>) {
         eatDataList = newList.toMutableList()
         notifyDataSetChanged()
     }
-
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

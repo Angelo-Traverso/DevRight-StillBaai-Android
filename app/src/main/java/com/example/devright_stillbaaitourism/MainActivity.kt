@@ -1,12 +1,7 @@
 package com.example.devright_stillbaaitourism
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,11 +10,8 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
@@ -46,6 +38,9 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         val jongens = findViewById<TextView>(R.id.btnJong)
         val melk = findViewById<TextView>(R.id.btnMelk)
 
+        /**
+         * Sets click listeners for various views to open the "About" page when clicked.
+         */
         stilBaaiInfo.setOnClickListener{
             intentForAbout()
         }
@@ -58,7 +53,10 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
             intentForAbout()
         }
 
-        // Subscribe for notifications
+        /**
+         * Subscribes the device to the "Notification" topic using Firebase Cloud Messaging.
+         * Displays a log message indicating whether the subscription was successful or not.
+         */
         FirebaseMessaging.getInstance().subscribeToTopic("Notification")
             .addOnCompleteListener { task ->
                 var msg = "Subscribed"
@@ -68,7 +66,10 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
                 Log.d(TAG, msg)
             }
 
-
+        /**
+         * Fetches data from the database using a background thread and populates the corresponding data lists.
+         * If the EventDataList is not empty, it directly populates the events.
+         */
         if(GlobalClass.EventDataList.isEmpty()) {
             val dbHandler = DBHandler(this)
             GlobalClass.StayDataList.clear()
@@ -89,6 +90,10 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         {
             populateEvents()
         }
+
+        /**
+         * Initializes and configures the ViewPager and TabLayout for displaying advertisements.
+         */
         val advertFragment = listOf(
             AdvertFragment.newInstance("Come visit us today!", R.drawable.home_store, "https://stilbaaitourism.co.za/"),
             AdvertFragment.newInstance("Come feed the eels!", R.drawable.home_eel, "https://stilbaaitourism.co.za/stilbaai-eels/")
@@ -129,7 +134,10 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         }, initialDelay)
     }
 
-
+    /**
+     * Callback method called when data is fetched.
+     * Updates the UI or populates views accordingly.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onDataFetched() {
         // This method will be called when data is fetched
@@ -139,6 +147,10 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         }
     }
 
+    /**
+     * Populates the UI with upcoming events.
+     * Fetches and displays event data based on the current date.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun populateEvents() {
         val linearLayoutEvents = findViewById<LinearLayout>(R.id.linearEventsDisplay)
@@ -201,23 +213,21 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
                 650 // replace this with the desired height in pixels for the image when there are no events today
             )
             linearLayoutEvents.addView(imageView)
-        } /*else {
-            imageView.setImageResource(R.drawable.img_event_end)
-            imageView.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                250 // replace this with the desired height in pixels for the image when there are events today
-            )
-            linearLayoutEvents.addView(imageView)
-        }*/
+        }
 
     }
+
+    /**
+     * Parses the date string from EventData and returns a LocalDate object.
+     *
+     * @return A LocalDate object representing the parsed date, or null if parsing fails.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun EventData.parseDate(): LocalDate? {
         val formats = arrayOf(
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
             DateTimeFormatter.ofPattern("yyyyMMdd-HH:mm:ss")
-            // Add more date formats as needed
         )
 
         for (format in formats) {
@@ -231,12 +241,15 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         return null
     }
 
-    fun intentForAbout()
+    /**
+     * Opens an intent to view the "About" page.
+     */
+   private fun intentForAbout()
     {
         val url = "https://stilbaaitourism.co.za/"
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(url)
         startActivity(i)
-
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

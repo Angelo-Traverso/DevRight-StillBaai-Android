@@ -1,5 +1,8 @@
 package com.example.devright_stillbaaitourism
 
+/**
+ * Data class representing a Business.
+ */
 class BusinessData
 {
     var BUSINESS_ID: Int = 0

@@ -13,12 +13,6 @@ class Eels : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_eels)
         burgerMenu.setupDrawer()
 
-        /*val menuBtn = findViewById<ImageButton>(R.id.btnMenu)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
-
-        // Open drawer on menu button clicked
-        menuBtn.setOnClickListener(){
-            drawerLayout.open()
-        }*/
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

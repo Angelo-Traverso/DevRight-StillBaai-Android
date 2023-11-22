@@ -1,11 +1,8 @@
 package com.example.devright_stillbaaitourism
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -25,7 +22,9 @@ class BusinessDetail : AppCompatActivity() {
             onBackPressed()
         }
 
-        // Retrieving data from Activities.kt
+        /**
+         * Getting values from activities, values used to display detailed view
+         */
         val businessName = intent.getStringExtra("BusinessName")
         val description = intent.getStringExtra("Description")
         val imageUrls = intent.getStringArrayListExtra("imageUrls")
@@ -34,7 +33,9 @@ class BusinessDetail : AppCompatActivity() {
         val address = intent.getStringExtra("address")
         val contactNumber = intent.getStringExtra("ContactNumber")
 
-        // Binding views
+        /**
+         * Binding views
+         */
         val tvTitle = findViewById<TextView>(R.id.titleTextViewBusiness)
         val tvDescription = findViewById<TextView>(R.id.descriptionTextView)
         val imagesDisplay = findViewById<ImageSlider>(R.id.businessImageSlider)
@@ -45,26 +46,14 @@ class BusinessDetail : AppCompatActivity() {
 
         // Taking user to Google Maps navigation
         tvAddress.setOnClickListener {
-
-            // Create a Uri for the location (use the "q" parameter)
-            val uri = Uri.parse("geo:0,0?q=$address")
-
-            // Create an Intent to view the location on Google Maps
-            val mapIntent = Intent(Intent.ACTION_VIEW, uri)
-
-            // Set the package to specify that you want to use Google Maps
-            mapIntent.setPackage("com.google.android.apps.maps")
-
-            // Check if there's an app available to handle the intent
-            if (mapIntent.resolveActivity(packageManager) != null) {
-                // Start the intent to open Google Maps
-                startActivity(mapIntent)
-
-            } else {
-                Toast.makeText(this, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
-            }
+            GlobalClass.openGoogleMaps(this, address.toString())
         }
 
+        /**
+         * Ensuring values are not null or empty before displaying.
+         * If view is NOT null or empty, then the view will be set to visible and its values will
+         * be displayed.
+         */
         if(!businessEmail.isNullOrEmpty())
         {
             tvMail.text = businessEmail
@@ -110,3 +99,4 @@ class BusinessDetail : AppCompatActivity() {
         }
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

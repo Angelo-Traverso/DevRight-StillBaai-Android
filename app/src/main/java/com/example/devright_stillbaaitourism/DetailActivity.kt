@@ -1,14 +1,10 @@
 package com.example.devright_stillbaaitourism;
 
-import android.content.Intent
-import android.content.res.Resources
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -23,12 +19,16 @@ class DetailActivity : AppCompatActivity() {
         // Binding back button
         val btnBack = findViewById<FloatingActionButton>(R.id.btnBack)
 
-        // On Click listener for back button
+        /**
+         * On Click for listView items. Intents user to detail view, passing all data needed
+         */
         btnBack.setOnClickListener {
             onBackPressed()
         }
 
-        // Get Extras from EAT
+        /**
+         * Getting values from Eats, values used to display detailed view
+         */
         val title = intent.getStringExtra("title")
         val description = intent.getStringExtra("description")
         val websiteURL = intent.getStringExtra("WebsiteURL")
@@ -37,7 +37,9 @@ class DetailActivity : AppCompatActivity() {
         val email = intent.getStringExtra("email")
         val imageUrls = intent.getStringArrayListExtra("imageUrls")
 
-        // Binding views
+        /**
+         * Binding views
+         */
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
         val descriptionTextView = findViewById<TextView>(R.id.descriptionTextView)
         val imagesDisplay = findViewById<ImageSlider>(R.id.imageSlider)
@@ -48,26 +50,8 @@ class DetailActivity : AppCompatActivity() {
 
         // Taking user to Google Maps navigation
         addressLocation.setOnClickListener {
-
-            // Create a Uri for the location (use the "q" parameter)
-            val uri = Uri.parse("geo:0,0?q=$address")
-
-            // Create an Intent to view the location on Google Maps
-            val mapIntent = Intent(Intent.ACTION_VIEW, uri)
-
-            // Set the package to specify that you want to use Google Maps
-            mapIntent.setPackage("com.google.android.apps.maps")
-
-            // Check if there's an app available to handle the intent
-            if (mapIntent.resolveActivity(packageManager) != null) {
-                // Start the intent to open Google Maps
-                startActivity(mapIntent)
-
-            } else {
-                Toast.makeText(this, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
-            }
+            GlobalClass.openGoogleMaps(this, address.toString())
         }
-
 
         // Setting title
         titleTextView.text = Html.fromHtml("<b>$title</b>")
@@ -75,12 +59,16 @@ class DetailActivity : AppCompatActivity() {
         // Setting description
         descriptionTextView.text = description
 
+        /**
+         * Ensuring values are not null or empty before displaying.
+         * If view is NOT null or empty, then the view will be set to visible and its values will
+         * be displayed.
+         */
         if(!address.isNullOrEmpty())
         {
             addressLocation.text = address
             addressLocation.visibility = View.VISIBLE
         }
-
 
         // Checking if an email exists
         if(!email.isNullOrEmpty())
@@ -118,3 +106,4 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //
