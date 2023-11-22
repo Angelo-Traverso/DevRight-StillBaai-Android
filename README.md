@@ -12,12 +12,4 @@ The Stilbaai Tourism App is an Android application designed to provide users wit
 - **Eels** Come feed the local eels in Stilbaai.
 - **Notifications:** Receive notifications about events, promotions, and important updates.
 
-## Screenshots
-
-![Screenshot 1](/screenshots/screenshot1.png)
-*Caption for Screenshot 1.*
-
-![Screenshot 2](/screenshots/screenshot2.png)
-*Caption for Screenshot 2.*
-
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f9ee9b64c4e04b57abba2021780ee9d5)](https://app.codacy.com/gh/Angelo-Traverso/DevRight-StillBaai-Android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
