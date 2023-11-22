@@ -10,25 +10,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class EventFragment : Fragment() {
-    companion object {
-        // This companion object is used to create new instances of the fragment
-        fun newInstance(eventName: String, eventTime: String, eventPlace: String): EventFragment {
-            val fragment = EventFragment()
-            val args = Bundle()
-            args.putString("eventName", eventName)
-            args.putString("eventTime", eventTime)
-            args.putString("eventPlace", eventPlace)
-            fragment.arguments = args
-            return fragment
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.events_home, container, false)
-
         val eventImage = view.findViewById<ImageView>(R.id.imgEvent)
         val eventName = view.findViewById<TextView>(R.id.eventName)
         val eventTime = view.findViewById<TextView>(R.id.eventTime)
@@ -56,3 +43,4 @@ class EventFragment : Fragment() {
         return view
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

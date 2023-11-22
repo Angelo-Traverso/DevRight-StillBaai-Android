@@ -3,6 +3,11 @@ package com.example.devright_stillbaaitourism
 import java.sql.*
 import java.util.*
 
+/**
+ * Handler class for interacting with the MySQL database and fetching various types of data.
+ *
+ * @property callback The callback interface to notify when data is fetched.
+ */
 class DBHandler (private val callback: DataFetchCallback) {
 
     // ------------------- Declarations ------------------- //
@@ -11,9 +16,9 @@ class DBHandler (private val callback: DataFetchCallback) {
     private val password = BuildConfig.STIL_PASSWORD
     // ------------------- END Declarations ------------------- //
 
-    /* ----------------------------------------------------------------- //
-    * Creating the sql connection
-    */
+    /**
+     * Creates a connection to the MySQL database.
+     */
     fun getConnection() {
         val connectionProps = Properties()
         //Username for the DB
@@ -22,7 +27,6 @@ class DBHandler (private val callback: DataFetchCallback) {
         connectionProps.put("password", password)
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance()
-            //connection string for the DB
             conn = DriverManager.getConnection(
                 "jdbc:mysql://dedi1778.jnb1.host-h.net:3306/stil_app_db",
                 connectionProps)
@@ -33,9 +37,9 @@ class DBHandler (private val callback: DataFetchCallback) {
         }
     }
 
-    /* ----------------------------------------------------------------- //
-    * Querying the eats table and puts the data in a list
-    */
+    /**
+     * Fetches data from the "Eat_Table" and associated tables, populates the GlobalClass.EatDataList.
+     */
     fun fetchEatData() {
         try {
 
@@ -89,9 +93,9 @@ class DBHandler (private val callback: DataFetchCallback) {
     }
 
 
-    /* ----------------------------------------------------------------- //
-    * Pulling Business data from the db and putting it in a list
-    */
+    /**
+     * Fetches data from the "Business_Table" and associated tables, populates the GlobalClass.BusinessDataList.
+     */
     fun fetchBusinessData(){
         try {
 
@@ -126,7 +130,7 @@ class DBHandler (private val callback: DataFetchCallback) {
                     }
                 }
 
-                // Now, fetch image URLs and associate them with the ActivityData objects
+                // Now, fetch image URLs and associate them with the BusinessData objects
                 conn?.createStatement().use { stmt ->
                     val imageResultSet = stmt?.executeQuery("SELECT * FROM Business_Image_Table")
 
@@ -135,11 +139,11 @@ class DBHandler (private val callback: DataFetchCallback) {
                             val businessId = imageResultSet.getInt("BUSINESS_ID")
                             val imageUrl = imageResultSet.getString("BUSINESS_IMAGE_URL")
 
-                            // Find the corresponding EatData object by EAT_ID
+                            // Find the corresponding BusinessData object by EAT_ID
                             val businessData =
                                 GlobalClass.BusinessDataList.find { it.BUSINESS_ID == businessId }
 
-                            // If an ActivityData object is found, add the image URL to its list
+                            // If an BusinessData object is found, add the image URL to its list
                             businessData?.BUSINESS_IMAGE_URLS?.add(imageUrl)
                         }
                     }
@@ -164,7 +168,7 @@ class DBHandler (private val callback: DataFetchCallback) {
                     }
                 }
 
-                // Associate category types with ActivityData objects
+                // Associate category types with BusinessData objects
                 for (businessData in GlobalClass.BusinessDataList) {
                     val categoryId = businessData.BUSINESS_CATEGORY_ID
                     businessData.BUSINESS_CATEGORY_TYPE = categoryTypeMap[categoryId]
@@ -176,9 +180,9 @@ class DBHandler (private val callback: DataFetchCallback) {
     }
 
 
-    /* ----------------------------------------------------------------- //
-    * Fetching events data from the events table
-    */
+    /**
+     * Fetches data from the "Event_Table" and associated tables, populates the GlobalClass.EventDataList.
+     */
     fun fetchEventsData(){
         try {
 
@@ -192,19 +196,19 @@ class DBHandler (private val callback: DataFetchCallback) {
                     // Executes until no more records are found
                     if (resultSet != null) {
                         while (resultSet.next()) {
-                            val EventData = EventData()
-                            EventData.EVENT_ID = resultSet.getInt("EVENT_ID")
-                            EventData.EVENT_NAME = resultSet.getString("EVENT_NAME")
-                            EventData.EVENT_NUM = resultSet.getString("EVENT_NUM")
-                            EventData.EVENT_ADDRESS = resultSet.getString("EVENT_ADDRESS")
-                            EventData.EVENT_DATE = resultSet.getString("EVENT_DATE")
-                            EventData.EVENT_STARTTIME = resultSet.getString("EVENT_STARTTIME")
-                            EventData.EVENT_DESCRIPTION = resultSet.getString("EVENT_DESCRIPTION")
-                            EventData.EVENT_DURATION = resultSet.getString("EVENT_DURATION")
-                            EventData.EVENT_PERSON = resultSet.getString("EVENT_PERSON")
-                            EventData.EVENT_WEBSITE = resultSet.getString("EVENT_WEBSITE")
-                            EventData.EVENT_EMAIL = resultSet.getString("EVENT_EMAIL")
-                            GlobalClass.EventDataList.add(EventData)
+                            val eventData = EventData()
+                            eventData.EVENT_ID = resultSet.getInt("EVENT_ID")
+                            eventData.EVENT_NAME = resultSet.getString("EVENT_NAME")
+                            eventData.EVENT_NUM = resultSet.getString("EVENT_NUM")
+                            eventData.EVENT_ADDRESS = resultSet.getString("EVENT_ADDRESS")
+                            eventData.EVENT_DATE = resultSet.getString("EVENT_DATE")
+                            eventData.EVENT_STARTTIME = resultSet.getString("EVENT_STARTTIME")
+                            eventData.EVENT_DESCRIPTION = resultSet.getString("EVENT_DESCRIPTION")
+                            eventData.EVENT_DURATION = resultSet.getString("EVENT_DURATION")
+                            eventData.EVENT_PERSON = resultSet.getString("EVENT_PERSON")
+                            eventData.EVENT_WEBSITE = resultSet.getString("EVENT_WEBSITE")
+                            eventData.EVENT_EMAIL = resultSet.getString("EVENT_EMAIL")
+                            GlobalClass.EventDataList.add(eventData)
                         }
                     }
                 }
@@ -218,11 +222,11 @@ class DBHandler (private val callback: DataFetchCallback) {
                             val eventId = imageResultSet.getInt("EVENT_ID")
                             val imageUrl = imageResultSet.getString("EVENT_IMAGE_URL")
 
-                            // Find the corresponding EatData object by EVENT_ID
+                            // Find the corresponding eventData object by event id
                             val eventData =
                                 GlobalClass.EventDataList.find { it.EVENT_ID == eventId }
 
-                            // If an ActivityData object is found, add the image URL to its list
+                            // If an eventData object is found, add the image URL to its list
                             eventData?.EVENT_IMAGE_URLS?.add(imageUrl)
                         }
                     }
@@ -235,9 +239,9 @@ class DBHandler (private val callback: DataFetchCallback) {
     }
 
 
-    /* ----------------------------------------------------------------- //
-    * Fetch activity data from the activity table
-    */
+    /**
+     * Fetches data from the "Activity_Table" and associated tables, populates the GlobalClass.ActivityDataList.
+     */
     fun fetchActivityData(){
 
         try {
@@ -252,27 +256,27 @@ class DBHandler (private val callback: DataFetchCallback) {
                     // Executes until no more records are found
                     if (resultSet != null) {
                         while (resultSet.next()) {
-                            val ActivityData = ActivityData()
-                            ActivityData.ACTIVITY_ID = resultSet.getInt("ACTIVITY_ID")
-                            ActivityData.ACTIVITY_NAME = resultSet.getString("ACTIVITY_NAME")
-                            ActivityData.ACTIVITY_MOBILE_NUM =
+                            val activityData = ActivityData()
+                            activityData.ACTIVITY_ID = resultSet.getInt("ACTIVITY_ID")
+                            activityData.ACTIVITY_NAME = resultSet.getString("ACTIVITY_NAME")
+                            activityData.ACTIVITY_MOBILE_NUM =
                                 resultSet.getString("ACTIVITY_MOBILE_NUM")
-                            ActivityData.ACTIVITY_TEL_NUM = resultSet.getString("ACTIVITY_TEL_NUM")
-                            ActivityData.ACTIVITY_ADDRESS = resultSet.getString("ACTIVITY_ADDRESS")
-                            ActivityData.ACTIVITY_DESCRIPTION =
+                            activityData.ACTIVITY_TEL_NUM = resultSet.getString("ACTIVITY_TEL_NUM")
+                            activityData.ACTIVITY_ADDRESS = resultSet.getString("ACTIVITY_ADDRESS")
+                            activityData.ACTIVITY_DESCRIPTION =
                                 resultSet.getString("ACTIVITY_DESCRIPTION")
-                            ActivityData.ACTIVITY_CONTACT_PERSON =
+                            activityData.ACTIVITY_CONTACT_PERSON =
                                 resultSet.getString("ACTIVITY_CONTACT_PERSON")
-                            ActivityData.ACTIVITY_EMAIL = resultSet.getString("ACTIVITY_EMAIL")
-                            ActivityData.ACTIVITY_WEBSITE = resultSet.getString("ACTIVITY_WEBSITE")
-                            ActivityData.ACTIVITY_CATEGORY_ID =
+                            activityData.ACTIVITY_EMAIL = resultSet.getString("ACTIVITY_EMAIL")
+                            activityData.ACTIVITY_WEBSITE = resultSet.getString("ACTIVITY_WEBSITE")
+                            activityData.ACTIVITY_CATEGORY_ID =
                                 resultSet.getInt("ACTIVITY_CATEGORY_ID")
-                            GlobalClass.ActivityDataList.add(ActivityData)
+                            GlobalClass.ActivityDataList.add(activityData)
                         }
                     }
                 }
 
-                // Now, fetch image URLs and associate them with the ActivityData objects
+                // Now, fetch image URLs and associate them with the activityData objects
                 conn?.createStatement().use { stmt ->
                     val imageResultSet = stmt?.executeQuery("SELECT * FROM Activity_Image_Table")
 
@@ -281,11 +285,11 @@ class DBHandler (private val callback: DataFetchCallback) {
                             val activityId = imageResultSet.getInt("ACTIVITY_ID")
                             val imageUrl = imageResultSet.getString("ACTIVITY_IMAGE_URL")
 
-                            // Find the corresponding EatData object by EAT_ID
+                            // Find the corresponding activityData object by EAT_ID
                             val activityData =
                                 GlobalClass.ActivityDataList.find { it.ACTIVITY_ID == activityId }
 
-                            // If an ActivityData object is found, add the image URL to its list
+                            // If an activityData object is found, add the image URL to its list
                             activityData?.ACTIVITY_IMAGE_URLS?.add(imageUrl)
                         }
                     }
@@ -323,9 +327,9 @@ class DBHandler (private val callback: DataFetchCallback) {
     }
 
 
-    /* ----------------------------------------------------------------- //
-    * Fetching stay data from the stay table
-    */
+    /**
+     * Fetches data from the "Stay_Table" and associated tables, populates the GlobalClass.StayDataList.
+     */
     fun fetchStayData(){
 
         try {
@@ -355,8 +359,7 @@ class DBHandler (private val callback: DataFetchCallback) {
                         }
                     }
                 }
-                // Fetch Stay Category Types and associate them with StayData objects
-                // Create a map to store category types by category ID
+
                 val categoryTypeMap = mutableMapOf<Int, String>()
 
                 // Fetch Stay Category Types and store them in the map
@@ -375,12 +378,12 @@ class DBHandler (private val callback: DataFetchCallback) {
                     }
                 }
 
-                // Associate category types with ActivityData objects
+                // Associate category types with stayData objects
                 for (stayData in GlobalClass.StayDataList) {
                     val categoryId = stayData.STAY_CATEGORY_ID
                     stayData.STAY_CATEGORY_TYPE = categoryTypeMap[categoryId]
                 }
-                // Fetch stay image URLs and associate them with EEL objects
+                // Fetch stay image URLs and associate them with stayData objects
                 conn?.createStatement().use { stmt ->
                     val imageResultSet = stmt?.executeQuery("SELECT * FROM Stay_Image_Table")
 
@@ -389,10 +392,10 @@ class DBHandler (private val callback: DataFetchCallback) {
                             val stayId = imageResultSet.getInt("STAY_ID")
                             val imageUrl = imageResultSet.getString("STAY_IMAGE_URL")
 
-                            // Find the corresponding StayData object by Stay_ID
+                            // Find the corresponding stayData object by Stay_ID
                             val stayData = GlobalClass.StayDataList.find { it.STAY_ID == stayId }
 
-                            // If an StayData object is found, add the image URL to its list
+                            // If an stayData object is found, add the image URL to its list
                             stayData?.STAY_IMAGE_URLS?.add(imageUrl)
                         }
                     }
@@ -403,9 +406,9 @@ class DBHandler (private val callback: DataFetchCallback) {
         }
     }
 
-    /* ----------------------------------------------------------------- //
-    * Fetching listing data from the listing table
-    */
+    /**
+     * Fetches data from the "Listing" and associated tables, populates the GlobalClass.ListingDataList.
+     */
     fun fetchListingData(){
 
         try {
@@ -431,7 +434,7 @@ class DBHandler (private val callback: DataFetchCallback) {
                     }
                 }
 
-                // Fetch eel image URLs and associate them with EEL objects
+                // Fetch listing image URLs and associate them with listingImagesData
                 conn?.createStatement().use { stmt ->
                     val imageResultSet = stmt?.executeQuery("SELECT * FROM Images")
 
@@ -440,7 +443,7 @@ class DBHandler (private val callback: DataFetchCallback) {
                             val imageId = imageResultSet.getInt("Image_ID")
                             val imageUrl = imageResultSet.getString("sourceURL")
 
-                            // Find the corresponding EatData object by EAT_ID
+                            // Find the corresponding listingImagesData object by ListingID
                             val listingImagesData =
                                 GlobalClass.ListingDataList.find { it.LISTING_ID == imageId }
 
@@ -455,9 +458,9 @@ class DBHandler (private val callback: DataFetchCallback) {
         }
     }
 
-    /* ----------------------------------------------------------------- //
-    * Fetches all the eel data from the eel table
-    */
+    /**
+     * Fetches data from the "Eel_Table" and associated tables, populates the GlobalClass.EelDataList.
+     */
     fun fetchEelData(){
         try {
 
@@ -481,6 +484,7 @@ class DBHandler (private val callback: DataFetchCallback) {
                         }
                     }
                 }
+
                 // Fetch eel image URLs and associate them with EEL objects
                 conn?.createStatement().use { stmt ->
                     val imageResultSet = stmt?.executeQuery("SELECT * FROM Eel_Image_Table")
@@ -491,10 +495,10 @@ class DBHandler (private val callback: DataFetchCallback) {
                             val eelId = imageResultSet.getInt("EEL_ID")
                             val imageUrl = imageResultSet.getString("EEL_IMAGE_URL")
 
-                            // Find the corresponding EatData object by EAT_ID
+                            // Find the corresponding eelData object by eel ID
                             val eelData = GlobalClass.EelDataList.find { it.EEL_ID == eelId }
 
-                            // If an ActivityData object is found, add the image URL to its list
+                            // If an eelData object is found, add the image URL to its list
                             eelData?.EEL_IMAGE_URLS?.add(imageUrl)
                         }
                     }
@@ -505,9 +509,9 @@ class DBHandler (private val callback: DataFetchCallback) {
         }
     }
 
-    /* ----------------------------------------------------------------- //
-    * Fetches contact information from the contact table
-    */
+    /**
+     * Fetches data from the "Contact_Table", populates the GlobalClass.ContactDataList.
+     */
     fun fetchContactData(){
 
         try {
@@ -521,14 +525,14 @@ class DBHandler (private val callback: DataFetchCallback) {
                     // Executes until no more records are found
                     if (resultSet != null) {
                         while (resultSet.next()) {
-                            val ContactData = ContactData()
-                            ContactData.CONTACT_ID = resultSet.getInt("CONTACT_ID")
-                            ContactData.CONTACT_NUM = resultSet.getString("CONTACT_NUM")
-                            ContactData.CONTACT_NAME = resultSet.getString("CONTACT_NAME")
-                            ContactData.CONTACT_ADDRESS = resultSet.getString("CONTACT_ADDRESS")
-                            ContactData.CONTACT_EMAIL = resultSet.getString("CONTACT_EMAIL")
-                            ContactData.CONTACT_PERSON = resultSet.getString("CONTACT_PERSON")
-                            GlobalClass.ContactDataList.add(ContactData)
+                            val contactData = ContactData()
+                            contactData.CONTACT_ID = resultSet.getInt("CONTACT_ID")
+                            contactData.CONTACT_NUM = resultSet.getString("CONTACT_NUM")
+                            contactData.CONTACT_NAME = resultSet.getString("CONTACT_NAME")
+                            contactData.CONTACT_ADDRESS = resultSet.getString("CONTACT_ADDRESS")
+                            contactData.CONTACT_EMAIL = resultSet.getString("CONTACT_EMAIL")
+                            contactData.CONTACT_PERSON = resultSet.getString("CONTACT_PERSON")
+                            GlobalClass.ContactDataList.add(contactData)
                         }
                     }
                 }

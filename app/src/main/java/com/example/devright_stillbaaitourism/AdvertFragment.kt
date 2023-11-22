@@ -10,8 +10,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.squareup.picasso.Picasso
 
+/**
+ * A fragment representing an advertisement.
+ */
 class AdvertFragment : Fragment() {
     companion object {
         // This companion object is used to create new instances of the fragment
@@ -30,8 +32,8 @@ class AdvertFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.custom_adverts, container, false)
 
+        val view = inflater.inflate(R.layout.custom_adverts, container, false)
         val eventImage = view.findViewById<ImageView>(R.id.imgEvent)
         val advertTitle = view.findViewById<TextView>(R.id.tvAdvertTitle)
         val saveEventButton = view.findViewById<Button>(R.id.btnGoToEvent)
@@ -56,3 +58,4 @@ class AdvertFragment : Fragment() {
         return view
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

@@ -1,12 +1,9 @@
 package com.example.devright_stillbaaitourism
 
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
 
+/**
+ * Data class representing an Eel.
+ */
 class EventData
 {
     var EVENT_ID: Int = 0
@@ -21,15 +18,5 @@ class EventData
     var EVENT_DURATION: String? = null
     var EVENT_DESCRIPTION: String? = null
     var EVENT_IMAGE_URLS: MutableList<String> = mutableListOf()
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun isEventToday(): Boolean {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val currentDate = LocalDate.now().format(formatter)
-        Log.d("Event Date Check", "EVENT_DATE: $EVENT_DATE, Current Date: $currentDate")
-        return EVENT_DATE == currentDate
-    }
-
-
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

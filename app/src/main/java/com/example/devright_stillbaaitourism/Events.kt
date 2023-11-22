@@ -15,6 +15,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class Events : AppCompatActivity() {
+
     private lateinit var burgerMenu: BurgerMenu
     private lateinit var eventList: List<EventData>
 
@@ -24,7 +25,6 @@ class Events : AppCompatActivity() {
         burgerMenu.setupDrawer()
 
         eventList = GlobalClass.EventDataList
-
         val linearLayout: LinearLayout = findViewById(R.id.linearEventsListings)
         var currentDate: String? = null
 
@@ -137,8 +137,13 @@ class Events : AppCompatActivity() {
         }
     }
 
+    /**
+     * Formats the input date string into a human-readable date format.
+     *
+     * @param inputDate The date string to be formatted (in "yyyy-MM-dd" format).
+     * @return A formatted date string in the "EEEE, d MMMM" format (e.g., "Tuesday, 5 January").
+     */
     private fun formatDate(inputDate: String): String {
-        // Parse the input date string
         val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = inputFormat.parse(inputDate)
 
@@ -146,5 +151,5 @@ class Events : AppCompatActivity() {
         val outputFormat = SimpleDateFormat("EEEE, d MMMM", Locale.getDefault())
         return outputFormat.format(date ?: Date())
     }
-    //............................................................................................//
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

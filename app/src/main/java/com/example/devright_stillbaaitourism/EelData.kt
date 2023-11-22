@@ -1,5 +1,8 @@
 package com.example.devright_stillbaaitourism
 
+/**
+ * Data class representing an Eel.
+ */
 class EelData
 {
     var EEL_ID: Int = 0
@@ -9,3 +12,4 @@ class EelData
     var EEL_DESCRIPTION: String = ""
     var EEL_IMAGE_URLS: MutableList<String> = mutableListOf()
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

@@ -1,13 +1,9 @@
 package com.example.devright_stillbaaitourism
 
-import android.content.Intent
-import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Html
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -27,7 +23,9 @@ class StayDetail : AppCompatActivity() {
             onBackPressed()
         }
 
-        // Retrieving data from Activities.kt
+        /**
+         * Getting values from Activities, values used to display detailed view
+         */
         val stayName = intent.getStringExtra("StayName")
         val description = intent.getStringExtra("Description")
         val imageUrls = intent.getStringArrayListExtra("imageUrls")
@@ -36,8 +34,9 @@ class StayDetail : AppCompatActivity() {
         val email = intent.getStringExtra("email")
         val address = intent.getStringExtra("address")
 
-
-        // Binding views
+        /**
+         * Binding views
+         */
         val tvActName = findViewById<TextView>(R.id.titleTextView)
         val tvDescription = findViewById<TextView>(R.id.descriptionTextView)
         val imagesDisplay = findViewById<ImageSlider>(R.id.imageSlider)
@@ -55,6 +54,11 @@ class StayDetail : AppCompatActivity() {
         tvActName.text = stayName
         tvDescription.text = Html.fromHtml(description)
 
+        /**
+         * Ensuring values are not null or empty before displaying.
+         * If view is NOT null or empty, then the view will be set to visible and its values will
+         * be displayed.
+         */
         if(!websiteLink.isNullOrEmpty())
         {
             tvWebsiteLink.text = websiteLink
@@ -96,3 +100,4 @@ class StayDetail : AppCompatActivity() {
         }
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

@@ -26,6 +26,13 @@ class GlobalClass: Application()
         var StayDataList = arrayListOf<StayData>()
         var ListingDataList = arrayListOf<ListingImagesData>()
 
+        /**
+         * Hides the soft keyboard and clears focus from the specified EditText.
+         *
+         * @param context The context of the calling activity or fragment.
+         * @param view The view that currently has focus.
+         * @param etSearch The EditText for which the keyboard should be hidden.
+         */
         fun hideUserKeyboard(context: Context, view: View, etSearch: EditText) {
             val inputMethodManager =
                 context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -34,6 +41,13 @@ class GlobalClass: Application()
             etSearch.clearFocus()
         }
 
+        /**
+         * Opens Google Maps with the specified address, if the Google Maps app is installed.
+         * Otherwise, displays a toast indicating that Google Maps is not installed.
+         *
+         * @param context The context of the calling activity or fragment.
+         * @param address The address to be displayed on Google Maps.
+         */
         fun openGoogleMaps(context: Context, address: String) {
             // Create a Uri for the location (use the "q" parameter)
             val uri = Uri.parse("geo:0,0?q=$address")
@@ -52,10 +66,6 @@ class GlobalClass: Application()
                 Toast.makeText(context, "Google Maps is not installed.", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
-
-
-
-
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

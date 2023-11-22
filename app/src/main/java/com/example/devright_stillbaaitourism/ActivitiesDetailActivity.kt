@@ -5,7 +5,6 @@ import android.text.Html
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.TextViewCompat
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -17,15 +16,19 @@ class ActivitiesDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_activities)
 
-        // Binding back button
+        // Back button binding
         val btnBack = findViewById<FloatingActionButton>(R.id.btnBack)
 
-        // On Click for back button click
+        /**
+         * On Click for listView items. Intents user to detail view, passing all data needed
+         */
         btnBack.setOnClickListener{
             onBackPressed()
         }
 
-        // Retrieving data from Activities.kt
+        /**
+         * Getting values from activities, values used to display detailed view
+         */
         val activityName = intent.getStringExtra("ActivityName")
         val description = intent.getStringExtra("Description")
         val imageUrls = intent.getStringArrayListExtra("imageUrls")
@@ -34,7 +37,9 @@ class ActivitiesDetailActivity : AppCompatActivity() {
         val email = intent.getStringExtra("email")
         val address = intent.getStringExtra("address")
 
-        // Binding views
+        /**
+         * Binding views
+         */
         val tvActName = findViewById<TextView>(R.id.tvActivityName)
         val tvDescription = findViewById<TextView>(R.id.descriptionTextView)
         val imagesDisplay = findViewById<ImageSlider>(R.id.imageSlider)
@@ -43,11 +48,15 @@ class ActivitiesDetailActivity : AppCompatActivity() {
         val tvActEmail = findViewById<TextView>(R.id.tvEmail)
         val tvAddress = findViewById<TextView>(R.id.tvAddress)
 
-
-
+        // Setting views that cant be null
         tvActName.text = activityName
         tvDescription.text = Html.fromHtml(description)
 
+        /**
+         * Ensuring values are not null or empty before displaying.
+         * If view is NOT null or empty, then the view will be set to visible and its values will
+         * be displayed.
+         */
         if(!contactNumber.isNullOrEmpty())
         {
             tvContactNumber.text = contactNumber
@@ -73,15 +82,18 @@ class ActivitiesDetailActivity : AppCompatActivity() {
         }
 
 
-        // Create a list of SlideModel to hold image data
+        /**
+         * Creating a list of slideModels to be displayed in the ImageSlider
+         */
         val slideModels = ArrayList<SlideModel>()
 
         // Check if imageUrls is not null and load images into slideModels
         if (!imageUrls.isNullOrEmpty()) {
+
             for (imageUrl in imageUrls) {
                 slideModels.add(SlideModel(imageUrl))
             }
-            // Bind the list to the Image Slider
+
             imagesDisplay.setImageList(slideModels, ScaleTypes.FIT)
         }else
         {
@@ -90,3 +102,4 @@ class ActivitiesDetailActivity : AppCompatActivity() {
         }
     }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

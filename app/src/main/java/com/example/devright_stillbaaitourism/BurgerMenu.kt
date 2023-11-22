@@ -8,12 +8,22 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
+/**
+ * Helper class for managing the navigation drawer (burger menu) functionality.
+ *
+ * @property activity The hosting AppCompatActivity.
+ * @property layoutResId The layout resource ID of the activity.
+ */
 class BurgerMenu(private val activity: AppCompatActivity, private val layoutResId: Int) : NavigationView.OnNavigationItemSelectedListener {
 
+    // UI components
     private lateinit var menuBtn: ImageButton
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
 
+    /**
+     * Sets up the navigation drawer with the specified layout.
+     */
     fun setupDrawer() {
         activity.setContentView(layoutResId)
 
@@ -26,10 +36,17 @@ class BurgerMenu(private val activity: AppCompatActivity, private val layoutResI
             drawerLayout.open()
         }
 
+        // Bring the navigation drawer to the front and set the item click listener
         navView.bringToFront()
         navView.setNavigationItemSelectedListener(this)
     }
 
+    /**
+     * Handles the selection of items in the navigation drawer.
+     *
+     * @param item The selected menu item.
+     * @return True if the item selection is handled.
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_home -> navigateTo(MainActivity::class.java)
@@ -45,17 +62,15 @@ class BurgerMenu(private val activity: AppCompatActivity, private val layoutResI
         return true
     }
 
+    /**
+     * Navigates to the specified activity class.
+     *
+     * @param destination The destination activity class.
+     */
     private fun navigateTo(destination: Class<*>) {
         val intent = Intent(activity.applicationContext, destination)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         activity.startActivity(intent)
     }
-
-    fun onBackPressed(): Boolean {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-            return true
-        }
-        return false
-    }
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

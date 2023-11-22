@@ -11,12 +11,8 @@ import kotlin.collections.ArrayList
 class Activities : AppCompatActivity() {
 
     private lateinit var activitiesAdapter: ActivityAdapter
-
     private lateinit var listView: ListView
-
     private lateinit var burgerMenu: BurgerMenu
-
-    // Store the filtered list at the class level
     private var filteredActivityList: List<ActivityData> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,19 +20,20 @@ class Activities : AppCompatActivity() {
         burgerMenu = BurgerMenu(this, R.layout.activity_activities)
         burgerMenu.setupDrawer()
 
+        // ------------------ Bindings ------------------ //
         val etSearch = findViewById<EditText>(R.id.etSearch)
         val activityDataList = GlobalClass.ActivityDataList
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
         val btnFilter = findViewById<ImageButton>(R.id.btnFilter)
 
         listView = findViewById(R.id.activityListView)
-
         activitiesAdapter = ActivityAdapter(this, activityDataList)
-
         filteredActivityList = activityDataList
         listView.adapter = activitiesAdapter
 
-        // Item click listener for the ListView
+        /**
+         * On Click for listView items. Intents user to detail view, passing all data needed
+         */
         listView.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < filteredActivityList.size) {
                 val selectedItem = filteredActivityList[position]
@@ -44,14 +41,13 @@ class Activities : AppCompatActivity() {
                 // Creating an Intent to open the DetailActivity
                 val intent = Intent(this@Activities, ActivitiesDetailActivity::class.java)
                 val imageUrls = ArrayList(selectedItem.ACTIVITY_IMAGE_URLS)
+
                 // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("ActivityName", selectedItem.ACTIVITY_NAME)
                 intent.putExtra("Description", selectedItem.ACTIVITY_DESCRIPTION)
                 intent.putExtra("WebsiteLink", selectedItem.ACTIVITY_WEBSITE ?: "")
                 intent.putExtra("email", selectedItem.ACTIVITY_EMAIL)
                 intent.putExtra("address", selectedItem.ACTIVITY_ADDRESS)
-
-                //intent.putExtra("Address", selectedItem.ACTIVITY_ADDRESS)
                 intent.putStringArrayListExtra("imageUrls", imageUrls)
 
                 // Use either mobile number or tell number, whichever is available
@@ -82,14 +78,16 @@ class Activities : AppCompatActivity() {
         btnFilter.setOnClickListener {
             val popupMenu = PopupMenu(this, btnFilter)
 
-            // Get unique categories from your businessDataList
+            // Get unique categories from your activityDataList
             val categories = activityDataList.map { it.ACTIVITY_CATEGORY_TYPE }.distinct()
             popupMenu.menu.add("All")
+
             // Create menu items dynamically
             for (category in categories) {
                 popupMenu.menu.add(category)
             }
 
+            // Handles the menu click event. List will filter according to user selection
             popupMenu.setOnMenuItemClickListener { item ->
                 // Handle menu item click
                 val selectedCategory = item.title.toString()
@@ -103,11 +101,12 @@ class Activities : AppCompatActivity() {
                 activitiesAdapter.updateData(filteredActivityList)
                 true
             }
-
             popupMenu.show()
         }
 
-
+        /**
+         * Updates the displayed list to the user, according to their search key characters
+         */
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // Not needed for this implementation
@@ -129,5 +128,5 @@ class Activities : AppCompatActivity() {
             }
         })
     }
-    //............................................................................................//
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

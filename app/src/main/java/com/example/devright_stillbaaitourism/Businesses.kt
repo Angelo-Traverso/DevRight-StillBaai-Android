@@ -12,30 +12,27 @@ class Businesses : AppCompatActivity() {
     private lateinit var listView: ListView
     private lateinit var businessAdapter: BusinessAdapter
     private lateinit var burgerMenu: BurgerMenu
-
-    // Store the filtered list at the class level
     private var filteredBusinessList: List<BusinessData> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         burgerMenu = BurgerMenu(this, R.layout.activity_businesses)
         burgerMenu.setupDrawer()
 
+        // ------------------ Bindings ------------------ //
         val businessDataList = GlobalClass.BusinessDataList
         val btnFilter = findViewById<ImageButton>(R.id.btnFilter)
         val edtSearch = findViewById<EditText>(R.id.etSearch)
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
 
         listView = findViewById(R.id.businessListView)
-
         businessAdapter = BusinessAdapter(this, businessDataList)
-
-        // Initially, use the unfiltered list
         filteredBusinessList = businessDataList
         listView.adapter = businessAdapter
 
-        /*
-     * List view on click listener
-     * */
+        /**
+         * On Click for listView items. Intents user to detail view, passing all data needed
+         */
         listView.setOnItemClickListener { _, _, position, _ ->
             if (position >= 0 && position < filteredBusinessList.size) {
                 val selectedItem = filteredBusinessList[position]
@@ -44,7 +41,6 @@ class Businesses : AppCompatActivity() {
                 val intent = Intent(this@Businesses, BusinessDetail::class.java)
                 val imageUrls = ArrayList(selectedItem.BUSINESS_IMAGE_URLS)
 
-                // Passing data to the DetailActivity using Intent extras
                 intent.putExtra("BusinessName", selectedItem.BUSINESS_NAME)
                 intent.putExtra("Description", selectedItem.BUSINESS_DESCRIPTION)
                 intent.putExtra("mail", selectedItem.BUSINESS_EMAIL)
@@ -61,13 +57,13 @@ class Businesses : AppCompatActivity() {
 
                 intent.putExtra("ContactNumber", contactNumber)
 
-                // ADD CONTACT DETAILS
-
                 startActivity(intent)
             }
         }
 
-
+        /**
+         * Updates the displayed list to the user, according to their search key characters
+         */
         edtSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // Not needed for this implementation
@@ -130,5 +126,5 @@ class Businesses : AppCompatActivity() {
             popupMenu.show()
         }
     }
-    //............................................................................................//
 }
+// .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //
