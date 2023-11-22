@@ -94,7 +94,7 @@
         android:drawablePadding="8dp"
         android:text="Email"
         android:textSize="16sp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:drawableTint="@color/black"
         tools:ignore="TouchTargetSizeCheck"
         app:drawableStartCompat="@drawable/mail" />
