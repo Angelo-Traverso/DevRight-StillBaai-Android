@@ -160,7 +160,9 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
         // Fetching Event List
         val eventList = GlobalClass.EventDataList
 
-        val sortedEventList = eventList.sortedBy { it.parseDate()?.atStartOfDay() }
+        val sortedEventList = eventList
+            .filter { it.parseDate()?.isAfter(LocalDate.now().minusDays(1)) ?: false }
+            .sortedBy { it.parseDate()?.atStartOfDay() }
 
         val upcomingEvents = sortedEventList.take(3)
 

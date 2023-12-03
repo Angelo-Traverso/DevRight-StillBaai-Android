@@ -2,15 +2,20 @@ package com.example.devright_stillbaaitourism
 
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,30 +31,34 @@ class Events : AppCompatActivity() {
 
         eventList = GlobalClass.EventDataList
         val linearLayout: LinearLayout = findViewById(R.id.linearEventsListings)
-        var currentDate: String? = null
+        var currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
         // Sort the eventList based on the event dates
         val sortedEventList = eventList.sortedBy { it.EVENT_DATE }
 
+        val uniqueDates = sortedEventList.map { it.EVENT_DATE!! }.distinct()
+
+        val todayDateString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
         // Loop through the sorted event list
-        for (event in sortedEventList) {
-            // Check if a new date is encountered
-            if (currentDate != event.EVENT_DATE) {
-                // Add a heading for the new date dynamically
+        for (currentDate in uniqueDates) {
+            // Add a heading for the new date dynamically
+            if (currentDate >= todayDateString) {
                 val dateHeadingTextView = TextView(this)
-                dateHeadingTextView.text = formatDate(event.EVENT_DATE.toString())
+                dateHeadingTextView.text = formatDate(currentDate)
                 dateHeadingTextView.textSize = 20f
                 dateHeadingTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
                 dateHeadingTextView.setTypeface(null, Typeface.BOLD)
                 dateHeadingTextView.setPadding(20, 20, 0, 8)
                 linearLayout.addView(dateHeadingTextView)
-                currentDate = event.EVENT_DATE
+            }
 
-                // Iterate through the events with the current date and display them
-                for (eventForDate in sortedEventList.filter { it.EVENT_DATE == currentDate }) {
-                    val eventView = layoutInflater.inflate(R.layout.events_custom_layout, null)
+            // Iterate through the events with the current date and display them
+            for (eventForDate in sortedEventList.filter { it.EVENT_DATE!! == currentDate }) {
+                val eventView = layoutInflater.inflate(R.layout.events_custom_layout, null)
 
-                    // Set data for each event (assuming you have setter methods in your layout)
+                // Set data for each event (assuming you have setter methods in your layout)
+                if (eventForDate.EVENT_DATE!! >= todayDateString) {
                     val eventNameTextView: TextView = eventView.findViewById(R.id.eventNameTextView)
                     val timeTextView: TextView = eventView.findViewById(R.id.timeTextView)
                     val locationTextView: TextView = eventView.findViewById(R.id.tvEventLocation)
@@ -136,20 +145,22 @@ class Events : AppCompatActivity() {
             }
         }
     }
-
-    /**
-     * Formats the input date string into a human-readable date format.
-     *
-     * @param inputDate The date string to be formatted (in "yyyy-MM-dd" format).
-     * @return A formatted date string in the "EEEE, d MMMM" format (e.g., "Tuesday, 5 January").
-     */
-    private fun formatDate(inputDate: String): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val date = inputFormat.parse(inputDate)
-
-        // Format the date in the desired output format
-        val outputFormat = SimpleDateFormat("EEEE, d MMMM", Locale.getDefault())
-        return outputFormat.format(date ?: Date())
-    }
 }
+
+/**
+ * Formats the input date string into a human-readable date format.
+ *
+ * @param inputDate The date string to be formatted (in "yyyy-MM-dd" format).
+ * @return A formatted date string in the "EEEE, d MMMM" format (e.g., "Tuesday, 5 January").
+ */
+private fun formatDate(inputDate: String): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val date = inputFormat.parse(inputDate)
+
+    // Format the date in the desired output format
+    val outputFormat = SimpleDateFormat("EEEE, d MMMM", Locale.getDefault())
+    return outputFormat.format(date ?: Date())
+}
+
+
 // .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //
