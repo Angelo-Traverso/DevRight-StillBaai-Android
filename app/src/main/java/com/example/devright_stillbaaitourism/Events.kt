@@ -1,6 +1,8 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Typeface
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -144,6 +146,13 @@ class Events : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        val configuration = Configuration(newBase.resources.configuration)
+        configuration.fontScale = 1f
+        val context: Context = newBase.createConfigurationContext(configuration)
+        super.attachBaseContext(context)
     }
 }
 

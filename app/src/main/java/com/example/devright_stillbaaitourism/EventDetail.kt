@@ -1,5 +1,7 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -114,6 +116,13 @@ class EventDetail: AppCompatActivity() {
             slideModels.add(SlideModel(R.drawable.no_image))
             imageDisplay.setImageList(slideModels, ScaleTypes.FIT)
         }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        val configuration = Configuration(newBase.resources.configuration)
+        configuration.fontScale = 1f
+        val context: Context = newBase.createConfigurationContext(configuration)
+        super.attachBaseContext(context)
     }
 }
 // .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

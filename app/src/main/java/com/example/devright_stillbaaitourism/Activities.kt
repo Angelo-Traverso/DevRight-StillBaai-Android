@@ -1,6 +1,8 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -104,6 +106,9 @@ class Activities : AppCompatActivity() {
             popupMenu.show()
         }
 
+
+
+
         /**
          * Updates the displayed list to the user, according to their search key characters
          */
@@ -127,6 +132,17 @@ class Activities : AppCompatActivity() {
                 activitiesAdapter.updateData(filteredActivityList)
             }
         })
+    }
+
+
+    /**
+     * Updates the displayed list to the user, according to their search key characters
+     */
+    override fun attachBaseContext(newBase: Context) {
+        val configuration = Configuration(newBase.resources.configuration)
+        configuration.fontScale = 1f
+        val context: Context = newBase.createConfigurationContext(configuration)
+        super.attachBaseContext(context)
     }
 }
 // .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

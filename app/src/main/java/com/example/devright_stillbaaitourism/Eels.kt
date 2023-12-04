@@ -1,5 +1,7 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Context
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton

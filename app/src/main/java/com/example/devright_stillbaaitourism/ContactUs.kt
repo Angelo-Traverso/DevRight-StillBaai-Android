@@ -1,6 +1,8 @@
 package com.example.devright_stillbaaitourism
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -55,6 +57,13 @@ class ContactUs : AppCompatActivity() {
             // Add the custom view to the container
             container.addView(customView)
         }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        val configuration = Configuration(newBase.resources.configuration)
+        configuration.fontScale = 1f
+        val context: Context = newBase.createConfigurationContext(configuration)
+        super.attachBaseContext(context)
     }
 }
 // .........oooooooooo0000000000 END OF FILE 0000000000oooooooooo.......... //

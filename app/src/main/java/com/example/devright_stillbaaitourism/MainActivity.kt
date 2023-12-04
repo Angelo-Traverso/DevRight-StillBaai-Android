@@ -1,7 +1,9 @@
 package com.example.devright_stillbaaitourism
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -146,6 +148,14 @@ class MainActivity : AppCompatActivity(), DataFetchCallback {
             populateEvents()
         }
     }
+
+    override fun attachBaseContext(newBase: Context) {
+        val configuration = Configuration(newBase.resources.configuration)
+        configuration.fontScale = 1f
+        val context: Context = newBase.createConfigurationContext(configuration)
+        super.attachBaseContext(context)
+    }
+
 
     /**
      * Populates the UI with upcoming events.
